@@ -2,18 +2,35 @@
 // This file contains all styles related to the side menu of the site/application.
 // -----------------------------------------------------------------------------
 
-.side-menu{
-    background-color: $super-dark-grey;
-    font-family: 'Open Sans';
-    font-size: 14px;
-    max-width: 280px;
-    height: 100%;
-    a {
-        color: $menu-gray-text;
-    }
+.side-menu {
+  background-color: $super-dark-grey;
+  font-family: "Open Sans";
+  font-size: 14px;
+  max-width: 280px;
+  height: 100%;
 
-    li {
-        display: block;
-        height: 40px;
-    } 
-} 
+  ul {    
+    padding-top: 5px;
+    padding-left: 5px;
+  }
+
+  li:first-child {
+    border-bottom: 1px solid;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: $menu-gray-title-text;
+    a {
+      color: $menu-gray-title-text;
+    }
+  }
+
+  a {
+    color: $menu-gray-text;
+  }
+
+  li {
+    display: block;
+    height: 40px;
+    margin-top: 20px;
+  }
+}

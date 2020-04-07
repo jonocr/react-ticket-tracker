@@ -14,7 +14,12 @@ function App() {
           <div className="container">
             <ul>
               <li>
-                <a href="#">Dashboard</a>
+                <a href="#">Menu Title</a>
+              </li>
+            </ul>
+            <ul>
+              <li>
+                <a href="#">Menu Sub Title</a>
               </li>
               <li>
                 <a href="#">Menu Link 1</a>
