@@ -1,0 +1,26 @@
+@charset 'UTF-8';
+
+// 1. Vendors
+@import
+  'vendors/bootstrap',
+  'vendors/normalize'; 
+
+// 2. Base stuff
+@import
+  'base/variables',
+  'base/base',
+  'base/fonts',
+  'base/typography',
+  'base/helpers';
+
+// 3. Layout-related sections
+@import
+  'layout/header',
+  'layout/body',
+  'layout/footer',  
+  'layout/mainmenu',  
+  'layout/sidemenu'; 
+
+// 4. Components
+@import
+  'components/button';

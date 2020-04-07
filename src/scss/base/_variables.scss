@@ -1,0 +1,98 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass variables.
+// -----------------------------------------------------------------------------
+
+
+
+
+
+/// Regular font family
+/// @type List
+$text-font-stack: 'Open Sans', 'Helvetica Neue Light', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif !default;
+
+/// Code (monospace) font family
+/// @type List
+$code-font-stack: 'Courier New', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Monaco', monospace !default;
+
+
+
+
+
+/// Copy text color
+/// @type Color
+$text-color: rgb(34, 34, 34) !default;
+
+/// Main brand color
+/// @type Color
+$brand-color: rgb(229, 0, 80) !default;
+
+/// Super Light grey
+/// @type Color
+$super-light-gray: #F1F2F7;
+
+/// Light grey
+/// @type Color
+$light-grey: #8E979E;
+
+/// Medium grey
+/// @type Color
+$mid-grey: #686D73 !default;
+
+/// Dark grey
+/// @type Color
+$dark-grey: #63636D !default;
+
+/// Super Dark grey
+/// @type Color
+$super-dark-grey: #272C32;
+
+/// Mid Green
+/// @type Color
+$mid-green: #33A75C;
+
+/// Aqua
+/// @type Color
+$aqua: #63C2DE;
+
+/// Ligh Blue
+/// @type Color
+$light-blue: #28A3E5;
+
+/// Container's maximum width
+/// @type Length
+$max-width: 1180px !default;
+
+$mid-red: #E25640;
+$blue: #3795F2;
+$light-red: #F26B6B;
+$yellow: #F2B90C;
+$dark-blue: #37538C;
+
+
+/// Menu gray text
+/// @type Color
+$menu-gray-text: #d7d9e3;
+
+
+
+
+
+/// Breakpoints map
+/// @prop {String} keys - Keys are identifiers mapped to a given length
+/// @prop {Map} values - Values are actual breakpoints expressed in pixels
+$breakpoints: (
+  'small': 320px,
+  'medium': 768px,
+  'large': 1024px,
+) !default;
+
+
+
+
+
+
+/// Relative or absolute URL where all assets are served from
+/// @type String
+/// @example scss - When using a CDN
+///   $base-url: 'http://cdn.example.com/assets/';
+$base-url: '/assets/' !default;

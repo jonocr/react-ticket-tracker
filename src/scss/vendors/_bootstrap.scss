@@ -1,0 +1,9 @@
+@import './bootstrap/bootstrap';
+
+#root{
+    .container {
+        @media (min-width: 1200px) { 
+            max-width: 100%;
+         }
+    }
+}
