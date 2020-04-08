@@ -62,11 +62,13 @@ $light-blue: #28A3E5;
 /// @type Length
 $max-width: 1180px !default;
 
+$red: #e74c3c;
 $mid-red: #E25640;
 $blue: #3795F2;
 $light-red: #F26B6B;
 $yellow: #F2B90C;
 $dark-blue: #37538C;
+$white: #fff;
 
 
 /// Menu gray text
@@ -88,6 +90,11 @@ $menu-main-title-highligh: $super-light-gray;
 /// Menu divisor
 /// @type Color
 $menu-divisor: #4e4e52;
+
+$head-button-color: $red;
+$head-button-bg-color: $white;
+$head-menu-bar: $white;
+
 
 //#46474C
 //#d7d9e3 !important

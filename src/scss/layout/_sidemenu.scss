@@ -11,6 +11,7 @@
   height: 100%;
   white-space: nowrap;
   overflow-x: hidden;
+  transition: width 0.3s ease;
 
   .menu-title {
     height: 70px;
@@ -32,7 +33,7 @@
     font-weight: bold;
     color: $menu-gray-title-text;
     height: 40px;
-  }  
+  }
 
   ul {
     padding-top: 5px;
@@ -73,11 +74,10 @@
   }
 }
 
-
 .close-menu {
   .side-menu {
-    max-width: 70px;
     width: 70px;
+    transition: width 0.3s ease;
   }
   .menu-title {
     font-size: 0;
@@ -91,4 +91,26 @@
   #dashboard {
     margin-bottom: 0;
   }
+
+  .toggle-menu {
+    margin-left: -232px;
+    transition: margin 0.3s ease;
+  }
+}
+
+.toggle-menu {
+  position: fixed;
+  background: $red;
+  border-radius: 50%;
+  color: $head-button-bg-color !important;
+  cursor: pointer;
+  font-size: 18px;
+  height: 43px;
+  line-height: 44px;
+  margin: -2px 20px 0 -57px;
+  text-align: center;
+  width: 43px;
+  margin-left: -22px;
+  margin-top: 15px;
+  transition: margin 0.3s ease;
 }

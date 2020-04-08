@@ -2,13 +2,20 @@
 // This file contains all styles related to the header of the site/application.
 // -----------------------------------------------------------------------------
 
-#root {
-  .border-bottom {
-    border-bottom: none !important;
-  }
+// #root {
+//   // .border-bottom {
+//   //   border-bottom: none !important;
+//   // }
 
-//   .shadow-sm {
-//     box-shadow: none !important;
-//     background-color: $light-grey;
-//   }
+// //   .shadow-sm {
+// //     box-shadow: none !important;
+// //     background-color: $light-grey;
+// //   }
+// }
+
+header {
+  padding-left: 280px;
+  background-color: $head-menu-bar;
+  height: 70px;
+  line-height: 70px;
 }
