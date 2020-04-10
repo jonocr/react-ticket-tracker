@@ -78,6 +78,12 @@
   .side-menu {
     width: 70px;
     transition: width 0.3s ease;
+    svg {
+      width: 1.5em;
+      height: 1.5em;
+      transition: width 0.3s ease;
+      transition: height 0.3s ease;
+    }
   }
   .menu-title {
     font-size: 0;

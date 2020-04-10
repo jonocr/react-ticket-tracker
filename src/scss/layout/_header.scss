@@ -22,4 +22,13 @@ header {
 
 .top-bar {
   margin-left: 40px;
+  transition: margin 0.3s ease;
+}
+
+
+.close-menu {
+  .top-bar {
+    margin-left: -170px;
+    transition: margin 0.3s ease;
+  }
 }
