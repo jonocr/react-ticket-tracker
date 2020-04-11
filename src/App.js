@@ -13,9 +13,17 @@ function App() {
 
 
   return (
-    <div>
+    <div className={closeCss}>
       <SideMenu css={closeCss}></SideMenu>
       <TopBar onClick={clickToggle} css={closeCss}></TopBar>
+      <div id="dashboad" className="container dashboad">
+      <div className="dashboard-bar">
+        Dashboar Title
+      </div>
+      <div className="dashboard-main">
+        Dashboar Title
+      </div>
+      </div>
     </div>
   );
 }

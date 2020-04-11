@@ -21,8 +21,25 @@ header {
 }
 
 .top-bar {
+  display: inline;
   margin-left: 40px;
   transition: margin 0.3s ease;
+  .bi {
+    margin-left: 25px;
+  }
+  .profile-icons {
+    float: right;
+    .bi {
+      margin-left: 0;
+    }
+  }
+  .flag {
+    height: 20px;
+    margin-right: 25px;
+  }
+  .profile-pic-icon {
+    margin-right: 25px;
+  }
 }
 
 
