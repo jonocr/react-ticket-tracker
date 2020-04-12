@@ -2,28 +2,21 @@
 // This file contains all styles related to the header of the site/application.
 // -----------------------------------------------------------------------------
 
-// #root {
-//   // .border-bottom {
-//   //   border-bottom: none !important;
-//   // }
-
-// //   .shadow-sm {
-// //     box-shadow: none !important;
-// //     background-color: $light-grey;
-// //   }
-// }
-
 header {
-  padding-left: 280px;
   background-color: $head-menu-bar;
   height: 70px;
   line-height: 70px;
+  @include media-breakpoint-up(md) {
+    padding-left: 280px;
+  }
 }
 
-.top-bar {
+.top-bar {  
   display: inline;
-  margin-left: 40px;
-  transition: margin 0.3s ease;
+  @include media-breakpoint-up(md) {
+    margin-left: 40px;  
+    transition: margin 0.3s ease;
+  }
   .bi {
     margin-left: 25px;
   }
@@ -42,10 +35,11 @@ header {
   }
 }
 
-
 .close-menu {
   .top-bar {
-    margin-left: -170px;
-    transition: margin 0.3s ease;
+    @include media-breakpoint-up(md) {
+      margin-left: -170px;
+      transition: margin 0.3s ease;
+    }
   }
 }

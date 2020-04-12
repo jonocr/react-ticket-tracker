@@ -105,6 +105,7 @@
 }
 
 .toggle-menu {
+  display: none;
   position: fixed;
   background: $red;
   border-radius: 50%;
@@ -119,4 +120,8 @@
   margin-left: -22px;
   margin-top: 15px;
   transition: margin 0.3s ease;
+  
+  @include media-breakpoint-up(md) {
+    display: inline;
+  }
 }
