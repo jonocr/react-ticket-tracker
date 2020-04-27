@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './main.css';
 import TopBar from "./components/layout/TopBar";
 import SideMenu from "./components/layout/SideMenu";
+import NewTicket from "./components/others/NewTicket";
 
 function App() {
   const [closeCss, setCloseCss] = useState("");
@@ -27,7 +28,7 @@ function App() {
       </nav> */}
       <SideMenu css={closeCss}></SideMenu>
       <TopBar onClick={clickToggle} css={closeCss}></TopBar>
-      
+
       <div className="container">
         <div className="dashboard-bar dashboard">
           Dashboar Title
@@ -79,7 +80,13 @@ function App() {
           </div>
 
         </div>
+
+        <div className="dashboard-main dashboard">
+          <NewTicket></NewTicket>
+        </div>
       </div>
+
+
     </div>
   );
 }
