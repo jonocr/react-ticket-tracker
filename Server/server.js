@@ -19,19 +19,12 @@ connection.once('open', () => {
     console.log("MongoDB database connection established successfully");
 })
 
+const ticketsRouter = require('./src/routes/ticket_routes');
+
+app.use('/tickets', ticketsRouter);
+
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
 })
 
-// MongoClient.connect(db.url, {
-//     useUnifiedTopology: true,
-//     useNewUrlParser: true,
-//     }, (err,  database) => {
-//         // const db = client.db;
-//     if (err) return console.log(err);
 
-//     require('./src/routes')(app, database);
-//     app.listen(port, () => {
-//         console.log(`Server is running on port: ${port}`);
-//     })
-// });

@@ -1,28 +1,58 @@
-module.exports = function(app, db) {
-    app.post('/tickets', (req, res) => {
-        
-        var today = new Date();
-        var dueDate = new Date();
-        dueDate.setDate(today.getDate()+5);
+const router = require('express').Router();
+let Ticket = require('../models/ticket.model');
 
-        const ticket = { 
-            title: req.body.title, 
-            creation: today,
-            status: 'open',
-            priority: 1,
-            description: req.body.description,
-            category: req.body.category,
-            due: dueDate.toString(),
-            creator: "jono.calvo1@gmail.com",
-            relatedIssues: [],
-            ModifiedBy: "",
-            agentAssigned: "",
-            lastModified: "" 
-        };
-        db.collection('tickets').insert(ticket, (err, result) => {
-            err ? res.send ({ error : "An error has ocurred" }) : res.send (result.ops[0])   
-        })
-    })
-}
+router.route('/').get((req, res) => {
+    Ticket.find()
+        .then(tickets => res.json(tickets))
+        .catch(err => res.status(400).json(`Error: ${err}`));
+});
+
+router.route('/add').post((req, res) => {
+    let today = new Date();
+    let dueDate = new Date();
+    dueDate.setDate(today.getDate()+5);
+
+    const data = req.body;
+    const createdBy = data.createdBy;
+    const title = data.title;
+    const description = data.description;
+    const status = data.status;
+    const priority = Number(data.priority);
+    const category = data.category;
+    const lastModified = today;
+
+    // const 
+
+    console.log(`data: ${data.creator}`);
+
+    const newTicket = new Ticket({
+        title,
+        description,
+        status,
+        lastModified,
+        priority,
+        category,
+        createdBy,
+        dueDate
+    });
+
+    newTicket.save()
+        .then(() => res.json('Ticket created!'))
+        .catch( err => res.status(400).json(`Error: ${err}`));
+
+});
 
 
+module.exports = router;
+
+
+
+
+// {
+// 	"title": "title test",
+// 	"description": "Power cord not woriking",
+// 	"status": "active",
+// 	"createdBy": "jono.calvo@gmail.com",
+// 	"category": "IT",
+// 	"priority": 1	
+// }
