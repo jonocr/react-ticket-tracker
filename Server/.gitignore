@@ -2,3 +2,7 @@
 
 #Server
 /node_modules
+
+#DB config
+/config
+.env
