@@ -4,7 +4,7 @@
   "description": "server side API for react ticket tracker",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon derver.js"
+    "dev": "nodemon server.js"
   },
   "author": "Jono",
   "license": "ISC",

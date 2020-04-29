@@ -1,5 +1,5 @@
 const router = require('express').Router();
-let Ticket = require('../models/ticket.model');
+const Ticket = require('../models/ticket.model');
 
 router.route('/').get((req, res) => {
     Ticket.find()
@@ -20,10 +20,6 @@ router.route('/add').post((req, res) => {
     const priority = Number(data.priority);
     const category = data.category;
     const lastModified = today;
-
-    // const 
-
-    console.log(`data: ${data.creator}`);
 
     const newTicket = new Ticket({
         title,

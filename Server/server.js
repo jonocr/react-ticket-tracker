@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
+//Allows to read .env file 
 require('dotenv').config();
 
 const app = express();
@@ -11,8 +12,6 @@ app.use(cors());
 app.use(express.json());
 const uri = process.env.ATLAS_URI;
 
-console.log("Env variable: " + uri);
-
 mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true });
 const connection = mongoose.connection;
 connection.once('open', () => {
@@ -20,8 +19,10 @@ connection.once('open', () => {
 })
 
 const ticketsRouter = require('./src/routes/ticket_routes');
+const usersRouter = require('./src/routes/user_routes');
 
 app.use('/tickets', ticketsRouter);
+app.use('/users', usersRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
