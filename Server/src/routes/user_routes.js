@@ -16,54 +16,90 @@ router.route('/:userId').get((req, res) => {
 });
 
 router.route('/signup').post((req, res, next) => {
+    const errorEmailMessage = 'Email address already registered in the system';
     const data = req.body;
     const userName = data.username;
-    const password = data.password;
     const roles = data.roles;
     const email = data.email;
     const manager = data.manager;
     const team = [];
 
+    User.find({ email: email })
+        .exec()
+        .then(user => {
+            if (user.length >= 1) {
+                res.status(409).json({
+                    error: errorEmailMessage
+                })
+            } else {
+                bcrypt.hash(data.password, 10, (err, hash) => {
+                    if (err) {
+                        res.status(500).json({
+                            error: err
+                        })
+                    } else {
+                        const password = hash;
 
-    bcrypt.hash(data.password, 10, (err, hash) => {
-        if (err) {
-            res.status(500).json({
-                error: err
-            })
-        } else {
-            console.log("hash passqord: ", hash);
+                        const newUser = new User({
+                            userName, email, password, roles, manager, team
+                        });
 
-            bcrypt.compare(data.password, hash).then(function(result) {
-                // result == true
-                console.log("compare correct: ", result);
+                        newUser.save()
+                            .then(() => res.json('User registered!'))
+                            .catch(err => res.status(400).json(`Error: ${err}`));
+                    }
+                });
+            }
+        });
+});
+
+router.route('/login').post((req, res) => {
+    const errorAuthMessage = 'Auth failed';
+    const successAuthMessage = 'Auth successful';
+
+    const failedAuth = () => {
+        return res.status(401).json({
+            message: errorAuthMessage
+        });
+    }
+    User.find({ email: req.body.email })
+        .exec()
+        .then(user => {
+            if (user.length < 1) {
+                failedAuth();
+            }
+            bcrypt.compare(req.body.password, user[0].password, (err, result) => {
+                if (err || !result) {
+                    failedAuth();
+                }
+                if (result) {
+                    return res.status(200).json({
+                        message: successAuthMessage
+                    });
+                }
+                failedAuth();
             });
-            bcrypt.compare("someOtherPlaintextPassword", hash).then(function(result) {
-                console.log("compare : ", result);
-                // result == false
-            });
-            
-            const newUser = new User({
-                userName, password, hash, roles, manager, team
-            });
-
-        }
-    });
-
-
-    // newUser.save()
-    //     .then( () => res.json('User registered!'))
-    //     .catch( err => res.status(400).json(`Error: ${err}`));
-
-
+        })
+        .catch(err => res.status(500).json(`Error: ${err}`));
 });
 
 module.exports = router;
 
 
 // {
-// 	"username" : "Jono",
+// 	"username" : "jono" ,
 // 	"password" : "12345",
 // 	"roles" : ["developer"],
 // 	"email" : "d@gmail.com",
 // 	"manager" : ""
 // }
+
+
+            // bcrypt.compare(data.password, hash).then(function (result) {
+            //     // result == true
+            //     console.log("compare correct: ", result);
+            // });
+            // bcrypt.compare("someOtherPlaintextPassword", hash).then(function (result) {
+            //     console.log("compare : ", result);
+            //     // result == false
+            // });
