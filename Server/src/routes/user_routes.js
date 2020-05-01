@@ -15,6 +15,26 @@ router.route('/:userId').get((req, res) => {
         .catch(err => res.status(400).json(`Error: ${err}`));
 });
 
+router.route('/update').patch((req, res) => {
+    res.status(200).json({
+        message: 'User Patched'
+    })
+    // const id = req.params.userId;
+    // User.find()
+    //     .then(users => res.json(users))
+    //     .catch(err => res.status(400).json(`Error: ${err}`));
+});
+
+router.route('/:userId').delete((req, res) => {
+    res.status(200).json({
+        message: 'User Deleted'
+    })
+    // const id = req.params.userId;
+    // User.find()
+    //     .then(users => res.json(users))
+    //     .catch(err => res.status(400).json(`Error: ${err}`));
+});
+
 router.route('/signup').post((req, res, next) => {
     const errorEmailMessage = 'Email address already registered in the system';
     const data = req.body;
