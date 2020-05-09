@@ -1,0 +1,27 @@
+[
+	{
+		"isEmployee": false,
+		"userName": "test",
+		"email": "test@gmail.com"
+	},
+	{
+		"isEmployee": false,
+		"userName": "jhon",
+		"email": "jhon@gmail.com"
+	},
+	{
+		"isEmployee": false,
+		"userName": "da",
+		"email": "da@gmail.com"
+	},
+	{
+		"isEmployee": false,
+		"userName": "dany",
+		"email": "dany@gmail.com"
+	},
+	{
+		"isEmployee": false,
+		"userName": "pablo",
+		"email": "pablo@gmail.com"
+	}
+]

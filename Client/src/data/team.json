@@ -1,0 +1,12 @@
+[
+	{
+		"isEmployee": false,
+		"userName": "da",
+		"email": "da@gmail.com"
+	},
+	{
+		"isEmployee": false,
+		"userName": "dany",
+		"email": "dany@gmail.com"
+	}
+]

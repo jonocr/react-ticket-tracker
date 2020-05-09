@@ -1,26 +1,30 @@
-import React, { useState } from 'react';
-import DashboardPage from './components/pages/DashboardPage';
-import './main.css';
+import React, { useState } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import "./main.css";
+
+import UserPage from "./components/pages/UserPage";
+import DashboardPage from "./components/pages/DashboardPage";
 
 function App() {
+	return (
+		<div>
+			{/* <DashboardPage></DashboardPage> */}
 
-
-  return (
-    <div>
-      <DashboardPage></DashboardPage>
-
-      {/* <div className="dashboard-main dashboard">
+			{/* <div className="dashboard-main dashboard">
         <UserList></UserList>
       </div> */}
-
-    </div>
-  );
+			<Router>
+				<Route component={DashboardPage} exact path="/" />
+				<Route component={UserPage} exact path="/user" />
+			</Router>
+		</div>
+	);
 }
 
 export default App;
 
-
-      {/* <nav class="navbar navbar-expand-md navbar-light bg-light">
+{
+	/* <nav class="navbar navbar-expand-md navbar-light bg-light">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -30,4 +34,5 @@ export default App;
             <a class="nav-item nav-link" href="#">Features</a>
           </div>
         </div>
-      </nav> */}
+      </nav> */
+}
