@@ -1,60 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 const UserList = (props) => {
-	const users = props.data;
-	const team = props.team;
-
-	console.log("user data: ", users);
-	console.log("team data: ", team);
-
-	// const noTeamUsers = users.filter
-
-	// const result = users.filter((user) => {
-	// 	const exists = team.includes((member) => {
-	// 		member.email == user.email;
-	// 	});
-	// 	return exists;
-
-	// 	// team.every((member) => {
-	// 	// 	member.email === user.email;
-	// 	// });
-	// });
-
-	const result = users.filter(
-		(elem) => !team.find(({ email }) => elem.email === email)
-	);
-
-	console.log("results data: ", result);
-
 	return (
 		<div>
 			<table className="table table-hover">
 				<thead>
 					<tr>
 						<th scope="col">#</th>
-						<th scope="col">First</th>
-						<th scope="col">Last</th>
-						<th scope="col">Handle</th>
+						<th scope="col">User Name</th>
+						<th scope="col">Email</th>
+						<th scope="col">Created</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<th scope="row">1</th>
-						<td>Mark</td>
-						<td>Otto</td>
-						<td>@mdo</td>
-					</tr>
-					<tr>
-						<th scope="row">2</th>
-						<td>Jacob</td>
-						<td>Thornton</td>
-						<td>@fat</td>
-					</tr>
-					<tr>
-						<th scope="row">3</th>
-						<td colSpan="2">Larry the Bird</td>
-						<td>@twitter</td>
-					</tr>
+					{props.data.map((user, index) => (
+						<tr key={index}>
+							<th scope="row">{index}</th>
+							<td>{user.userName}</td>
+							<td>{user.email}</td>
+							<td>{user.createdAt}</td>
+						</tr>
+					))}
 				</tbody>
 			</table>
 		</div>

@@ -2,26 +2,31 @@
 	{
 		"isEmployee": false,
 		"userName": "test",
-		"email": "test@gmail.com"
+		"email": "test@gmail.com",
+		"createdAt": "2020-04-30"
 	},
 	{
 		"isEmployee": false,
 		"userName": "jhon",
-		"email": "jhon@gmail.com"
+		"email": "jhon@gmail.com",
+		"createdAt": "2020-04-30"
 	},
 	{
 		"isEmployee": false,
 		"userName": "da",
-		"email": "da@gmail.com"
+		"email": "da@gmail.com",
+		"createdAt": "2020-04-30"
 	},
 	{
 		"isEmployee": false,
 		"userName": "dany",
-		"email": "dany@gmail.com"
+		"email": "dany@gmail.com",
+		"createdAt": "2020-04-30"
 	},
 	{
 		"isEmployee": false,
 		"userName": "pablo",
-		"email": "pablo@gmail.com"
+		"email": "pablo@gmail.com",
+		"createdAt": "2020-04-30"
 	}
 ]
