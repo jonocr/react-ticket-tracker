@@ -8,7 +8,6 @@ const DashboardPage = (props) => {
 
 	const clickToggle = (e) => {
 		closeCss === "" ? setCloseCss("close-menu") : setCloseCss("");
-		console.log("click!");
 	};
 
 	return (

@@ -3,14 +3,15 @@ import React from "react";
 const UserForm = (props) => {
 	return (
 		<div>
-			<form>
+			<form onSubmit={props.onClickSave}>
 				<div className="form-group">
-					<label htmlFor="subjectInput">Subject</label>
+					<label htmlFor="subjectInput">User Name:</label>
 					<input
 						type="text"
 						className="form-control"
-						id="subjectInput"
-						placeholder="Title of the Issue"
+						id="userName"
+						name="userName"
+						placeholder="User Name"
 					/>
 				</div>
 
@@ -19,14 +20,15 @@ const UserForm = (props) => {
 					<input
 						type="email"
 						className="form-control"
-						id="emailInput"
+						id="email"
+						name="email"
 						placeholder="name@example.com"
 					/>
 				</div>
 
 				<div className="form-group">
-					<label htmlFor="exampleFormControlSelect1">Category</label>
-					<select className="form-control" id="exampleFormControlSelect1">
+					<label htmlFor="departmentSelect">Department</label>
+					<select className="form-control" id="departmentSelect">
 						<option>IT</option>
 						<option>Billing</option>
 						<option>Development</option>
@@ -36,12 +38,24 @@ const UserForm = (props) => {
 				</div>
 
 				<div className="form-group">
-					<label htmlFor="descriptionTextArea">Description of the Issue</label>
-					<textarea
-						className="form-control"
-						id="descriptionTextArea"
-						rows="3"
-					></textarea>
+					<div className="form-check">
+						<input
+							type="checkbox"
+							className="form-check-input"
+							id="managerCheck"
+						/>
+						<label className="form-check-label" htmlFor="managerCheck">
+							Is manager:
+						</label>
+					</div>
+				</div>
+
+				<div className="form-group row">
+					<div className="col-sm-10">
+						<button type="submit" className="btn btn-primary">
+							Save
+						</button>
+					</div>
 				</div>
 			</form>
 		</div>
