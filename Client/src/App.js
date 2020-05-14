@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./main.css";
 
 import UserPage from "./components/pages/UserPage";
+import UserSearchPage from "./components/pages/UserSearchPage";
 import DashboardPage from "./components/pages/DashboardPage";
 
 function App() {
@@ -16,6 +17,8 @@ function App() {
 			<Router>
 				<Route component={DashboardPage} exact path="/" />
 				<Route component={UserPage} exact path="/user" />
+				<Route component={UserPage} exact path="/user/:email" />
+				<Route component={UserSearchPage} exact path="/findUser" />
 			</Router>
 		</div>
 	);

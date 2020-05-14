@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import TopBar from "../layout/TopBar";
 import SideMenu from "../layout/SideMenu";
 import UserList from "../users/UserList";
@@ -9,18 +10,29 @@ import mockTeam from "../../data/team.json";
 
 const UserPage = (props) => {
 	const [closeCss, setCloseCss] = useState("");
+	const [user, setUser] = useState({});
 	const [allUsers, setAllUsers] = useState([]);
 	const [teamUsers, setTeamUsers] = useState([]);
 	const [availableUsers, setAvailableUsers] = useState([]);
-
-	useEffect(() => {
-		setAllUsers(mockData);
-		setTeamUsers(mockTeam);
-		setAvailableUsers(filterUsers);
-	}, []);
+	const [openError, setOpenError] = React.useState(false);
+	const [errorMsg, setErrorMsg] = React.useState("");
+	const { email } = useParams();
 
 	const clickToggle = (e) => {
 		closeCss === "" ? setCloseCss("close-menu") : setCloseCss("");
+	};
+
+	const findUserByEmail = (email) => {
+		fetch(`http://localhost:8000/users/${email}`)
+			.then((response) => {
+				return response.json();
+			})
+			.then((responseData) => {
+				setUser(responseData);
+			})
+			.catch((err) => {
+				console.log("error at fetching: ", err);
+			});
 	};
 
 	const filterUsers = mockData.filter(
@@ -38,11 +50,21 @@ const UserPage = (props) => {
 			//   .signInWithEmailAndPassword(email.value, password.value);
 			// history.push("/home");
 		} catch (error) {
-			// setOpenError(true);
-			// setErrorMsg(error.message);
+			setOpenError(true);
+			setErrorMsg(error.message);
 			return false;
 		}
 	};
+
+	useEffect(() => {
+		setAllUsers(mockData);
+		setTeamUsers(mockTeam);
+		setAvailableUsers(filterUsers);
+		console.log("param user email: ", email);
+		if (email) {
+			findUserByEmail(email);
+		}
+	}, []);
 
 	return (
 		<div className={closeCss}>

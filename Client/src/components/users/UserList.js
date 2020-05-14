@@ -14,7 +14,12 @@ const UserList = (props) => {
 				</thead>
 				<tbody>
 					{props.data.map((user, index) => (
-						<tr key={index}>
+						<tr
+							key={index}
+							onClick={(e) => {
+								props.onClick(user);
+							}}
+						>
 							<th scope="row">{index}</th>
 							<td>{user.userName}</td>
 							<td>{user.email}</td>
