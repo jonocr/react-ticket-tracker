@@ -21,7 +21,7 @@ const SideMenu = (props) => {
 					</div>
 					<ul>
 						<li id="menu-dashboard">
-							<a href="#">
+							<a href="/#">
 								<svg
 									className="bi bi-display-fill"
 									width="1em"
@@ -45,7 +45,7 @@ const SideMenu = (props) => {
 					<div className="menu-subtitle">Tickets</div>
 					<ul>
 						<li>
-							<a href="#">
+							<a href="/#">
 								<svg
 									className="bi bi-folder"
 									width="1em"
@@ -65,7 +65,7 @@ const SideMenu = (props) => {
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="/#">
 								<svg
 									className="bi bi-folder"
 									width="1em"
@@ -85,7 +85,7 @@ const SideMenu = (props) => {
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="/#">
 								<svg
 									className="bi bi-folder"
 									width="1em"
@@ -108,7 +108,7 @@ const SideMenu = (props) => {
 					<div className="menu-subtitle">Users</div>
 					<ul>
 						<li>
-							<a href="#">
+							<a href="/#">
 								<svg
 									className="bi bi-person"
 									width="1em"
@@ -127,7 +127,7 @@ const SideMenu = (props) => {
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="/#">
 								<svg
 									className="bi bi-person-plus"
 									width="1em"
@@ -151,7 +151,7 @@ const SideMenu = (props) => {
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="/#">
 								<svg
 									className="bi bi-folder"
 									width="1em"
@@ -175,7 +175,7 @@ const SideMenu = (props) => {
 			</nav>
 
 			<nav className="navbar navbar-dark bg-dark d-md-none">
-				<a className="navbar-brand" href="#">
+				<a className="navbar-brand" href="/#">
 					Navbar
 				</a>
 				<button
@@ -192,24 +192,24 @@ const SideMenu = (props) => {
 				<div className="collapse navbar-collapse" id="navbarNavDropdown">
 					<ul className="navbar-nav">
 						<li className="nav-item active">
-							<a className="nav-link" href="#">
+							<a className="nav-link" href="/#">
 								Home <span className="sr-only">(current)</span>
 							</a>
 						</li>
 						<li className="nav-item">
-							<a className="nav-link" href="#">
+							<a className="nav-link" href="/#">
 								Features
 							</a>
 						</li>
 						<li className="nav-item">
-							<a className="nav-link" href="#">
+							<a className="nav-link" href="/#">
 								Pricing
 							</a>
 						</li>
 						<li className="nav-item dropdown">
 							<a
 								className="nav-link dropdown-toggle"
-								href="#"
+								href="/#"
 								id="navbarDropdownMenuLink"
 								data-toggle="dropdown"
 								aria-haspopup="true"
@@ -221,13 +221,13 @@ const SideMenu = (props) => {
 								className="dropdown-menu"
 								aria-labelledby="navbarDropdownMenuLink"
 							>
-								<a className="dropdown-item" href="#">
+								<a className="dropdown-item" href="/#">
 									Action
 								</a>
-								<a className="dropdown-item" href="#">
+								<a className="dropdown-item" href="/#">
 									Another action
 								</a>
-								<a className="dropdown-item" href="#">
+								<a className="dropdown-item" href="/#">
 									Something else here
 								</a>
 							</div>

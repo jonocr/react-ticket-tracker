@@ -4,7 +4,7 @@ import USFlag from "../../images/flags/svg/us.svg";
 const TopBar = (props) => {
 	return (
 		<header className={props.css}>
-			<a href="#" className="toggle-menu" onClick={(e) => props.onClick(e)}>
+			<a href="/#" className="toggle-menu" onClick={(e) => props.onClick(e)}>
 				<svg
 					className="bi bi-grid-1x2"
 					width="1em"
@@ -21,7 +21,7 @@ const TopBar = (props) => {
 				</svg>
 			</a>
 			<div className="top-bar">
-				<a href="#">
+				<a href="/#">
 					<svg
 						className="bi bi-search"
 						width="1em"
@@ -42,7 +42,7 @@ const TopBar = (props) => {
 						/>
 					</svg>
 				</a>
-				<a href="#">
+				<a href="/#">
 					<svg
 						className="bi bi-bell"
 						width="1em"
@@ -59,7 +59,7 @@ const TopBar = (props) => {
 						/>
 					</svg>
 				</a>
-				<a href="#">
+				<a href="/#">
 					<svg
 						className="bi bi-envelope"
 						width="1em"
@@ -83,7 +83,7 @@ const TopBar = (props) => {
 				</a>
 				<div className="profile-icons">
 					<img src={USFlag} className="flag"></img>
-					<a href="#" className="profile-pic-icon">
+					<a href="/#" className="profile-pic-icon">
 						<svg
 							className="bi bi-people-circle"
 							width="1em"
