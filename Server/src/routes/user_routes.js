@@ -10,6 +10,7 @@ router.route("/").get((req, res) => {
 
 router.route("/:email").get((req, res) => {
 	const email = req.params.email;
+	//TODO DELETE CONSOLE
 	console.log("*******************server /email path*************** ", email);
 	User.find({ email: email })
 		.then((users) => {

@@ -1,6 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 const UserForm = (props) => {
+	const [user, setUser] = useState({
+		userName: "",
+		email: "",
+		password: "",
+		department: "",
+		isManager: false,
+	});
+
+	useEffect(() => {
+		console.log("CONSTRUCTOR USER VALUES: ", user);
+		if (
+			props.userData &&
+			!JSON.stringify(props.userData) === JSON.stringify({})
+		) {
+			console.log("USER FORM: ", props.userData);
+			setUser(props.userData);
+		}
+	}, []);
+
 	return (
 		<div>
 			<form onSubmit={props.onClickSave}>
@@ -12,6 +31,8 @@ const UserForm = (props) => {
 						id="userName"
 						name="userName"
 						placeholder="User Name"
+						value={user.userName}
+						onChange={(e) => setUser({ ...user, userName: e.target.value })}
 					/>
 				</div>
 
@@ -23,6 +44,22 @@ const UserForm = (props) => {
 						id="email"
 						name="email"
 						placeholder="name@example.com"
+						onChange={(e) => {
+							setUser({ ...user, email: e.target.value });
+							console.log("onchange ", user);
+						}}
+						value={user.email}
+					/>
+				</div>
+
+				<div className="form-group">
+					<label htmlFor="passwordInput">Password</label>
+					<input
+						type="password"
+						className="form-control"
+						id="password"
+						name="password"
+						onChange={(e) => setUser({ ...user, password: e.target.value })}
 					/>
 				</div>
 

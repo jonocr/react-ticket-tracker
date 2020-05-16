@@ -14,6 +14,7 @@ const UserPage = (props) => {
 	const [allUsers, setAllUsers] = useState([]);
 	const [teamUsers, setTeamUsers] = useState([]);
 	const [availableUsers, setAvailableUsers] = useState([]);
+	const [loading, setLoading] = useState(true);
 	const [openError, setOpenError] = React.useState(false);
 	const [errorMsg, setErrorMsg] = React.useState("");
 	const { email } = useParams();
@@ -22,13 +23,14 @@ const UserPage = (props) => {
 		closeCss === "" ? setCloseCss("close-menu") : setCloseCss("");
 	};
 
-	const findUserByEmail = (email) => {
+	const findUserByEmail = async (email) => {
 		fetch(`http://localhost:8000/users/${email}`)
 			.then((response) => {
 				return response.json();
 			})
 			.then((responseData) => {
-				setUser(responseData);
+				setUser(responseData[0]);
+				setLoading(false);
 			})
 			.catch((err) => {
 				console.log("error at fetching: ", err);
@@ -60,11 +62,18 @@ const UserPage = (props) => {
 		setAllUsers(mockData);
 		setTeamUsers(mockTeam);
 		setAvailableUsers(filterUsers);
-		console.log("param user email: ", email);
 		if (email) {
 			findUserByEmail(email);
+			// console.log("Getting Data FROM API RES: ", data);
+			// setUser(data);
+		} else {
+			setLoading(false);
 		}
 	}, []);
+
+	useEffect(() => {
+		console.log("user info: ", user);
+	}, [user]);
 
 	return (
 		<div className={closeCss}>
@@ -73,8 +82,11 @@ const UserPage = (props) => {
 			<div className="container">
 				<div className="dashboard-bar dashboard">Users</div>
 				<div className="dashboard-main dashboard">
-					<UserForm onClickSave={clickSaveHandle}></UserForm>
-
+					{!loading ? (
+						<UserForm onClickSave={clickSaveHandle} userData={user}></UserForm>
+					) : (
+						<div>loading...</div>
+					)}
 					<div className="row">
 						<div className="col-12 col-md-6">
 							Team Members
