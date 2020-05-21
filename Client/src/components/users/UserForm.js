@@ -7,13 +7,20 @@ const UserForm = (props) => {
 		password: "",
 		department: "",
 		isManager: false,
+		team: [],
+		roles: [],
 	});
+
+	const hadlerSaveClick = (e) => {
+		e.preventDefault();
+		props.onClickSave(user);
+	};
 
 	useEffect(() => {
 		console.log("CONSTRUCTOR USER VALUES: ", user);
 		if (
 			props.userData &&
-			!JSON.stringify(props.userData) === JSON.stringify({})
+			JSON.stringify(props.userData) !== JSON.stringify({})
 		) {
 			console.log("USER FORM: ", props.userData);
 			setUser(props.userData);
@@ -22,7 +29,7 @@ const UserForm = (props) => {
 
 	return (
 		<div>
-			<form onSubmit={props.onClickSave}>
+			<form onSubmit={hadlerSaveClick}>
 				<div className="form-group">
 					<label htmlFor="subjectInput">User Name:</label>
 					<input
@@ -65,7 +72,11 @@ const UserForm = (props) => {
 
 				<div className="form-group">
 					<label htmlFor="departmentSelect">Department</label>
-					<select className="form-control" id="departmentSelect">
+					<select
+						className="form-control"
+						id="departmentSelect"
+						onChange={(e) => setUser({ ...user, department: e.target.value })}
+					>
 						<option>IT</option>
 						<option>Billing</option>
 						<option>Development</option>
@@ -79,6 +90,8 @@ const UserForm = (props) => {
 						<input
 							type="checkbox"
 							className="form-check-input"
+							checked={user.isManager}
+							onChange={(e) => setUser({ ...user, isManager: !user.isManager })}
 							id="managerCheck"
 						/>
 						<label className="form-check-label" htmlFor="managerCheck">

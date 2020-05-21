@@ -41,11 +41,27 @@ const UserPage = (props) => {
 		(elem) => !mockTeam.find(({ email }) => elem.email === email)
 	);
 
-	const clickSaveHandle = async (e) => {
-		e.preventDefault();
-		const { userName, email } = e.target.elements;
-		console.log("clickSaveHandle: ", userName.value, email.value);
+	// const clickSaveHandle = async (e, userData) => {
+	const clickUpdateHandle = async (userData) => {
+		// e.preventDefault();
+		// const { userName, email } = e.target.elements;
+		console.log("clickSaveHandle: ", userData);
+		try {
+			// await app
+			//   .auth()
+			//   .signInWithEmailAndPassword(email.value, password.value);
+			// history.push("/home");
+		} catch (error) {
+			setOpenError(true);
+			setErrorMsg(error.message);
+			return false;
+		}
+	};
 
+	const clickCreateHandle = async (userData) => {
+		// e.preventDefault();
+		// const { userName, email } = e.target.elements;
+		console.log("clickCreateHandle: ", userData);
 		try {
 			// await app
 			//   .auth()
@@ -64,16 +80,14 @@ const UserPage = (props) => {
 		setAvailableUsers(filterUsers);
 		if (email) {
 			findUserByEmail(email);
-			// console.log("Getting Data FROM API RES: ", data);
-			// setUser(data);
 		} else {
 			setLoading(false);
 		}
 	}, []);
 
-	useEffect(() => {
-		console.log("user info: ", user);
-	}, [user]);
+	// useEffect(() => {
+	// 	console.log("user info: ", user);
+	// }, [user]);
 
 	return (
 		<div className={closeCss}>
@@ -83,7 +97,10 @@ const UserPage = (props) => {
 				<div className="dashboard-bar dashboard">Users</div>
 				<div className="dashboard-main dashboard">
 					{!loading ? (
-						<UserForm onClickSave={clickSaveHandle} userData={user}></UserForm>
+						<UserForm
+							onClickSave={email ? clickUpdateHandle : clickCreateHandle}
+							userData={user}
+						></UserForm>
 					) : (
 						<div>loading...</div>
 					)}
