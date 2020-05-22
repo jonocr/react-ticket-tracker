@@ -37,14 +37,21 @@ const UserPage = (props) => {
 			});
 	};
 
-	const filterUsers = mockData.filter(
-		(elem) => !mockTeam.find(({ email }) => elem.email === email)
-	);
+	const getAllUsers = async () => {
+		fetch(`http://localhost:8000/users/`)
+			.then((response) => {
+				return response.json();
+			})
+			.then((responseData) => {
+				console.log("allUsers: ", responseData);
+				setAllUsers(responseData);
+			})
+			.catch((err) => {
+				console.log("error at fetching: ", err);
+			});
+	};
 
-	// const clickSaveHandle = async (e, userData) => {
 	const clickUpdateHandle = async (userData) => {
-		// e.preventDefault();
-		// const { userName, email } = e.target.elements;
 		console.log("clickSaveHandle: ", userData);
 		try {
 			// await app
@@ -74,16 +81,33 @@ const UserPage = (props) => {
 		}
 	};
 
+	const filterUsers = (fullList, filterList) => {
+		console.log("filterList: ", filterList);
+		return fullList.filter(
+			(elem) => !filterList.find(({ email }) => elem.email === email)
+		);
+	};
+
 	useEffect(() => {
-		setAllUsers(mockData);
+		getAllUsers();
 		setTeamUsers(mockTeam);
-		setAvailableUsers(filterUsers);
 		if (email) {
 			findUserByEmail(email);
+			console.log("user: ", user);
 		} else {
 			setLoading(false);
 		}
 	}, []);
+
+	useEffect(() => {
+		if (allUsers.length > 0 && JSON.stringify(user) !== JSON.stringify({})) {
+			let filteredUserList = filterUsers(allUsers, user.team);
+			filteredUserList = filterUsers(filteredUserList, [{ email: user.email }]);
+			setAvailableUsers(filteredUserList);
+		} else {
+			setAvailableUsers(allUsers);
+		}
+	}, [allUsers, user]);
 
 	// useEffect(() => {
 	// 	console.log("user info: ", user);
@@ -97,23 +121,28 @@ const UserPage = (props) => {
 				<div className="dashboard-bar dashboard">Users</div>
 				<div className="dashboard-main dashboard">
 					{!loading ? (
-						<UserForm
-							onClickSave={email ? clickUpdateHandle : clickCreateHandle}
-							userData={user}
-						></UserForm>
+						<div>
+							<UserForm
+								onClickSave={email ? clickUpdateHandle : clickCreateHandle}
+								userData={user}
+							></UserForm>
+
+							<div className="row">
+								<div className="col-12 col-md-6">
+									Team Members
+									<UserList data={user.team ? user.team : []}></UserList>
+								</div>
+								<div className="col-12 col-md-6">
+									All Users
+									<UserList
+										data={availableUsers ? availableUsers : []}
+									></UserList>
+								</div>
+							</div>
+						</div>
 					) : (
 						<div>loading...</div>
 					)}
-					<div className="row">
-						<div className="col-12 col-md-6">
-							Team Members
-							<UserList data={filterUsers}></UserList>
-						</div>
-						<div className="col-12 col-md-6">
-							All Users
-							<UserList data={mockData}></UserList>
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>

@@ -17,12 +17,10 @@ const UserForm = (props) => {
 	};
 
 	useEffect(() => {
-		console.log("CONSTRUCTOR USER VALUES: ", user);
 		if (
 			props.userData &&
 			JSON.stringify(props.userData) !== JSON.stringify({})
 		) {
-			console.log("USER FORM: ", props.userData);
 			setUser(props.userData);
 		}
 	}, []);
