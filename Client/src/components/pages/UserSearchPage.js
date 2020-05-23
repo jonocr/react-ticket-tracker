@@ -16,7 +16,6 @@ const UserSearchPage = (props) => {
 	};
 
 	const addTeamUser = (user) => {
-		console.log("click on user list: ", user.email);
 		history.push(`/user/${user.email}`);
 	};
 

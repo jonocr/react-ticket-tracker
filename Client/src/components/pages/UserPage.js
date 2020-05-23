@@ -5,8 +5,8 @@ import SideMenu from "../layout/SideMenu";
 import UserList from "../users/UserList";
 import UserForm from "../users/UserForm";
 
-import mockData from "../../data/users.json";
-import mockTeam from "../../data/team.json";
+// import mockData from "../../data/users.json";
+// import mockTeam from "../../data/team.json";
 
 const UserPage = (props) => {
 	const [closeCss, setCloseCss] = useState("");
@@ -30,6 +30,7 @@ const UserPage = (props) => {
 			})
 			.then((responseData) => {
 				setUser(responseData[0]);
+				setTeamUsers(responseData[0].team);
 				setLoading(false);
 			})
 			.catch((err) => {
@@ -81,8 +82,15 @@ const UserPage = (props) => {
 		}
 	};
 
+	const addUser2Team = (teamMember) => {
+		setTeamUsers(teamUsers.concat(teamMember));
+	};
+
+	const removeUserFromTeam = (teamMember) => {
+		setTeamUsers(filterUsers(teamUsers, [{ email: teamMember.email }]));
+	};
+
 	const filterUsers = (fullList, filterList) => {
-		console.log("filterList: ", filterList);
 		return fullList.filter(
 			(elem) => !filterList.find(({ email }) => elem.email === email)
 		);
@@ -90,28 +98,25 @@ const UserPage = (props) => {
 
 	useEffect(() => {
 		getAllUsers();
-		setTeamUsers(mockTeam);
 		if (email) {
 			findUserByEmail(email);
-			console.log("user: ", user);
 		} else {
 			setLoading(false);
 		}
 	}, []);
 
 	useEffect(() => {
-		if (allUsers.length > 0 && JSON.stringify(user) !== JSON.stringify({})) {
-			let filteredUserList = filterUsers(allUsers, user.team);
+		if (
+			(allUsers.length > 0 && JSON.stringify(user) !== JSON.stringify({})) ||
+			teamUsers.length > 0
+		) {
+			let filteredUserList = filterUsers(allUsers, teamUsers);
 			filteredUserList = filterUsers(filteredUserList, [{ email: user.email }]);
 			setAvailableUsers(filteredUserList);
 		} else {
 			setAvailableUsers(allUsers);
 		}
-	}, [allUsers, user]);
-
-	// useEffect(() => {
-	// 	console.log("user info: ", user);
-	// }, [user]);
+	}, [allUsers, user, teamUsers]);
 
 	return (
 		<div className={closeCss}>
@@ -130,12 +135,16 @@ const UserPage = (props) => {
 							<div className="row">
 								<div className="col-12 col-md-6">
 									Team Members
-									<UserList data={user.team ? user.team : []}></UserList>
+									<UserList
+										data={teamUsers}
+										onClick={removeUserFromTeam}
+									></UserList>
 								</div>
 								<div className="col-12 col-md-6">
 									All Users
 									<UserList
 										data={availableUsers ? availableUsers : []}
+										onClick={addUser2Team}
 									></UserList>
 								</div>
 							</div>
