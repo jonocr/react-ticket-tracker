@@ -9,11 +9,6 @@ import DashboardPage from "./components/pages/DashboardPage";
 function App() {
 	return (
 		<div>
-			{/* <DashboardPage></DashboardPage> */}
-
-			{/* <div className="dashboard-main dashboard">
-        <UserList></UserList>
-      </div> */}
 			<Router>
 				<Route component={DashboardPage} exact path="/" />
 				<Route component={UserPage} exact path="/user" />
@@ -38,4 +33,14 @@ export default App;
           </div>
         </div>
       </nav> */
+}
+
+{
+	/* <DashboardPage></DashboardPage> */
+}
+
+{
+	/* <div className="dashboard-main dashboard">
+        <UserList></UserList>
+      </div> */
 }

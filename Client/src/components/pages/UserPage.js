@@ -23,12 +23,13 @@ const UserPage = (props) => {
 		closeCss === "" ? setCloseCss("close-menu") : setCloseCss("");
 	};
 
-	const findUserByEmail = async (email) => {
+	const findUserByEmail = (email) => {
 		fetch(`http://localhost:8000/users/${email}`)
 			.then((response) => {
 				return response.json();
 			})
 			.then((responseData) => {
+				console.log("Response: ", responseData);
 				setUser(responseData[0]);
 				setTeamUsers(responseData[0].team);
 				setLoading(false);
@@ -53,7 +54,9 @@ const UserPage = (props) => {
 	};
 
 	const clickUpdateHandle = async (userData) => {
-		console.log("clickSaveHandle: ", userData);
+		const newUser = { ...userData, team: teamUsers };
+		userData.team = teamUsers;
+		console.log("clickUpdateHandle newUser: ", newUser);
 		try {
 			// await app
 			//   .auth()
@@ -67,19 +70,18 @@ const UserPage = (props) => {
 	};
 
 	const clickCreateHandle = async (userData) => {
-		// e.preventDefault();
-		// const { userName, email } = e.target.elements;
-		console.log("clickCreateHandle: ", userData);
-		try {
-			// await app
-			//   .auth()
-			//   .signInWithEmailAndPassword(email.value, password.value);
-			// history.push("/home");
-		} catch (error) {
-			setOpenError(true);
-			setErrorMsg(error.message);
-			return false;
-		}
+		const newUser = { ...userData, team: teamUsers };
+		userData.team = teamUsers;
+		console.log("clickCreateHandle newUser: ", newUser);
+
+		fetch("http://localhost:8000/users/signup", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(newUser),
+		})
+			.then((res) => res.json())
+			.then((data) => console.log(data))
+			.catch((err) => console.log(err));
 	};
 
 	const addUser2Team = (teamMember) => {

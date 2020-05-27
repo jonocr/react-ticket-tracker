@@ -49,10 +49,7 @@ const UserForm = (props) => {
 						id="email"
 						name="email"
 						placeholder="name@example.com"
-						onChange={(e) => {
-							setUser({ ...user, email: e.target.value });
-							console.log("onchange ", user);
-						}}
+						onChange={(e) => setUser({ ...user, email: e.target.value })}
 						value={user.email}
 					/>
 				</div>
@@ -74,12 +71,13 @@ const UserForm = (props) => {
 						className="form-control"
 						id="departmentSelect"
 						onChange={(e) => setUser({ ...user, department: e.target.value })}
+						value={user.department}
 					>
-						<option>IT</option>
-						<option>Billing</option>
-						<option>Development</option>
-						<option>Sales</option>
-						<option>Other</option>
+						<option value="IT">IT</option>
+						<option value="Billing">Billing</option>
+						<option value="Development">Development</option>
+						<option value="Sales">Sales</option>
+						<option value="Other">Other</option>
 					</select>
 				</div>
 
@@ -88,7 +86,7 @@ const UserForm = (props) => {
 						<input
 							type="checkbox"
 							className="form-check-input"
-							checked={user.isManager}
+							checked={!!user.isManager}
 							onChange={(e) => setUser({ ...user, isManager: !user.isManager })}
 							id="managerCheck"
 						/>

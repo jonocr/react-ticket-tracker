@@ -10,11 +10,8 @@ router.route("/").get((req, res) => {
 
 router.route("/:email").get((req, res) => {
 	const email = req.params.email;
-	//TODO DELETE CONSOLE
-	console.log("*******************server /email path*************** ", email);
 	User.find({ email: email })
 		.then((users) => {
-			console.log("/email path: ", users);
 			res.json(users);
 		})
 		.catch((err) => res.status(400).json(`Error: ${err}`));
@@ -43,11 +40,12 @@ router.route("/:userId").delete((req, res) => {
 router.route("/signup").post((req, res, next) => {
 	const errorEmailMessage = "Email address already registered in the system";
 	const data = req.body;
-	const userName = data.username;
+	const userName = data.userName;
 	const roles = data.roles;
 	const email = data.email;
-	const manager = data.manager;
-	const team = [];
+	const isManager = data.isManager;
+	const team = data.team ? data.team : [];
+	const department = data.department;
 
 	User.find({ email: email })
 		.exec()
@@ -69,8 +67,9 @@ router.route("/signup").post((req, res, next) => {
 							userName,
 							email,
 							password,
+							department,
 							roles,
-							manager,
+							isManager,
 							team,
 						});
 
