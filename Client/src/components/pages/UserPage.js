@@ -54,25 +54,24 @@ const UserPage = (props) => {
 	};
 
 	const clickUpdateHandle = async (userData) => {
-		const newUser = { ...userData, team: teamUsers };
-		userData.team = teamUsers;
-		console.log("clickUpdateHandle newUser: ", newUser);
-		try {
-			// await app
-			//   .auth()
-			//   .signInWithEmailAndPassword(email.value, password.value);
-			// history.push("/home");
-		} catch (error) {
-			setOpenError(true);
-			setErrorMsg(error.message);
-			return false;
-		}
+		const updatedUser = { ...userData, team: teamUsers };
+
+		fetch("http://localhost:8000/users/update", {
+			method: "PATCH",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(updatedUser),
+		})
+			.then((res) => res.json())
+			.then((data) => console.log(data))
+			.catch((err) => console.log(err));
+
+		// setOpenError(true);
+		// setErrorMsg(error.message);
+		// return false;
 	};
 
 	const clickCreateHandle = async (userData) => {
 		const newUser = { ...userData, team: teamUsers };
-		userData.team = teamUsers;
-		console.log("clickCreateHandle newUser: ", newUser);
 
 		fetch("http://localhost:8000/users/signup", {
 			method: "POST",

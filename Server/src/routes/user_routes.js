@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const User = require("../models/user.model");
 const bcrypt = require("bcrypt");
+const mongoose = require("mongoose");
 
 router.route("/").get((req, res) => {
 	User.find()
@@ -18,13 +19,79 @@ router.route("/:email").get((req, res) => {
 });
 
 router.route("/update").patch((req, res) => {
-	res.status(200).json({
-		message: "User Patched",
+	const errorEmailMessage = "There was an error finding this user";
+	const data = req.body;
+	const userName = data.userName;
+	const roles = data.roles;
+	const email = data.email;
+	const isManager = data.isManager;
+	const team = data.team ? data.team : [];
+	const department = data.department;
+	const password = data.password;
+	const _id = data._id;
+
+	let updatedUser = new User({
+		_id,
+		userName,
+		email,
+		password,
+		department,
+		roles,
+		isManager,
+		team,
 	});
-	// const id = req.params.userId;
-	// User.find()
-	//     .then(users => res.json(users))
-	//     .catch(err => res.status(400).json(`Error: ${err}`));
+	console.log("Updated User: ", updatedUser);
+	User.findOne({ _id: _id })
+		.exec()
+		.then((user) => {
+			console.log("THEN User: ", user);
+			if (user.length <= 0) {
+				console.log("user.length <= 0");
+				res.status(409).json({
+					error: errorEmailMessage,
+				});
+			} else {
+				console.log("! user.length <= 0");
+				console.log("OlD PASSWORD: ", user.password);
+				console.log("NEW PASSWORD: ", password);
+
+				if (password != user.password) {
+					console.log("NEW PASSWORD!");
+					if (err) {
+						res.status(500).json({
+							error: err,
+						});
+					} else {
+						updatedUser.password = hash;
+
+						User.updateOne(
+							{
+								_id: _id,
+							},
+							{
+								$set: updatedUser,
+								$currentDate: { lastModified: true },
+							}
+						)
+							.then(() => res.json("User updated!"))
+							.catch((err) => res.status(400).json(`Error: ${err}`));
+					}
+				} else {
+					console.log("No NEW PASSWORD");
+					User.updateOne(
+						{
+							_id: _id,
+						},
+						{
+							$set: updatedUser,
+							$currentDate: { lastModified: true },
+						}
+					)
+						.then(() => res.json("User updated!"))
+						.catch((err) => res.status(400).json(`Error: ${err}`));
+				}
+			}
+		});
 });
 
 router.route("/:userId").delete((req, res) => {
@@ -64,6 +131,7 @@ router.route("/signup").post((req, res, next) => {
 						const password = hash;
 
 						const newUser = new User({
+							_id: new mongoose.Types.ObjectId(),
 							userName,
 							email,
 							password,

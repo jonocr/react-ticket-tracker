@@ -22,6 +22,7 @@ const UserSearchPage = (props) => {
 	const loadUsers = () => {
 		fetch("http://localhost:8000/users")
 			.then((response) => {
+				console.log("All Users Data: ", response.clone().json());
 				return response.json();
 			})
 			.then((responseData) => {
@@ -34,7 +35,6 @@ const UserSearchPage = (props) => {
 
 	useEffect(() => {
 		loadUsers();
-		setUsersMock(mockData);
 	}, []);
 
 	return (
@@ -46,7 +46,6 @@ const UserSearchPage = (props) => {
 
 				<div className="dashboard-main dashboard">
 					<UserList data={users} onClick={addTeamUser}></UserList>
-					<UserList data={usersMock} onClick={addTeamUser}></UserList>
 				</div>
 			</div>
 		</div>
