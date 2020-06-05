@@ -6,8 +6,8 @@
  * Set up a decent box model on the root element
  */
 html {
-  box-sizing: border-box;
-  height: 100%;
+	box-sizing: border-box;
+	height: 100%;
 }
 
 /**
@@ -19,19 +19,22 @@ html {
 *,
 *::before,
 *::after {
-  box-sizing: inherit;
+	box-sizing: inherit;
 }
 
 /**
  * Basic styles for links
  */
 a {
-  color: $text-color;
-  text-decoration: none;
+	color: $text-color;
+	text-decoration: none;
 
-  // @include on-event {
-  //   color: $text-color;
-  //   text-decoration: underline;
-  // }
+	// @include on-event {
+	//   color: $text-color;
+	//   text-decoration: underline;
+	// }
 }
 
+label {
+	font-size: $text-form-size;
+}

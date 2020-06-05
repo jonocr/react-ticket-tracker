@@ -5,12 +5,14 @@ import "./main.css";
 import UserPage from "./components/pages/UserPage";
 import UserSearchPage from "./components/pages/UserSearchPage";
 import DashboardPage from "./components/pages/DashboardPage";
+import LoginPage from "./components/pages/LoginPage";
 
 function App() {
 	return (
 		<div>
 			<Router>
 				<Route component={DashboardPage} exact path="/" />
+				<Route component={LoginPage} exact path="/login" />
 				<Route component={UserPage} exact path="/user" />
 				<Route component={UserPage} exact path="/user/:email" />
 				<Route component={UserSearchPage} exact path="/findUser" />

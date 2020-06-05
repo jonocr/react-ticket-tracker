@@ -2,21 +2,24 @@
 // This file contains all application-wide Sass variables.
 // -----------------------------------------------------------------------------
 
-
-
-
+//Font Size for Forms
+$text-form-size: 16px;
 
 /// Regular font family
 /// @type List
-$text-font-stack: 'Open Sans', 'Helvetica Neue Light', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif !default;
+$text-font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+	"Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+	"Segoe UI Symbol";
+
+// $text-font-stack: "Open Sans", "Helvetica Neue Light", "Helvetica Neue",
+// "Helvetica", "Arial", sans-serif !default;
+
+// font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
 
 /// Code (monospace) font family
 /// @type List
-$code-font-stack: 'Courier New', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Monaco', monospace !default;
-
-
-
-
+$code-font-stack: "Courier New", "DejaVu Sans Mono", "Bitstream Vera Sans Mono",
+	"Monaco", monospace !default;
 
 /// Copy text color
 /// @type Color
@@ -28,48 +31,47 @@ $brand-color: rgb(229, 0, 80) !default;
 
 /// Super Light grey
 /// @type Color
-$super-light-gray: #F1F2F7;
+$super-light-gray: #f1f2f7;
 
 /// Light grey
 /// @type Color
-$light-grey: #8E979E;
+$light-grey: #8e979e;
 
 /// Medium grey
 /// @type Color
-$mid-grey: #686D73 !default;
+$mid-grey: #686d73 !default;
 
 /// Dark grey
 /// @type Color
-$dark-grey: #63636D !default;
+$dark-grey: #63636d !default;
 
 /// Super Dark grey
 /// @type Color
-$super-dark-grey: #272C32;
+$super-dark-grey: #272c32;
 
 /// Mid Green
 /// @type Color
-$mid-green: #33A75C;
+$mid-green: #33a75c;
 
 /// Aqua
 /// @type Color
-$aqua: #63C2DE;
+$aqua: #63c2de;
 
 /// Ligh Blue
 /// @type Color
-$light-blue: #28A3E5;
+$light-blue: #28a3e5;
 
 /// Container's maximum width
 /// @type Length
 $max-width: 1180px !default;
 
 $red: #e74c3c;
-$mid-red: #E25640;
-$blue: #3795F2;
-$light-red: #F26B6B;
-$yellow: #F2B90C;
-$dark-blue: #37538C;
+$mid-red: #e25640;
+$blue: #3795f2;
+$light-red: #f26b6b;
+$yellow: #f2b90c;
+$dark-blue: #37538c;
 $white: #fff;
-
 
 /// Menu gray text
 /// @type Color
@@ -81,7 +83,7 @@ $menu-gray-title-text: #9496a1;
 
 /// Menu highlight title text
 /// @type Color
-$menu-highlight-text: #FFF;
+$menu-highlight-text: #fff;
 
 /// Menu main title highlight text
 /// @type Color
@@ -95,38 +97,30 @@ $menu-divisor: #4e4e52;
 $head-button-color: $red;
 $head-button-bg-color: $white;
 $head-menu-bar: $white;
-$dashboard-bar:$white;
-
+$dashboard-bar: $white;
 
 //table variables
 $table-bg: $white;
 $table-head-bg: #343a40;
 $table-head-txt: $white;
 
-
+//Login Variables
+$login-text-color: #878787;
 
 //#46474C
 //#d7d9e3 !important
-
-
-
 
 /// Breakpoints map
 /// @prop {String} keys - Keys are identifiers mapped to a given length
 /// @prop {Map} values - Values are actual breakpoints expressed in pixels
 $breakpoints: (
-  'small': 320px,
-  'medium': 768px,
-  'large': 1024px,
+	"small": 320px,
+	"medium": 768px,
+	"large": 1024px,
 ) !default;
-
-
-
-
-
 
 /// Relative or absolute URL where all assets are served from
 /// @type String
 /// @example scss - When using a CDN
 ///   $base-url: 'http://cdn.example.com/assets/';
-$base-url: '/assets/' !default;
+$base-url: "/assets/" !default;
