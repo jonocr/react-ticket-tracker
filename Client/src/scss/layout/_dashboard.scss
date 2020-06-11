@@ -1,46 +1,49 @@
 .dashboard {
-  @include media-breakpoint-up(md) {
-    margin-left: 300px;
-    margin-right: 20px;
-    transition: margin 0.3s ease;
-  }
+	@include media-breakpoint-up(md) {
+		margin-left: 300px;
+		margin-right: 20px;
+		transition: margin 0.3s ease;
+	}
 }
 
 .dashboard-bar {
-  background-color: $dashboard-bar;
-  height: 40px;
-  line-height: 40px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  padding-left: 20px;
-  transition: margin 0.3s ease;
-  @include media-breakpoint-up(md) {
-    margin-right: 20px;
-  }
+	background-color: $dashboard-bar;
+	height: 40px;
+	line-height: 40px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	padding-left: 20px;
+	transition: margin 0.3s ease;
+	@include media-breakpoint-up(md) {
+		margin-right: 20px;
+	}
 }
 
 @include media-breakpoint-up(md) {
-  .close-menu {
-    .dashboard-bar {
-      margin-left: 90px;
-      transition: margin 0.3s ease;
-    }
-    .dashboard {
-      margin-left: 90px;
-      transition: margin 0.3s ease;
-    }
-  }
+	.close-menu {
+		.dashboard-bar {
+			margin-left: 90px;
+			transition: margin 0.3s ease;
+		}
+		.dashboard {
+			margin-left: 90px;
+			transition: margin 0.3s ease;
+		}
+	}
 }
 
 .box {
-  padding: 5px;
-  margin-bottom: 25px;
-  background-color: skyblue;
-  min-height: 150px;
+	padding: 5px;
+	margin-bottom: 25px;
+	background-color: skyblue;
+	min-height: 150px;
 }
 
 .dashboard {
-  .col {
-    padding-bottom: 25px;
-  }
+	table {
+		border-radius: 2px;
+	}
+	.col {
+		padding-bottom: 25px;
+	}
 }

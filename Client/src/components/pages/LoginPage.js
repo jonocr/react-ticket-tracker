@@ -5,7 +5,15 @@ const LoginPage = () => {
 
 	const loginHandle = (e) => {
 		e.preventDefault();
-		console.log("Login action", user);
+
+		fetch("http://localhost:8000/users/login", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(user),
+		})
+			.then((res) => res.json())
+			.then((data) => console.log(data))
+			.catch((err) => console.log(err));
 	};
 	return (
 		<div className="login-body">

@@ -2,6 +2,7 @@ const router = require("express").Router();
 const User = require("../models/user.model");
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
 
 router.route("/").get((req, res) => {
 	User.find()
@@ -171,8 +172,19 @@ router.route("/login").post((req, res) => {
 					failedAuth();
 				}
 				if (result) {
+					const token = jwt.sign(
+						{
+							userName: user[0].userName,
+							email: user[0].email,
+							isManager: user[0].isManager,
+							department: user[0].department,
+						},
+						process.env.JWT_KEY,
+						{ expiresIn: "1h" }
+					);
 					return res.status(200).json({
 						message: successAuthMessage,
+						token: token,
 					});
 				}
 				failedAuth();

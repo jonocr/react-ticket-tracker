@@ -39,6 +39,10 @@ const userSchema = new Schema(
 			type: Boolean,
 			default: false,
 		},
+		department: {
+			type: String,
+			trim: true,
+		},
 	},
 	{
 		timestamps: true,
