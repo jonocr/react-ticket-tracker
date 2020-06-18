@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { useParams, Redirect } from "react-router-dom";
 import TopBar from "../layout/TopBar";
 import SideMenu from "../layout/SideMenu";
 import UserList from "../users/UserList";
 import UserForm from "../users/UserForm";
+import AuthContext from "../utils/AuthContext";
 
 // import mockData from "../../data/users.json";
 // import mockTeam from "../../data/team.json";
@@ -18,6 +19,7 @@ const UserPage = (props) => {
 	const [openError, setOpenError] = React.useState(false);
 	const [errorMsg, setErrorMsg] = React.useState("");
 	const { email } = useParams();
+	const { userData } = useContext(AuthContext);
 
 	const clickToggle = (e) => {
 		closeCss === "" ? setCloseCss("close-menu") : setCloseCss("");
@@ -40,7 +42,14 @@ const UserPage = (props) => {
 	};
 
 	const getAllUsers = async () => {
-		fetch(`http://localhost:8000/users/`)
+		console.log("FECTH getAllUsers: ", userData.token);
+		fetch(`http://localhost:8000/users/`, {
+			method: "GET",
+			contentType: "application/json",
+			headers: {
+				Authorization: `Bearer ${userData.token}`,
+			},
+		})
 			.then((response) => {
 				return response.json();
 			})

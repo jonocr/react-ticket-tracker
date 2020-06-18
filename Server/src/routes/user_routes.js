@@ -3,8 +3,9 @@ const User = require("../models/user.model");
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
+const checkAuth = require("../utils/check-auth");
 
-router.route("/").get((req, res) => {
+router.route("/").get(checkAuth, (req, res) => {
 	User.find()
 		.then((users) => res.json(users))
 		.catch((err) => res.status(400).json(`Error: ${err}`));
@@ -176,8 +177,6 @@ router.route("/login").post((req, res) => {
 						{
 							userName: user[0].userName,
 							email: user[0].email,
-							isManager: user[0].isManager,
-							department: user[0].department,
 						},
 						process.env.JWT_KEY,
 						{ expiresIn: "1h" }
@@ -185,6 +184,12 @@ router.route("/login").post((req, res) => {
 					return res.status(200).json({
 						message: successAuthMessage,
 						token: token,
+						user: {
+							userName: user[0].userName,
+							email: user[0].email,
+							isManager: user[0].isManager,
+							department: user[0].department,
+						},
 					});
 				}
 				failedAuth();

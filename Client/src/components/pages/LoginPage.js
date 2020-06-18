@@ -1,7 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
+// import useHistory from "react-router-dom";
+import AuthContext from "../utils/AuthContext";
+import { useHistory } from "react-router";
 
 const LoginPage = () => {
 	const [user, setUser] = useState({});
+	const { userData, setUserData } = useContext(AuthContext);
+	let history = useHistory();
 
 	const loginHandle = (e) => {
 		e.preventDefault();
@@ -12,9 +17,17 @@ const LoginPage = () => {
 			body: JSON.stringify(user),
 		})
 			.then((res) => res.json())
-			.then((data) => console.log(data))
+			.then((data) => {
+				setUserData({
+					token: data.token,
+					user: data.user,
+					loading: false,
+				});
+				history.push("/user");
+			})
 			.catch((err) => console.log(err));
 	};
+
 	return (
 		<div className="login-body">
 			<div className="login-container">

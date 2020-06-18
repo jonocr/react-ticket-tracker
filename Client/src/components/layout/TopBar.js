@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import USFlag from "../../images/flags/svg/us.svg";
+import AuthContext from "../utils/AuthContext";
 
 const TopBar = (props) => {
+	const { userData } = useContext(AuthContext);
+
+	useEffect(() => {
+		console.log("TOP BAR", userData);
+	}, []);
+
 	return (
 		<header className={props.css}>
 			<a href="/#" className="toggle-menu" onClick={(e) => props.onClick(e)}>
@@ -82,6 +89,7 @@ const TopBar = (props) => {
 					</svg>
 				</a>
 				<div className="profile-icons">
+					Hi {userData.user.userName}
 					<img src={USFlag} className="flag"></img>
 					<a href="/#" className="profile-pic-icon">
 						<svg

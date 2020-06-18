@@ -6,51 +6,35 @@ import UserPage from "./components/pages/UserPage";
 import UserSearchPage from "./components/pages/UserSearchPage";
 import DashboardPage from "./components/pages/DashboardPage";
 import LoginPage from "./components/pages/LoginPage";
-import UserContext from "./components/utils/UserContext";
+import AuthContext from "./components/utils/AuthContext";
+
+const GUEST_USER = {
+	email: null,
+	userName: "Guest",
+	isManager: false,
+	department: null,
+};
 
 function App() {
-	const [userData, setUserDate] = useState({
+	const [userData, setUserData] = useState({
 		token: undefined,
-		user: undefined,
+		user: GUEST_USER,
+		loading: true,
 	});
 
 	return (
 		<div>
-			<Router>
-				<UserContext.Provider value={{ userData, setUserDate }}>
+			<AuthContext.Provider value={{ userData, setUserData }}>
+				<Router>
 					<Route component={DashboardPage} exact path="/" />
 					<Route component={LoginPage} exact path="/login" />
 					<Route component={UserPage} exact path="/user" />
 					<Route component={UserPage} exact path="/user/:email" />
 					<Route component={UserSearchPage} exact path="/findUser" />
-				</UserContext.Provider>
-			</Router>
+				</Router>
+			</AuthContext.Provider>
 		</div>
 	);
 }
 
 export default App;
-
-{
-	/* <nav class="navbar navbar-expand-md navbar-light bg-light">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" href="#">Features</a>
-          </div>
-        </div>
-      </nav> */
-}
-
-{
-	/* <DashboardPage></DashboardPage> */
-}
-
-{
-	/* <div className="dashboard-main dashboard">
-        <UserList></UserList>
-      </div> */
-}
