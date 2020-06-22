@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import TopBar from "../layout/TopBar";
-import SideMenu from "../layout/SideMenu";
-import UserList from "../users/UserList";
-import mockData from "../../data/users.json";
+import TopBar from "../../layout/TopBar";
+import SideMenu from "../../layout/SideMenu";
+import UserList from "../../users/UserList";
 
 const UserSearchPage = (props) => {
 	const [closeCss, setCloseCss] = useState("");
 	const [users, setUsers] = useState([]);
-	const [usersMock, setUsersMock] = useState([]);
 	const history = useHistory();
 
 	const clickToggle = (e) => {

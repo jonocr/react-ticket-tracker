@@ -3,125 +3,125 @@
 // -----------------------------------------------------------------------------
 
 .side-menu {
-  position: fixed;
-  background-color: $super-dark-grey;
-  font-family: "Open Sans";
-  font-size: 14px;
-  width: 280px;
-  height: 100%;
-  white-space: nowrap;
-  overflow-x: hidden;
-  transition: width 0.3s ease;
+	position: fixed;
+	background-color: $super-dark-grey;
+	font-family: "Open Sans";
+	font-size: 14px;
+	width: 280px;
+	height: 100%;
+	white-space: nowrap;
+	overflow-x: hidden;
+	transition: width 0.3s ease;
 
-  .menu-title {
-    height: 70px;
-    font-size: 22px;
-    color: $menu-gray-text;
-    text-align: center;
-    padding-top: 20px;
-    border-bottom: 1px solid $menu-divisor;
-  }
+	.menu-title {
+		height: 70px;
+		font-size: 22px;
+		color: $menu-gray-text;
+		text-align: center;
+		padding-top: 20px;
+		border-bottom: 1px solid $menu-divisor;
+	}
 
-  .menu-title-highligh {
-    color: $menu-main-title-highligh;
-    font-weight: bold;
-  }
+	.menu-title-highligh {
+		color: $menu-main-title-highligh;
+		font-weight: bold;
+	}
 
-  .menu-subtitle {
-    border-bottom: 1px solid $menu-divisor;
-    text-transform: uppercase;
-    font-weight: bold;
-    color: $menu-gray-title-text;
-    height: 40px;
-  }
+	.menu-subtitle {
+		border-bottom: 1px solid $menu-divisor;
+		text-transform: uppercase;
+		font-weight: bold;
+		color: $menu-gray-title-text;
+		height: 40px;
+	}
 
-  ul {
-    padding-top: 5px;
-    padding-left: 1px;
-  }
+	ul {
+		padding-top: 5px;
+		padding-left: 1px;
+	}
 
-  a {
-    display: block;
-    color: $menu-gray-text;
-    text-decoration: none;
-    &:hover {
-      color: $menu-highlight-text;
-    }
-  }
+	a {
+		display: block;
+		color: $menu-gray-text;
+		text-decoration: none;
+		&:hover {
+			color: $menu-highlight-text;
+		}
+	}
 
-  li {
-    display: block;
-    height: 40px;
-    margin-top: 20px;
-  }
+	li {
+		display: block;
+		height: 40px;
+		margin-top: 20px;
+	}
 
-  #menu-dashboard {
-    text-transform: none;
-    font-weight: normal;
-    border-bottom: none;
-    a {
-      color: $menu-gray-text;
-    }
+	#menu-dashboard {
+		text-transform: none;
+		font-weight: normal;
+		border-bottom: none;
+		a {
+			color: $menu-gray-text;
+		}
 
-    a:hover {
-      color: $menu-highlight-text;
-    }
-  }
+		a:hover {
+			color: $menu-highlight-text;
+		}
+	}
 
-  svg {
-    margin-right: 40px;
-    margin-bottom: 4px;
-  }
+	svg {
+		margin-right: 40px;
+		margin-bottom: 4px;
+	}
 }
 
 .close-menu {
-  .side-menu {
-    width: 70px;
-    transition: width 0.3s ease;
-    svg {
-      width: 1.5em;
-      height: 1.5em;
-      transition: width 0.3s ease;
-      transition: height 0.3s ease;
-    }
-  }
-  .menu-title {
-    font-size: 0;
-    line-height: 0;
-    opacity: 0;
-    padding: 0;
-  }
-  .menu-subtitle {
-    display: none;
-  }
-  #dashboard {
-    margin-bottom: 0;
-  }
+	.side-menu {
+		width: 70px;
+		transition: width 0.3s ease;
+		svg {
+			width: 1.5em;
+			height: 1.5em;
+			transition: width 0.3s ease;
+			transition: height 0.3s ease;
+		}
+	}
+	.menu-title {
+		font-size: 0;
+		line-height: 0;
+		opacity: 0;
+		padding: 0;
+	}
+	.menu-subtitle {
+		display: none;
+	}
+	#dashboard {
+		margin-bottom: 0;
+	}
 
-  .toggle-menu {
-    margin-left: -232px;
-    transition: margin 0.3s ease;
-  }
+	.toggle-menu {
+		margin-left: -232px;
+		transition: margin 0.3s ease;
+	}
 }
 
 .toggle-menu {
-  display: none;
-  position: fixed;
-  background: $red;
-  border-radius: 50%;
-  color: $head-button-bg-color !important;
-  cursor: pointer;
-  font-size: 18px;
-  height: 43px;
-  line-height: 44px;
-  margin: -2px 20px 0 -57px;
-  text-align: center;
-  width: 43px;
-  margin-left: -22px;
-  margin-top: 15px;
-  transition: margin 0.3s ease;
-  
-  @include media-breakpoint-up(md) {
-    display: inline;
-  }
+	display: none;
+	position: fixed;
+	background: $red;
+	border-radius: 50%;
+	color: $head-button-bg-color !important;
+	cursor: pointer;
+	font-size: 18px;
+	height: 43px;
+	line-height: 44px;
+	margin: -2px 20px 0 -57px;
+	text-align: center;
+	width: 43px;
+	margin-left: -22px;
+	margin-top: 15px;
+	transition: margin 0.3s ease;
+
+	@include media-breakpoint-up(md) {
+		display: inline;
+	}
 }

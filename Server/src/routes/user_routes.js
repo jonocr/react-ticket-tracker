@@ -42,7 +42,6 @@ router.route("/update").patch((req, res) => {
 		isManager,
 		team,
 	});
-	console.log("Updated User: ", updatedUser);
 	User.findOne({ _id: _id })
 		.exec()
 		.then((user) => {
@@ -53,10 +52,6 @@ router.route("/update").patch((req, res) => {
 					error: errorEmailMessage,
 				});
 			} else {
-				console.log("! user.length <= 0");
-				console.log("OlD PASSWORD: ", user.password);
-				console.log("NEW PASSWORD: ", password);
-
 				if (password != user.password) {
 					console.log("NEW PASSWORD!");
 					if (err) {

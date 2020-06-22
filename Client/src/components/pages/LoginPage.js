@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
-// import useHistory from "react-router-dom";
 import AuthContext from "../utils/AuthContext";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 
 const LoginPage = () => {
 	const [user, setUser] = useState({});
@@ -23,7 +23,10 @@ const LoginPage = () => {
 					user: data.user,
 					loading: false,
 				});
-				history.push("/user");
+				//*********JUST FOR DEV ENVIROMENT******** */
+				// window.localStorage.setItem('token', data.token);
+				// window.localStorage.setItem('user', data.user);
+				history.push("/dashboard");
 			})
 			.catch((err) => console.log(err));
 	};
@@ -65,6 +68,9 @@ const LoginPage = () => {
 						</div>
 					</div>
 				</form>
+				<div className="no-account">
+					Don't have account ? <Link to="/new-account">Sign Up Here</Link>
+				</div>
 			</div>
 		</div>
 	);

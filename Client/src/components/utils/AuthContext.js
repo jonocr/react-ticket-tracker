@@ -19,30 +19,3 @@ export function useAuthData() {
 }
 
 export default AuthContext;
-
-// const AuthProvider = ({ children }) => {
-// 	const [auth, setAuth] = useState({
-// 		token: null,
-// 		user: {
-// 			email: null,
-// 			userName: null,
-// 			isManager: false,
-// 			department: null,
-// 		},
-// 		loading: true,
-// 	});
-// 	// we will use loading later
-
-// 	const setAuthData = (data) => {
-// 		setAuth({ data: data });
-// 	};
-// 	// a function that will help us to add the user data in the auth;
-
-// 	return (
-// 		<AuthContext.Provider value={{ auth, setAuthData }}>
-// 			{children}
-// 		</AuthContext.Provider>
-// 	);
-// };
-
-// export default AuthProvider;

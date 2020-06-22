@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, Redirect } from "react-router-dom";
-import TopBar from "../layout/TopBar";
-import SideMenu from "../layout/SideMenu";
-import UserList from "../users/UserList";
-import UserForm from "../users/UserForm";
-import AuthContext from "../utils/AuthContext";
+import TopBar from "../../layout/TopBar";
+import SideMenu from "../../layout/SideMenu";
+import UserList from "../../users/UserList";
+import UserForm from "../../users/UserForm";
+import AuthContext from "../../utils/AuthContext";
 
 // import mockData from "../../data/users.json";
 // import mockTeam from "../../data/team.json";
