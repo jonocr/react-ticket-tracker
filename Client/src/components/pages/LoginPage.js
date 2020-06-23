@@ -60,11 +60,9 @@ const LoginPage = () => {
 					</div>
 
 					<div className="form-group row">
-						<div className="col-sm-12">
-							<button type="submit" className="btn btn-primary">
-								Login
-							</button>
-						</div>
+						<button type="submit" className="btn btn-primary">
+							Login
+						</button>
 					</div>
 				</form>
 				<div className="no-account">

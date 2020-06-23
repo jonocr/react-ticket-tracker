@@ -56,11 +56,9 @@ const UserClientForm = (props) => {
 				</div>
 
 				<div className="form-group row">
-					<div className="col-sm-12">
-						<button type="submit" className="btn btn-primary">
-							Register
-						</button>
-					</div>
+					<button type="submit" className="btn btn-primary">
+						Register
+					</button>
 				</div>
 			</form>
 		</div>

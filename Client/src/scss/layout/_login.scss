@@ -32,6 +32,10 @@
 		display: inline-block;
 		margin-bottom: 0.5rem;
 	}
+
+	button {
+		width: 100%;
+	}
 }
 
 .no-account {
@@ -42,4 +46,10 @@
 	border-top: 1px solid;
 	border-color: $login-text-color;
 	font-size: smaller;
+}
+
+.new-user-container {
+	button {
+		width: 100%;
+	}
 }
