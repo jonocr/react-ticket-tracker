@@ -1,6 +1,6 @@
 import React from "react";
 
-const NewTicket = (props) => {
+const NewTicketForm = (props) => {
 	return (
 		<div>
 			<form>
@@ -48,4 +48,4 @@ const NewTicket = (props) => {
 	);
 };
 
-export default NewTicket;
+export default NewTicketForm;

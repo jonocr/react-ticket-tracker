@@ -15,7 +15,7 @@ const UserClientForm = (props) => {
 		props.onClickSave(user);
 	};
 	return (
-		<did>
+		<div>
 			<form onSubmit={hadlerSaveClick}>
 				<div className="form-group">
 					<label htmlFor="subjectInput">User Name:</label>
@@ -50,6 +50,7 @@ const UserClientForm = (props) => {
 						className="form-control"
 						id="password"
 						name="password"
+						placeholder="Password"
 						onChange={(e) => setUser({ ...user, password: e.target.value })}
 					/>
 				</div>
@@ -57,12 +58,12 @@ const UserClientForm = (props) => {
 				<div className="form-group row">
 					<div className="col-sm-12">
 						<button type="submit" className="btn btn-primary">
-							Save
+							Register
 						</button>
 					</div>
 				</div>
 			</form>
-		</did>
+		</div>
 	);
 };
 

@@ -1,14 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import AuthContext from "../utils/AuthContext";
 import TopBar from "../layout/TopBar";
 import SideMenu from "../layout/SideMenu";
-import NewTicket from "../others/NewTicket";
+// import NewTicket from "../others/NewTicket";
+import { useHistory } from "react-router";
 
 const DashboardPage = (props) => {
 	const [closeCss, setCloseCss] = useState("");
+	const history = useHistory();
+	const { userData } = useContext(AuthContext);
 
 	const clickToggle = (e) => {
 		closeCss === "" ? setCloseCss("close-menu") : setCloseCss("");
 	};
+
+	useEffect(() => {
+		!userData.token && history.push("/login");
+	}, []);
 
 	return (
 		<div className={closeCss}>
@@ -48,7 +56,7 @@ const DashboardPage = (props) => {
 				</div>
 
 				<div className="dashboard-main dashboard">
-					<NewTicket></NewTicket>
+					{/* <NewTicket></NewTicket> */}
 				</div>
 			</div>
 		</div>

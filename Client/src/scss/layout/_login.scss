@@ -33,3 +33,13 @@
 		margin-bottom: 0.5rem;
 	}
 }
+
+.no-account {
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	padding-top: 20px;
+	border-top: 1px solid;
+	border-color: $login-text-color;
+	font-size: smaller;
+}

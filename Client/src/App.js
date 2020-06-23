@@ -7,6 +7,7 @@ import UserSearchPage from "./components/pages/user/UserSearchPage";
 import DashboardPage from "./components/pages/DashboardPage";
 import LoginPage from "./components/pages/LoginPage";
 import CreateUser from "./components/pages/user/CreateUser";
+import NewTicketPage from "./components/pages/ticket/CreateTicketPage";
 import AuthContext from "./components/utils/AuthContext";
 
 const GUEST_USER = {
@@ -35,15 +36,20 @@ function App() {
 					<Route component={LoginPage} exact path="/login" />
 					<Route component={CreateUser} exact path="/new-account" />
 					<Route component={LoginPage} exact path="/" />
-					{userData.token && (
+					<Route component={DashboardPage} exact path="/dashboard" />
+					{/* {userData.token && (
 						<Route component={DashboardPage} exact path="/dashboard" />
-					)}
+					)} */}
 					{userData.token && <Route component={UserPage} exact path="/user" />}
 					{userData.token && (
 						<Route component={UserPage} exact path="/user/:email" />
 					)}
 					{userData.token && (
 						<Route component={UserSearchPage} exact path="/findUser" />
+					)}
+
+					{userData.token && (
+						<Route component={NewTicketPage} exact path="/new-ticket" />
 					)}
 
 					{/* {!userData.token && <Redirect  from="/" to="/login" />} */}
