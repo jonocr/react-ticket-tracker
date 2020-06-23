@@ -44,7 +44,6 @@ const LoginPage = () => {
 							name="email"
 							placeholder="name@example.com"
 							onChange={(e) => setUser({ ...user, email: e.target.value })}
-							value={user.email}
 						/>
 					</div>
 

@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import NewTicketForm from "../../others/NewTicket";
 import SideMenu from "../../layout/SideMenu";
 import TopBar from "../../layout/TopBar";
+import AuthContext from "../../utils/AuthContext";
 
-export default CreateTicketPage = () => {
+const CreateTicketPage = () => {
 	const [closeCss, setCloseCss] = useState("");
 	const { userData } = useContext(AuthContext);
 
@@ -15,9 +16,11 @@ export default CreateTicketPage = () => {
 		<div className={closeCss}>
 			<SideMenu css={closeCss}></SideMenu>
 			<TopBar onClick={clickToggle} css={closeCss}></TopBar>
-			<div className="container">
+			<div className="dashboard-main dashboard">
 				<NewTicketForm></NewTicketForm>
 			</div>
 		</div>
 	);
 };
+
+export default CreateTicketPage;

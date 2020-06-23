@@ -43,6 +43,13 @@ const NewTicketForm = (props) => {
 						rows="3"
 					></textarea>
 				</div>
+				<div className="form-group row">
+					<div className="col-sm-10">
+						<button type="submit" className="btn btn-primary">
+							Create Ticket
+						</button>
+					</div>
+				</div>
 			</form>
 		</div>
 	);
