@@ -31,7 +31,6 @@ const UserPage = (props) => {
 				return response.json();
 			})
 			.then((responseData) => {
-				console.log("Response: ", responseData);
 				setUser(responseData[0]);
 				setTeamUsers(responseData[0].team);
 				setLoading(false);

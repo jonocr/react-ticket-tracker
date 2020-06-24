@@ -11,7 +11,14 @@ const TopBar = (props) => {
 
 	return (
 		<header className={props.css}>
-			<a href="/#" className="toggle-menu" onClick={(e) => props.onClick(e)}>
+			<a
+				href="/#"
+				className="toggle-menu"
+				onClick={(e) => {
+					e.preventDefault();
+					props.onClick(e);
+				}}
+			>
 				<svg
 					className="bi bi-grid-1x2"
 					width="1em"

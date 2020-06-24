@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useState, useContext } from "react";
+import AuthContext from "../utils/AuthContext";
 
 const NewTicketForm = (props) => {
+	const { userData } = useContext(AuthContext);
+	const [ticket, SetTicket] = useState({
+		status: "open",
+		priority: 3,
+		createdBy: userData.user.email,
+	});
+
+	const handleCreateClick = (e) => {
+		e.preventDefault();
+		console.log("Creating new Ticket ***handleClick***: ", ticket);
+		props.clickHandle(ticket);
+	};
+
 	return (
 		<div>
-			<form>
+			<form onSubmit={handleCreateClick}>
 				<div className="form-group">
 					<label htmlFor="subjectInput">Subject</label>
 					<input
@@ -11,22 +25,17 @@ const NewTicketForm = (props) => {
 						className="form-control"
 						id="subjectInput"
 						placeholder="Title of the Issue"
-					/>
-				</div>
-
-				<div className="form-group">
-					<label htmlFor="emailInput">Email address</label>
-					<input
-						type="email"
-						className="form-control"
-						id="emailInput"
-						placeholder="name@example.com"
+						onChange={(e) => SetTicket({ ...ticket, title: e.target.value })}
 					/>
 				</div>
 
 				<div className="form-group">
 					<label htmlFor="exampleFormControlSelect1">Category</label>
-					<select className="form-control" id="exampleFormControlSelect1">
+					<select
+						className="form-control"
+						id="exampleFormControlSelect1"
+						onChange={(e) => SetTicket({ ...ticket, category: e.target.value })}
+					>
 						<option>IT</option>
 						<option>Billing</option>
 						<option>Development</option>
@@ -41,6 +50,9 @@ const NewTicketForm = (props) => {
 						className="form-control"
 						id="descriptionTextArea"
 						rows="3"
+						onChange={(e) =>
+							SetTicket({ ...ticket, description: e.target.value })
+						}
 					></textarea>
 				</div>
 				<div className="form-group row">
