@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import NewTicketForm from "../../others/NewTicketForm";
+import NewTicketForm from "../../tickets/NewTicketForm";
 import SideMenu from "../../layout/SideMenu";
 import TopBar from "../../layout/TopBar";
 import AuthContext from "../../utils/AuthContext";

@@ -13,6 +13,7 @@ router.route("/").get(checkAuth, (req, res) => {
 
 router.route("/:email").get((req, res) => {
 	const email = req.params.email;
+	console.log("User Email: ", email);
 	User.find({ email: email })
 		.then((users) => {
 			res.json(users);

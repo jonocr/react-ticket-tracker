@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import AuthContext from "../utils/AuthContext";
 
 const SideMenu = (props) => {
+	const { userData } = useContext(AuthContext);
 	return (
 		<section className={props.css}>
 			<nav className="side-menu d-none d-md-block">

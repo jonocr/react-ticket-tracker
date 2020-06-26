@@ -2,13 +2,7 @@ const router = require("express").Router();
 const Ticket = require("../models/ticket.model");
 const checkAuth = require("../utils/check-auth");
 
-router.route("/").get((req, res) => {
-	Ticket.find()
-		.then((tickets) => res.json(tickets))
-		.catch((err) => res.status(400).json(`Error: ${err}`));
-});
-
-router.route("/create").post((req, res) => {
+router.route("/create").post(checkAuth, (req, res) => {
 	let today = new Date();
 	let dueDate = new Date();
 	dueDate.setDate(today.getDate() + 5);
@@ -32,12 +26,30 @@ router.route("/create").post((req, res) => {
 		createdBy,
 		dueDate,
 	});
-	console.log("SERVER ticket create: ", data);
-	console.log("SERVER ticket newTicket: ", newTicket);
 
 	newTicket
 		.save()
 		.then(() => res.json("Ticket created!"))
+		.catch((err) => res.status(400).json(`Error: ${err}`));
+});
+
+router.route("/list-all").get((req, res) => {
+	Ticket.find()
+		.then((tickets) => res.json(tickets))
+		.catch((err) => res.status(400).json(`Error: ${err}`));
+});
+
+router.route("/find-id").get(checkAuth, (req, res) => {
+	const ticketId = req.params.ticketId;
+	Ticket.find({ _id: ticketId })
+		.then((tickets) => res.json(tickets))
+		.catch((err) => res.status(400).json(`Error: ${err}`));
+});
+
+router.route("/user-list/:email").get((req, res) => {
+	const email = req.params.email;
+	Ticket.find({ createdBy: email })
+		.then((tickets) => res.json(tickets))
 		.catch((err) => res.status(400).json(`Error: ${err}`));
 });
 
