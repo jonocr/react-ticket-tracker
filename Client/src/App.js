@@ -10,6 +10,7 @@ import CreateUser from "./components/pages/user/CreateUser";
 import NewTicketPage from "./components/pages/ticket/CreateTicketPage";
 import MyTicketsPage from "./components/pages/ticket/MyTicketsPage";
 import AuthContext from "./components/utils/AuthContext";
+import TicketSearchPage from "./components/pages/ticket/TicketsSearchPage";
 
 const GUEST_USER = {
 	email: null,
@@ -42,6 +43,9 @@ function App() {
 						<Route component={DashboardPage} exact path="/dashboard" />
 					)} */}
 					{userData.token && <Route component={UserPage} exact path="/user" />}
+					{userData.token && (
+						<Route component={TicketSearchPage} exact path="/ticket-search" />
+					)}
 					{userData.token && (
 						<Route component={MyTicketsPage} exact path="/my-tickets" />
 					)}

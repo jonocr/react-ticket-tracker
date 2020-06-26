@@ -41,7 +41,7 @@ const UserPage = (props) => {
 	};
 
 	const getAllUsers = async () => {
-		fetch(`http://localhost:8000/users/`, {
+		fetch(`http://localhost:8000/tickets/list-all`, {
 			method: "GET",
 			contentType: "application/json",
 			headers: {
