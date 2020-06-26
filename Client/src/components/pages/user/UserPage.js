@@ -41,7 +41,6 @@ const UserPage = (props) => {
 	};
 
 	const getAllUsers = async () => {
-		console.log("FECTH getAllUsers: ", userData.token);
 		fetch(`http://localhost:8000/users/`, {
 			method: "GET",
 			contentType: "application/json",
@@ -53,7 +52,6 @@ const UserPage = (props) => {
 				return response.json();
 			})
 			.then((responseData) => {
-				console.log("allUsers: ", responseData);
 				setAllUsers(responseData);
 			})
 			.catch((err) => {

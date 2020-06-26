@@ -54,12 +54,3 @@ router.route("/user-list/:email").get((req, res) => {
 });
 
 module.exports = router;
-
-// {
-// 	"title": "title test",
-// 	"description": "Power cord not woriking",
-// 	"status": "active",
-// 	"createdBy": "jono.calvo@gmail.com",
-// 	"category": "IT",
-// 	"priority": 1
-// }
