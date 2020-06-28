@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import TopBar from "../../layout/TopBar";
 import SideMenu from "../../layout/SideMenu";
 import TicketList from "../../tickets/TicketList";
+import TicketSearchBar from "../../tickets/TicketSearchBar";
 import AuthContext from "../../utils/AuthContext";
 
 const TicketSearchPage = (props) => {
@@ -63,6 +64,7 @@ const TicketSearchPage = (props) => {
 			<div className="container">
 				<div className="dashboard-bar dashboard">Ticket Search</div>
 				<div className="dashboard-main dashboard">
+					<TicketSearchBar></TicketSearchBar>
 					<TicketList data={tickets} onClick={handleClick}></TicketList>
 				</div>
 			</div>
