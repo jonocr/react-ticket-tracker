@@ -28,7 +28,6 @@ const TicketSearchPage = (props) => {
 				return response.json();
 			})
 			.then((responseData) => {
-				console.log("ALL TICKETS: ", responseData);
 				setTickets(responseData);
 			})
 			.catch((err) => {
@@ -48,7 +47,6 @@ const TicketSearchPage = (props) => {
 				return response.json();
 			})
 			.then((responseData) => {
-				console.log("ALL TICKETS: ", responseData);
 				setTickets(responseData);
 			})
 			.catch((err) => {
