@@ -22,15 +22,14 @@ const TicketSearchPage = (props) => {
 		console.log("You click this");
 	};
 
-	const findUserByEmail = (email) => {
-		fetch(`http://localhost:8000/users/${email}`)
+	const findTicketsQuery = (criteria, query) => {
+		fetch(`http://localhost:8000/tickets/tickets-criteria/${criteria}/${query}`)
 			.then((response) => {
 				return response.json();
 			})
 			.then((responseData) => {
-				// setUser(responseData[0]);
-				// setTeamUsers(responseData[0].team);
-				// setLoading(false);
+				console.log("ALL TICKETS: ", responseData);
+				setTickets(responseData);
 			})
 			.catch((err) => {
 				console.log("error at fetching: ", err);
@@ -64,7 +63,7 @@ const TicketSearchPage = (props) => {
 			<div className="container">
 				<div className="dashboard-bar dashboard">Ticket Search</div>
 				<div className="dashboard-main dashboard">
-					<TicketSearchBar></TicketSearchBar>
+					<TicketSearchBar onClick={findTicketsQuery}></TicketSearchBar>
 					<TicketList data={tickets} onClick={handleClick}></TicketList>
 				</div>
 			</div>

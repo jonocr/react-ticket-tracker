@@ -53,4 +53,15 @@ router.route("/user-list/:email").get((req, res) => {
 		.catch((err) => res.status(400).json(`Error: ${err}`));
 });
 
+router.route("/tickets-criteria/:criteria/:query").get((req, res) => {
+	const criteria = req.params.criteria;
+	const query = req.params.query;
+	const queryObj = {};
+	queryObj[criteria] = query;
+	console.log("ROUTE SERACH BAR: ", queryObj);
+	Ticket.find(queryObj)
+		.then((tickets) => res.json(tickets))
+		.catch((err) => res.status(400).json(`Error: ${err}`));
+});
+
 module.exports = router;
