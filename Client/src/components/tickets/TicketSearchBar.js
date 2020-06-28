@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const TicketSearchBar = (props) => {
-	const [search, setSearch] = useState({});
+	const [search, setSearch] = useState({ criteria: "createdBy", query: "" });
 
 	const handleSearchClick = (e) => {
 		e.preventDefault();
@@ -31,7 +31,7 @@ const TicketSearchBar = (props) => {
 								setSearch({ ...search, criteria: e.target.value })
 							}
 						>
-							<option>CreatedBy</option>
+							<option value="createdBy">CreatedBy</option>
 							<option value="category">Category</option>
 							<option value="priority">Priority</option>
 							<option value="status">Status</option>
