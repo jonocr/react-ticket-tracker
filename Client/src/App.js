@@ -7,7 +7,7 @@ import UserSearchPage from "./components/pages/user/UserSearchPage";
 import DashboardPage from "./components/pages/DashboardPage";
 import LoginPage from "./components/pages/LoginPage";
 import CreateUser from "./components/pages/user/CreateUser";
-import NewTicketPage from "./components/pages/ticket/CreateTicketPage";
+import NewTicketPage from "./components/pages/ticket/TicketPage";
 import MyTicketsPage from "./components/pages/ticket/MyTicketsPage";
 import AuthContext from "./components/utils/AuthContext";
 import TicketSearchPage from "./components/pages/ticket/TicketsSearchPage";

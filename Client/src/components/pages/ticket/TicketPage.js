@@ -5,7 +5,7 @@ import TopBar from "../../layout/TopBar";
 import AuthContext from "../../utils/AuthContext";
 import { useHistory } from "react-router";
 
-const CreateTicketPage = () => {
+const TicketPage = () => {
 	const [closeCss, setCloseCss] = useState("");
 	const { userData } = useContext(AuthContext);
 	const [succesMsgCss, setSuccesMsgCss] = useState("close d-none");
@@ -64,4 +64,4 @@ const CreateTicketPage = () => {
 	);
 };
 
-export default CreateTicketPage;
+export default TicketPage;

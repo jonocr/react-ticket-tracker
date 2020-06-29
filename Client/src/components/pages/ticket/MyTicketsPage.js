@@ -14,7 +14,6 @@ const MyTicketsPage = (props) => {
 	};
 
 	useEffect(() => {
-		console.log("Loding...");
 		findTicketsbyEmail(userData.user.email);
 	}, []);
 

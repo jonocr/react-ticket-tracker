@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import TopBar from "../../layout/TopBar";
 import SideMenu from "../../layout/SideMenu";
 import UserList from "../../users/UserList";
+import AuthContext from "../../utils/AuthContext";
 
 const UserSearchPage = (props) => {
+	const { userData } = useContext(AuthContext);
 	const [closeCss, setCloseCss] = useState("");
 	const [users, setUsers] = useState([]);
 	const history = useHistory();
@@ -18,7 +20,13 @@ const UserSearchPage = (props) => {
 	};
 
 	const loadUsers = () => {
-		fetch("http://localhost:8000/users")
+		fetch("http://localhost:8000/users", {
+			method: "GET",
+			headers: {
+				Authorization: `Bearer ${userData.token}`,
+				"Content-Type": "application/json",
+			},
+		})
 			.then((response) => {
 				console.log("All Users Data: ", response.clone().json());
 				return response.json();
