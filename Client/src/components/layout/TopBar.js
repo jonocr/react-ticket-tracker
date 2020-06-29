@@ -1,13 +1,9 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import USFlag from "../../images/flags/svg/us.svg";
 import AuthContext from "../utils/AuthContext";
 
 const TopBar = (props) => {
 	const { userData } = useContext(AuthContext);
-
-	useEffect(() => {
-		console.log("TOP BAR", userData);
-	}, []);
 
 	return (
 		<header className={props.css}>
