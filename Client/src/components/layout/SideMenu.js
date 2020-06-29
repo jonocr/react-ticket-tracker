@@ -5,10 +5,6 @@ import AuthContext from "../utils/AuthContext";
 const SideMenu = (props) => {
 	const { userData } = useContext(AuthContext);
 
-	useEffect(() => {
-		console.log("MENU Context", userData);
-	}, []);
-
 	return (
 		<section className={props.css}>
 			<nav className="side-menu d-none d-md-block">
