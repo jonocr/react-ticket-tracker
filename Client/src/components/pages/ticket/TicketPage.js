@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import NewTicketForm from "../../tickets/NewTicketForm";
+import TicketForm from "../../tickets/TicketForm";
 import SideMenu from "../../layout/SideMenu";
 import TopBar from "../../layout/TopBar";
 import AuthContext from "../../utils/AuthContext";
@@ -7,7 +7,8 @@ import { useHistory } from "react-router";
 
 const TicketPage = (props) => {
 	const [closeCss, setCloseCss] = useState("");
-	const [ticket, setTicket] = useState({});
+	// const [loading, setLoading] = useState(true);
+	const [ticket, setTicket] = useState(null);
 	const { userData } = useContext(AuthContext);
 	const [succesMsgCss, setSuccesMsgCss] = useState("close d-none");
 	const history = useHistory();
@@ -51,6 +52,9 @@ const TicketPage = (props) => {
 
 	useEffect(() => {
 		!userData.token && history.push("/login");
+		props.location.state !== undefined &&
+			setTicket(props.location.state.ticket);
+		// setLoading(false);
 	}, []);
 
 	return (
@@ -58,14 +62,15 @@ const TicketPage = (props) => {
 			<SideMenu css={closeCss}></SideMenu>
 			<TopBar onClick={clickToggle} css={closeCss}></TopBar>
 			<div className="dashboard-main dashboard">
-				<NewTicketForm
+				<TicketForm
 					clickHandle={ticket ? clickUpdateHandle : clickCreateHandle}
 					data={
 						props.location.state !== undefined
 							? props.location.state.ticket
 							: {}
 					}
-				></NewTicketForm>
+					buttonText={ticket ? "Save Ticket" : "Create Ticket"}
+				></TicketForm>
 				<div className={succesMsgCss} role="alert">
 					You have <strong>succesfully</strong> created a new ticket.
 					<button

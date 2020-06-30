@@ -36,6 +36,10 @@ const ticketSchema = new Schema(
 		dueDate: {
 			type: Date,
 		},
+		comments: {
+			type: Array,
+			default: [],
+		},
 	},
 	{
 		timestamps: true,
