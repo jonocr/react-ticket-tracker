@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import AuthContext from "../utils/AuthContext";
 
 const NewTicketForm = (props) => {
@@ -14,6 +14,16 @@ const NewTicketForm = (props) => {
 		console.log("Creating new Ticket ***handleClick***: ", ticket);
 		props.clickHandle(ticket);
 	};
+
+	useEffect(() => {
+		console.log("Ticket Form props: ", props.data);
+		// if (
+		// 	props.userData &&
+		// 	JSON.stringify(props.userData) !== JSON.stringify({})
+		// ) {
+		// 	setUser(props.userData);
+		// }
+	}, []);
 
 	return (
 		<div>

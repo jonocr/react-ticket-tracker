@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
+import { useHistory, Redirect } from "react-router-dom";
 import TopBar from "../../layout/TopBar";
 import SideMenu from "../../layout/SideMenu";
 import TicketList from "../../tickets/TicketList";
@@ -8,7 +9,9 @@ import AuthContext from "../../utils/AuthContext";
 const TicketSearchPage = (props) => {
 	const [closeCss, setCloseCss] = useState("");
 	const [tickets, setTickets] = useState([]);
+	const [ticket, setTicket] = useState();
 	const { userData } = useContext(AuthContext);
+	const history = useHistory();
 
 	const clickToggle = (e) => {
 		closeCss === "" ? setCloseCss("close-menu") : setCloseCss("");
@@ -18,8 +21,19 @@ const TicketSearchPage = (props) => {
 		getAllTickets();
 	}, []);
 
-	const handleClick = (e) => {
-		console.log("You click this");
+	const goTicketDetail = (ticket) => {
+		setTicket(ticket);
+	};
+
+	const redirectDetail = () => {
+		return (
+			<Redirect
+				to={{
+					pathname: "/ticket",
+					state: { ticket: ticket },
+				}}
+			/>
+		);
 	};
 
 	const findTicketsQuery = (criteria, query) => {
@@ -56,13 +70,14 @@ const TicketSearchPage = (props) => {
 
 	return (
 		<div className={closeCss}>
+			{ticket && redirectDetail()}
 			<SideMenu css={closeCss}></SideMenu>
 			<TopBar onClick={clickToggle} css={closeCss}></TopBar>
 			<div className="container">
 				<div className="dashboard-bar dashboard">Ticket Search</div>
 				<div className="dashboard-main dashboard">
 					<TicketSearchBar onClick={findTicketsQuery}></TicketSearchBar>
-					<TicketList data={tickets} onClick={handleClick}></TicketList>
+					<TicketList data={tickets} onClick={goTicketDetail}></TicketList>
 				</div>
 			</div>
 		</div>

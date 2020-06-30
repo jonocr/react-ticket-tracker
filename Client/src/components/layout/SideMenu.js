@@ -49,7 +49,7 @@ const SideMenu = (props) => {
 					<div className="menu-subtitle">Tickets</div>
 					<ul>
 						<li>
-							<Link to="/new-ticket">
+							<Link to="/ticket">
 								<svg
 									className="bi bi-folder"
 									width="1em"

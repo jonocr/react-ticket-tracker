@@ -15,7 +15,7 @@ const UserSearchPage = (props) => {
 		closeCss === "" ? setCloseCss("close-menu") : setCloseCss("");
 	};
 
-	const addTeamUser = (user) => {
+	const goUserDetail = (user) => {
 		history.push(`/user/${user.email}`);
 	};
 
@@ -51,7 +51,7 @@ const UserSearchPage = (props) => {
 				<div className="dashboard-bar dashboard">User Search</div>
 
 				<div className="dashboard-main dashboard">
-					<UserList data={users} onClick={addTeamUser}></UserList>
+					<UserList data={users} onClick={goUserDetail}></UserList>
 				</div>
 			</div>
 		</div>

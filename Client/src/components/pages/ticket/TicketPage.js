@@ -5,8 +5,9 @@ import TopBar from "../../layout/TopBar";
 import AuthContext from "../../utils/AuthContext";
 import { useHistory } from "react-router";
 
-const TicketPage = () => {
+const TicketPage = (props) => {
 	const [closeCss, setCloseCss] = useState("");
+	const [ticket, setTicket] = useState({});
 	const { userData } = useContext(AuthContext);
 	const [succesMsgCss, setSuccesMsgCss] = useState("close d-none");
 	const history = useHistory();
@@ -36,10 +37,20 @@ const TicketPage = () => {
 			.catch((err) => console.log(err));
 	};
 
+	const clickUpdateHandle = async (ticket) => {
+		console.log("Updating ticket: ", ticket);
+		fetch("http://localhost:8000/tickets/update", {
+			method: "PATCH",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(ticket),
+		})
+			.then((res) => res.json())
+			.then((data) => console.log(data))
+			.catch((err) => console.log(err));
+	};
+
 	useEffect(() => {
-		if (!userData.token) {
-			history.push("/login");
-		}
+		!userData.token && history.push("/login");
 	}, []);
 
 	return (
@@ -47,7 +58,14 @@ const TicketPage = () => {
 			<SideMenu css={closeCss}></SideMenu>
 			<TopBar onClick={clickToggle} css={closeCss}></TopBar>
 			<div className="dashboard-main dashboard">
-				<NewTicketForm clickHandle={clickCreateHandle}></NewTicketForm>
+				<NewTicketForm
+					clickHandle={ticket ? clickUpdateHandle : clickCreateHandle}
+					data={
+						props.location.state !== undefined
+							? props.location.state.ticket
+							: {}
+					}
+				></NewTicketForm>
 				<div className={succesMsgCss} role="alert">
 					You have <strong>succesfully</strong> created a new ticket.
 					<button

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import SideMenu from "../../layout/SideMenu";
 import TopBar from "../../layout/TopBar";
 
@@ -10,6 +10,7 @@ const TicketDetail = (props) => {
 	const clickToggle = (e) => {
 		closeCss === "" ? setCloseCss("close-menu") : setCloseCss("");
 	};
+
 	return (
 		<div className="ticket-detail">
 			<div className={closeCss}>

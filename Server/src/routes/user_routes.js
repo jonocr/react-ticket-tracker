@@ -46,15 +46,12 @@ router.route("/update").patch((req, res) => {
 	User.findOne({ _id: _id })
 		.exec()
 		.then((user) => {
-			console.log("THEN User: ", user);
 			if (user.length <= 0) {
-				console.log("user.length <= 0");
 				res.status(409).json({
 					error: errorEmailMessage,
 				});
 			} else {
 				if (password != user.password) {
-					console.log("NEW PASSWORD!");
 					if (err) {
 						res.status(500).json({
 							error: err,
@@ -75,7 +72,6 @@ router.route("/update").patch((req, res) => {
 							.catch((err) => res.status(400).json(`Error: ${err}`));
 					}
 				} else {
-					console.log("No NEW PASSWORD");
 					User.updateOne(
 						{
 							_id: _id,
