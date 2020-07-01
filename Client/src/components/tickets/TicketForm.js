@@ -1,8 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
 import AuthContext from "../utils/AuthContext";
+import AutoComplete from "../utils/AutoComplete";
 
 const TicketForm = (props) => {
 	const { userData } = useContext(AuthContext);
+	const [editTicket, setEditTicket] = useState(false);
 	const [ticket, SetTicket] = useState({
 		status: "open",
 		priority: 3,
@@ -14,9 +16,19 @@ const TicketForm = (props) => {
 		props.clickHandle(ticket);
 	};
 
+	const searchAgent = (email) => {
+		console.log(email);
+	};
+
 	const renderAdmin = () => {
 		return (
 			<div>
+				<div className="form-group">
+					<AutoComplete
+						items={["j@gmail.com", "g@g.com", "p@p.com", "carlos@p.com"]}
+						search={searchAgent}
+					></AutoComplete>
+				</div>
 				<div className="form-group">
 					<label htmlFor="createdByInput">Created By</label>
 					<input
@@ -62,6 +74,7 @@ const TicketForm = (props) => {
 		console.log("Ticket Form props: ", props.data);
 		if (props.data && JSON.stringify(props.data) !== JSON.stringify({})) {
 			SetTicket(props.data);
+			setEditTicket(true);
 		}
 	}, []);
 
@@ -105,6 +118,7 @@ const TicketForm = (props) => {
 						id="descriptionTextArea"
 						rows="3"
 						value={ticket.description}
+						readOnly={!!editTicket}
 						onChange={(e) =>
 							SetTicket({ ...ticket, description: e.target.value })
 						}

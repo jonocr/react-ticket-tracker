@@ -40,6 +40,12 @@ const ticketSchema = new Schema(
 			type: Array,
 			default: [],
 		},
+		assignedTo: {
+			type: String,
+		},
+		assignedBy: {
+			type: String,
+		},
 	},
 	{
 		timestamps: true,
