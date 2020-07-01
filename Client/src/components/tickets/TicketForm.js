@@ -14,6 +14,27 @@ const TicketForm = (props) => {
 		createdBy: userData.user.email,
 	});
 
+	useEffect(() => {
+		if (props.data && JSON.stringify(props.data) !== JSON.stringify({})) {
+			SetTicket(props.data);
+			setEditTicket(true);
+		}
+	}, []);
+
+	useEffect(() => {
+		findManyUsersByEmail(userSearchBar).then((response) => {
+			setUsersFound(
+				response.map((user, index) => {
+					return {
+						value: user.email,
+						id: user.email,
+						index: index,
+					};
+				})
+			);
+		});
+	}, [userSearchBar]);
+
 	const handleCreateClick = (e) => {
 		e.preventDefault();
 		props.clickHandle(ticket);
@@ -27,7 +48,18 @@ const TicketForm = (props) => {
 		return (
 			<div>
 				<div className="form-group">
-					<AutoComplete items={usersFound} search={searchAgent}></AutoComplete>
+					<label htmlFor="createdByInput">Assigned To</label>
+					<AutoComplete
+						items={usersFound}
+						search={searchAgent}
+						onChange={(email) =>
+							SetTicket({
+								...ticket,
+								assignedTo: email,
+								assignedBy: userData.user.email,
+							})
+						}
+					></AutoComplete>
 				</div>
 				<div className="form-group">
 					<label htmlFor="createdByInput">Created By</label>
@@ -69,26 +101,6 @@ const TicketForm = (props) => {
 			</div>
 		);
 	};
-
-	useEffect(() => {
-		if (props.data && JSON.stringify(props.data) !== JSON.stringify({})) {
-			SetTicket(props.data);
-			setEditTicket(true);
-		}
-	}, []);
-
-	useEffect(() => {
-		findManyUsersByEmail(userSearchBar).then((response) => {
-			setUsersFound(
-				response.map((user, index) => {
-					return {
-						value: user.email,
-						index: index,
-					};
-				})
-			);
-		});
-	}, [userSearchBar]);
 
 	return (
 		<div>

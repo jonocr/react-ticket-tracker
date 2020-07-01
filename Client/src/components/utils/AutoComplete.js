@@ -1,16 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const AutoComplete = (props) => {
+	const [suggestions, setSuggestions] = useState([]);
+	const [selectedItem, setSelectedItem] = useState();
+
 	const logs = (text) => {
-		// console.log(text);
 		props.search(text);
+		setSelectedItem(text);
 	};
+
+	const itemSelectHandle = (item) => {
+		setSuggestions([]);
+		setSelectedItem(item.value);
+		props.onChange(item.id);
+	};
+
+	useEffect(() => {
+		setSuggestions(props.items);
+	}, [props.items]);
+
 	return (
-		<div>
-			<input onChange={(e) => logs(e.target.value)}></input>
+		<div className="auto-complete-text">
+			<input
+				onChange={(e) => logs(e.target.value)}
+				value={selectedItem}
+			></input>
 			<ul>
-				{props.items.map((item) => (
-					<li key={item.index}>{item.value}</li>
+				{suggestions.map((item) => (
+					<li onClick={() => itemSelectHandle(item)} key={item.index}>
+						{item.value}
+					</li>
 				))}
 			</ul>
 		</div>
