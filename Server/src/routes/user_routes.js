@@ -12,9 +12,29 @@ router.route("/").get(checkAuth, (req, res) => {
 });
 
 router.route("/:email").get((req, res) => {
+	// const criteria = req.params.criteria;
+	// const query = req.params.query;
+	// const queryOptionsObj = { $regex: query, $options: "i" };
+	// const queryObj = {};
+	// queryObj[criteria] = queryOptionsObj;
+
 	const email = req.params.email;
-	console.log("User Email: ", email);
+	// console.log("User Email: ", email);
 	User.find({ email: email })
+		.then((users) => {
+			res.json(users);
+		})
+		.catch((err) => res.status(400).json(`Error: ${err}`));
+});
+
+router.route("/find-users-email/:email").get((req, res) => {
+	const criteria = "email";
+	const query = req.params.email;
+	const queryOptionsObj = { $regex: query, $options: "i" };
+	const queryObj = {};
+	queryObj[criteria] = queryOptionsObj;
+	console.log("/find-users-email/:email: ", query);
+	User.find(queryObj)
 		.then((users) => {
 			res.json(users);
 		})

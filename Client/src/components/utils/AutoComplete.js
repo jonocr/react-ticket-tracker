@@ -10,7 +10,7 @@ const AutoComplete = (props) => {
 			<input onChange={(e) => logs(e.target.value)}></input>
 			<ul>
 				{props.items.map((item) => (
-					<li>{item}</li>
+					<li key={item.index}>{item.value}</li>
 				))}
 			</ul>
 		</div>

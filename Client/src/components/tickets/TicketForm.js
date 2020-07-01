@@ -1,10 +1,13 @@
 import React, { useState, useContext, useEffect } from "react";
 import AuthContext from "../utils/AuthContext";
 import AutoComplete from "../utils/AutoComplete";
+import { findManyUsersByEmail } from "../users/UserApi";
 
 const TicketForm = (props) => {
 	const { userData } = useContext(AuthContext);
 	const [editTicket, setEditTicket] = useState(false);
+	const [userSearchBar, SetUserSearchBar] = useState();
+	const [usersFound, setUsersFound] = useState([]);
 	const [ticket, SetTicket] = useState({
 		status: "open",
 		priority: 3,
@@ -17,17 +20,14 @@ const TicketForm = (props) => {
 	};
 
 	const searchAgent = (email) => {
-		console.log(email);
+		SetUserSearchBar(email);
 	};
 
 	const renderAdmin = () => {
 		return (
 			<div>
 				<div className="form-group">
-					<AutoComplete
-						items={["j@gmail.com", "g@g.com", "p@p.com", "carlos@p.com"]}
-						search={searchAgent}
-					></AutoComplete>
+					<AutoComplete items={usersFound} search={searchAgent}></AutoComplete>
 				</div>
 				<div className="form-group">
 					<label htmlFor="createdByInput">Created By</label>
@@ -71,12 +71,24 @@ const TicketForm = (props) => {
 	};
 
 	useEffect(() => {
-		console.log("Ticket Form props: ", props.data);
 		if (props.data && JSON.stringify(props.data) !== JSON.stringify({})) {
 			SetTicket(props.data);
 			setEditTicket(true);
 		}
 	}, []);
+
+	useEffect(() => {
+		findManyUsersByEmail(userSearchBar).then((response) => {
+			setUsersFound(
+				response.map((user, index) => {
+					return {
+						value: user.email,
+						index: index,
+					};
+				})
+			);
+		});
+	}, [userSearchBar]);
 
 	return (
 		<div>
