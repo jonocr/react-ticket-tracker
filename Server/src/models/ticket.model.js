@@ -4,6 +4,9 @@ const Schema = mongoose.Schema;
 
 const ticketSchema = new Schema(
 	{
+		_id: {
+			type: mongoose.Schema.Types.ObjectId,
+		},
 		title: {
 			type: String,
 			required: true,

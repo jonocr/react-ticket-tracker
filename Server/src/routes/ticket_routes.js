@@ -34,6 +34,7 @@ router.route("/create").post(checkAuth, (req, res) => {
 });
 
 router.route("/update").patch((req, res) => {
+	console.log("UPDATE TICKET ROUTE");
 	const errorEmailMessage = "There was an error finding this ticket";
 	const data = req.body;
 	const createdBy = data.createdBy;
@@ -44,6 +45,9 @@ router.route("/update").patch((req, res) => {
 	const category = data.category;
 	const lastModified = new Date();
 	const _id = data._id;
+	const dueDate = data.dueDate;
+	const assignedTo = data.assignedTo;
+	const assignedBy = data.assignedBy;
 
 	let updatedTicket = new Ticket({
 		title,
@@ -54,6 +58,8 @@ router.route("/update").patch((req, res) => {
 		category,
 		createdBy,
 		dueDate,
+		assignedTo,
+		assignedBy,
 	});
 	Ticket.findOne({ _id: _id })
 		.exec()
@@ -64,17 +70,16 @@ router.route("/update").patch((req, res) => {
 				});
 			} else {
 				console.log("update route ticket: ", updatedTicket);
-				// Ticket.updateOne(
-				// 	{
-				// 		_id: _id,
-				// 	},
-				// 	{
-				// 		$set: updatedUser,
-				// 		$currentDate: { lastModified: true },
-				// 	}
-				// )
-				// 	.then(() => res.json("User updated!"))
-				// 	.catch((err) => res.status(400).json(`Error: ${err}`));
+				Ticket.updateOne(
+					{
+						_id: _id,
+					},
+					{
+						$set: updatedTicket,
+					}
+				)
+					.then(() => res.json("Ticket updated!"))
+					.catch((err) => res.status(400).json(`Error: ${err}`));
 			}
 		});
 });
