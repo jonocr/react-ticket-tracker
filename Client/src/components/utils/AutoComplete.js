@@ -26,7 +26,7 @@ const AutoComplete = (props) => {
 				onChange={(e) => logs(e.target.value)}
 				value={selectedItem}
 			></input>
-			<ul className={suggestions.length < 1 && "d-none"}>
+			<ul className={suggestions.length < 1 ? "d-none" : ""}>
 				{suggestions.map((item) => (
 					<li onClick={() => itemSelectHandle(item)} key={item.index}>
 						{item.value}
