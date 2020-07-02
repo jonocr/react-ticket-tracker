@@ -111,7 +111,7 @@ const SideMenu = (props) => {
 									</Link>
 								</li>
 								<li>
-									<Link to="/#">
+									<Link to="/my-cases">
 										<svg
 											className="bi bi-folder"
 											width="1em"
@@ -127,7 +127,7 @@ const SideMenu = (props) => {
 												clipRule="evenodd"
 											/>
 										</svg>
-										Newest Tickets
+										My Cases
 									</Link>
 								</li>
 								<li>

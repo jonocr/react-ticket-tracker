@@ -11,6 +11,7 @@ import TicketPage from "./components/pages/ticket/TicketPage";
 import MyTicketsPage from "./components/pages/ticket/MyTicketsPage";
 import AuthContext from "./components/utils/AuthContext";
 import TicketSearchPage from "./components/pages/ticket/TicketsSearchPage";
+import MyCasesPage from "./components/pages/ticket/MyCasesPage";
 
 const GUEST_USER = {
 	email: null,
@@ -40,6 +41,7 @@ function App() {
 					<Route component={LoginPage} exact path="/" />
 					<Route component={DashboardPage} exact path="/dashboard" />
 					<Route component={TicketPage} exact path="/ticket" />
+					<Route component={MyCasesPage} exact path="/my-cases" />
 					{/* {userData.token && (
 						<Route component={DashboardPage} exact path="/dashboard" />
 					)} */}
