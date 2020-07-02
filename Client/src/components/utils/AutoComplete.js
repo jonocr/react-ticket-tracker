@@ -22,10 +22,11 @@ const AutoComplete = (props) => {
 	return (
 		<div className="auto-complete-text">
 			<input
+				className="form-control"
 				onChange={(e) => logs(e.target.value)}
 				value={selectedItem}
 			></input>
-			<ul>
+			<ul className={suggestions.length < 1 && "d-none"}>
 				{suggestions.map((item) => (
 					<li onClick={() => itemSelectHandle(item)} key={item.index}>
 						{item.value}

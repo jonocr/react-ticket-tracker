@@ -12,6 +12,9 @@ const TicketForm = (props) => {
 		status: "open",
 		priority: 3,
 		createdBy: userData.user.email,
+		assignedTo: "",
+		assignedBy: "",
+		comment: [],
 	});
 
 	useEffect(() => {
