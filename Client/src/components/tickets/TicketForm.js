@@ -28,11 +28,15 @@ const TicketForm = (props) => {
 		findManyUsersByEmail(userSearchBar).then((response) => {
 			setUsersFound(
 				response.map((user, index) => {
-					return {
-						value: user.email,
-						id: user.email,
-						index: index,
-					};
+					if (user.department !== "Client") {
+						return {
+							value: user.email,
+							id: user.email,
+							index: index,
+						};
+					} else {
+						return false;
+					}
 				})
 			);
 		});

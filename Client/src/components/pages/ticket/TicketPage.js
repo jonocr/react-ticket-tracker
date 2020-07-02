@@ -7,7 +7,6 @@ import { useHistory } from "react-router";
 
 const TicketPage = (props) => {
 	const [closeCss, setCloseCss] = useState("");
-	// const [loading, setLoading] = useState(true);
 	const [ticket, setTicket] = useState(null);
 	const { userData } = useContext(AuthContext);
 	const [succesMsgCss, setSuccesMsgCss] = useState("close d-none");
@@ -54,7 +53,6 @@ const TicketPage = (props) => {
 		!userData.token && history.push("/login");
 		props.location.state !== undefined &&
 			setTicket(props.location.state.ticket);
-		// setLoading(false);
 	}, []);
 
 	return (
