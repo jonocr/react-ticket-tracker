@@ -19,6 +19,10 @@ const AutoComplete = (props) => {
 		setSuggestions(props.items);
 	}, [props.items]);
 
+	useEffect(() => {
+		setSelectedItem(props.defaultValue);
+	}, []);
+
 	return (
 		<div className="auto-complete-text">
 			<input

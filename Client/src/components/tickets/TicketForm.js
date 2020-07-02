@@ -5,6 +5,7 @@ import { findManyUsersByEmail } from "../users/UserApi";
 
 const TicketForm = (props) => {
 	const { userData } = useContext(AuthContext);
+	const [loading, seLoading] = useState(true);
 	const [editTicket, setEditTicket] = useState(false);
 	const [userSearchBar, SetUserSearchBar] = useState();
 	const [usersFound, setUsersFound] = useState([]);
@@ -22,6 +23,7 @@ const TicketForm = (props) => {
 			SetTicket(props.data);
 			setEditTicket(true);
 		}
+		seLoading(false);
 	}, []);
 
 	useEffect(() => {
@@ -59,6 +61,7 @@ const TicketForm = (props) => {
 					<AutoComplete
 						items={usersFound}
 						search={searchAgent}
+						defaultValue={ticket.assignedTo}
 						onChange={(email) =>
 							SetTicket({
 								...ticket,
@@ -109,62 +112,70 @@ const TicketForm = (props) => {
 		);
 	};
 
-	return (
-		<div>
-			<form onSubmit={handleCreateClick}>
-				<div className="form-group">
-					<label htmlFor="subjectInput">Subject</label>
-					<input
-						type="text"
-						className="form-control"
-						id="subjectInput"
-						placeholder="Title of the Issue"
-						value={ticket.title}
-						onChange={(e) => SetTicket({ ...ticket, title: e.target.value })}
-					/>
-				</div>
-
-				<div className="form-group">
-					<label htmlFor="categorySelect">Category</label>
-					<select
-						className="form-control"
-						id="categorySelect"
-						value={ticket.category}
-						onChange={(e) => SetTicket({ ...ticket, category: e.target.value })}
-					>
-						<option>IT</option>
-						<option>Billing</option>
-						<option>Development</option>
-						<option>Sales</option>
-						<option>Other</option>
-					</select>
-				</div>
-
-				{userData.user.department !== "Client" && renderAdmin()}
-
-				<div className="form-group">
-					<label htmlFor="descriptionTextArea">Description of the Issue</label>
-					<textarea
-						className="form-control"
-						id="descriptionTextArea"
-						rows="3"
-						value={ticket.description}
-						readOnly={!!editTicket}
-						onChange={(e) =>
-							SetTicket({ ...ticket, description: e.target.value })
-						}
-					></textarea>
-				</div>
-				<div className="form-group row">
-					<div className="col-sm-10">
-						<button type="submit" className="btn btn-primary">
-							{props.buttonText}
-						</button>
+	const loadPage = () => {
+		return (
+			<div>
+				<form onSubmit={handleCreateClick}>
+					<div className="form-group">
+						<label htmlFor="subjectInput">Subject</label>
+						<input
+							type="text"
+							className="form-control"
+							id="subjectInput"
+							placeholder="Title of the Issue"
+							value={ticket.title}
+							onChange={(e) => SetTicket({ ...ticket, title: e.target.value })}
+						/>
 					</div>
-				</div>
-			</form>
-		</div>
-	);
+
+					<div className="form-group">
+						<label htmlFor="categorySelect">Category</label>
+						<select
+							className="form-control"
+							id="categorySelect"
+							value={ticket.category}
+							onChange={(e) =>
+								SetTicket({ ...ticket, category: e.target.value })
+							}
+						>
+							<option>IT</option>
+							<option>Billing</option>
+							<option>Development</option>
+							<option>Sales</option>
+							<option>Other</option>
+						</select>
+					</div>
+
+					{userData.user.department !== "Client" && renderAdmin()}
+
+					<div className="form-group">
+						<label htmlFor="descriptionTextArea">
+							Description of the Issue
+						</label>
+						<textarea
+							className="form-control"
+							id="descriptionTextArea"
+							rows="3"
+							value={ticket.description}
+							readOnly={!!editTicket}
+							onChange={(e) =>
+								SetTicket({ ...ticket, description: e.target.value })
+							}
+						></textarea>
+					</div>
+					<div className="form-group row">
+						<div className="col-sm-10">
+							<button type="submit" className="btn btn-primary">
+								{props.buttonText}
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		);
+	};
+
+	return <div>{!loading && loadPage()}</div>;
 };
 
 export default TicketForm;
