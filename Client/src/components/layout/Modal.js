@@ -1,8 +1,6 @@
 import React from "react";
 
 const Modal = (props) => {
-	const tagger = props.component;
-
 	const clickClose = () => {
 		console.log("closing tag...");
 	};
@@ -41,11 +39,9 @@ const Modal = (props) => {
 							</button>
 						</div>
 						<div className="modal-body">
-							{/* {props.component} */}
 							{React.cloneElement(props.component, {
 								closeModal: clickClose,
 							})}
-							{/* <tagger /> */}
 						</div>
 					</div>
 				</div>

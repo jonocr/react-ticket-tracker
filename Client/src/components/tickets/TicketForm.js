@@ -4,6 +4,7 @@ import AutoComplete from "../utils/AutoComplete";
 import Modal from "../layout/Modal";
 import TicketCommentForm from "../tickets/TicketCommentForm";
 import { findManyUsersByEmail } from "../users/UserApi";
+import { addTicketComment } from "../tickets/TicketApi";
 
 const TicketForm = (props) => {
 	const { userData } = useContext(AuthContext);
@@ -57,6 +58,7 @@ const TicketForm = (props) => {
 
 	const addComment = (comment) => {
 		console.log("Add comment TICKET FORM", comment);
+		addTicketComment(comment, 1, userData.token);
 	};
 
 	const renderAdmin = () => {

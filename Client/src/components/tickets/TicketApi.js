@@ -9,3 +9,15 @@ export const getAllTicketsDynamicQuery = async (criteria, query) => {
 		console.log("error at fetching: ", err);
 	}
 };
+
+export const addTicketComment = async (comment, id, token) => {
+	console.log("TicketAPI");
+	// try {
+	// 	const response = await fetch(
+	// 		`http://localhost:8000/users/find-users-email/${email}`
+	// 	);
+	// 	return response.json();
+	// } catch (err) {
+	// 	console.log("error at fetching: ", err);
+	// }
+};
