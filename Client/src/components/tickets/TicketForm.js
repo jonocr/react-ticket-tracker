@@ -59,11 +59,14 @@ const TicketForm = (props) => {
 		console.log("Add comment TICKET FORM", comment);
 	};
 
-	// const Modal component={}  = Modal(TicketCommentForm);
-
 	const renderAdmin = () => {
 		return (
 			<div>
+				<Modal
+					component={<TicketCommentForm onSubmit={addComment} />}
+					title={"Comment"}
+					openText={"Add A Comment"}
+				></Modal>
 				<div className="form-group">
 					<label htmlFor="createdByInput">Assigned To</label>
 					<AutoComplete
@@ -116,10 +119,6 @@ const TicketForm = (props) => {
 						<option value="close">Close</option>
 					</select>
 				</div>
-				<Modal
-					component={<TicketCommentForm onSubmit={addComment} />}
-					title={"Comment"}
-				></Modal>
 			</div>
 		);
 	};
@@ -158,8 +157,6 @@ const TicketForm = (props) => {
 						</select>
 					</div>
 
-					{userData.user.department !== "Client" && renderAdmin()}
-
 					<div className="form-group">
 						<label htmlFor="descriptionTextArea">
 							Description of the Issue
@@ -175,6 +172,9 @@ const TicketForm = (props) => {
 							}
 						></textarea>
 					</div>
+
+					{userData.user.department !== "Client" && renderAdmin()}
+
 					<div className="form-group row">
 						<div className="col-sm-10">
 							<button type="submit" className="btn btn-primary">

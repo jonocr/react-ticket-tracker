@@ -14,7 +14,7 @@ const Modal = (props) => {
 				data-toggle="modal"
 				data-target="#exampleModal"
 			>
-				Launch demo modal
+				{props.openText}
 			</button>
 
 			<div
