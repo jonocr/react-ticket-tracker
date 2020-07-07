@@ -41,10 +41,9 @@ function App() {
 					<Route component={LoginPage} exact path="/" />
 					<Route component={DashboardPage} exact path="/dashboard" />
 					<Route component={TicketPage} exact path="/ticket" />
+					<Route component={TicketPage} exact path="/create-ticket" />
 					<Route component={MyCasesPage} exact path="/my-cases" />
-					{/* {userData.token && (
-						<Route component={DashboardPage} exact path="/dashboard" />
-					)} */}
+
 					{userData.token && <Route component={UserPage} exact path="/user" />}
 					{userData.token && (
 						<Route component={TicketSearchPage} exact path="/ticket-search" />
@@ -58,15 +57,6 @@ function App() {
 					{userData.token && (
 						<Route component={UserSearchPage} exact path="/findUser" />
 					)}
-
-					{/* {userData.token && (
-						<Route component={TicketPage} exact path="/ticket" />
-					)} */}
-
-					{/* {!userData.token && <Redirect  from="/" to="/login" />} */}
-					{/* {!userData.token && <Redirect from="/user" to="/login" />}
-					{!userData.token && <Redirect from="/user/:email" to="/login" />}
-					{!userData.token && <Redirect from="/findUser" to="/login" />} */}
 				</Router>
 			</AuthContext.Provider>
 		</div>

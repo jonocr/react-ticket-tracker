@@ -13,6 +13,10 @@ const MyTicketsPage = (props) => {
 		closeCss === "" ? setCloseCss("close-menu") : setCloseCss("");
 	};
 
+	const ticketDetails = (ticket) => {
+		console.log("details: ", ticket);
+	};
+
 	useEffect(() => {
 		findTicketsbyEmail(userData.user.email);
 	}, []);
@@ -38,7 +42,7 @@ const MyTicketsPage = (props) => {
 			<div className="container">
 				<div className="dashboard-bar dashboard">My Tickets</div>
 				<div className="dashboard-main dashboard">
-					<TicketList data={ticketList}></TicketList>
+					<TicketList data={ticketList} onClick={ticketDetails}></TicketList>
 				</div>
 			</div>
 		</div>

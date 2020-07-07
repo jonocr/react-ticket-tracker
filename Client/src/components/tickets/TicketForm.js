@@ -1,6 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
 import AuthContext from "../utils/AuthContext";
 import AutoComplete from "../utils/AutoComplete";
+import Modal from "../layout/Modal";
+import TicketCommentForm from "../tickets/TicketCommentForm";
 import { findManyUsersByEmail } from "../users/UserApi";
 
 const TicketForm = (props) => {
@@ -52,6 +54,12 @@ const TicketForm = (props) => {
 	const searchAgent = (email) => {
 		SetUserSearchBar(email);
 	};
+
+	const addComment = (comment) => {
+		console.log("Add comment TICKET FORM", comment);
+	};
+
+	// const Modal component={}  = Modal(TicketCommentForm);
 
 	const renderAdmin = () => {
 		return (
@@ -108,6 +116,10 @@ const TicketForm = (props) => {
 						<option value="close">Close</option>
 					</select>
 				</div>
+				<Modal
+					component={<TicketCommentForm onSubmit={addComment} />}
+					title={"Comment"}
+				></Modal>
 			</div>
 		);
 	};
