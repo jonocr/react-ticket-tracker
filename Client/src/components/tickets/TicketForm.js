@@ -47,7 +47,7 @@ const TicketForm = (props) => {
 		});
 	}, [userSearchBar]);
 
-	const handleCreateClick = (e) => {
+	const handleSubmit = (e) => {
 		e.preventDefault();
 		props.clickHandle(ticket);
 	};
@@ -57,7 +57,6 @@ const TicketForm = (props) => {
 	};
 
 	const addComment = (comment) => {
-		console.log("Add comment TICKET FORM", comment);
 		addTicketComment(comment, 1, userData.token);
 	};
 
@@ -128,7 +127,7 @@ const TicketForm = (props) => {
 	const loadPage = () => {
 		return (
 			<div>
-				<form onSubmit={handleCreateClick}>
+				<form onSubmit={handleSubmit}>
 					<div className="form-group">
 						<label htmlFor="subjectInput">Subject</label>
 						<input

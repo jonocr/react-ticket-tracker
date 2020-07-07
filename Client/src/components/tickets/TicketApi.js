@@ -11,7 +11,7 @@ export const getAllTicketsDynamicQuery = async (criteria, query) => {
 };
 
 export const addTicketComment = async (comment, id, token) => {
-	console.log("TicketAPI");
+	console.log("TicketAPI", comment, id, token);
 	// try {
 	// 	const response = await fetch(
 	// 		`http://localhost:8000/users/find-users-email/${email}`
