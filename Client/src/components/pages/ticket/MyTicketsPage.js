@@ -19,6 +19,7 @@ const MyTicketsPage = (props) => {
 
 	useEffect(() => {
 		findTicketsbyEmail(userData.user.email);
+		// eslint-disable-next-line
 	}, []);
 
 	const findTicketsbyEmail = (email) => {

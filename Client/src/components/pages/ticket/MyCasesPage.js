@@ -7,6 +7,8 @@ import { useHistory } from "react-router-dom";
 import { getAllTicketsDynamicQuery } from "../../tickets/TicketApi";
 
 const MyCasesPage = (props) => {
+	const abortController = new AbortController();
+	const signal = abortController.signal;
 	const { userData } = useContext(AuthContext);
 	const [closeCss, setCloseCss] = useState("");
 	const [ticketList, setTicketList] = useState([]);
@@ -18,12 +20,17 @@ const MyCasesPage = (props) => {
 
 	useEffect(() => {
 		!userData.token && history.push("/login");
-		getAllTicketsDynamicQuery("assignedTo", userData.user.email).then(
+		getAllTicketsDynamicQuery("assignedTo", userData.user.email, signal).then(
 			(response) => {
-				console.log("get tickets assigned to me: ", response);
-				setTicketList(response);
+				if (response !== undefined) {
+					setTicketList(response);
+				}
 			}
 		);
+
+		return function cleanup() {
+			abortController.abort();
+		};
 	}, []);
 
 	const ticketDetails = (ticket) => {

@@ -1,7 +1,8 @@
-export const getAllTicketsDynamicQuery = async (criteria, query) => {
+export const getAllTicketsDynamicQuery = async (criteria, query, signal) => {
 	try {
 		const response = await fetch(
-			`http://localhost:8000/tickets/tickets-criteria/${criteria}/${query}`
+			`http://localhost:8000/tickets/tickets-criteria/${criteria}/${query}`,
+			{ signal: signal }
 		);
 		console.log("tickets-criteria response: ", response.clone().json());
 		return response.json();
