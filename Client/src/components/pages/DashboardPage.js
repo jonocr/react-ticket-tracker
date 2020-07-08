@@ -16,6 +16,7 @@ const DashboardPage = (props) => {
 
 	useEffect(() => {
 		!userData.token && history.push("/login");
+		// eslint-disable-next-line
 	}, []);
 
 	return (

@@ -7,6 +7,8 @@ import { findManyUsersByEmail } from "../users/UserApi";
 import { addTicketComment } from "../tickets/TicketApi";
 
 const TicketForm = (props) => {
+	const abortController = new AbortController();
+	const signal = abortController.signal;
 	const { userData } = useContext(AuthContext);
 	const [loading, seLoading] = useState(true);
 	const [editTicket, setEditTicket] = useState(false);
@@ -30,24 +32,31 @@ const TicketForm = (props) => {
 	}, []);
 
 	useEffect(() => {
-		findManyUsersByEmail(userSearchBar).then((response) => {
-			setUsersFound(
-				response.map((user, index) => {
-					if (user.department !== "Client") {
-						return {
-							value: user.email,
-							id: user.email,
-							index: index,
-						};
-					} else {
-						return false;
-					}
-				})
-			);
+		findManyUsersByEmail(userSearchBar, signal).then((response) => {
+			if (response !== undefined) {
+				setUsersFound(
+					response.map((user, index) => {
+						if (user.department !== "Client") {
+							return {
+								value: user.email,
+								id: user.email,
+								index: index,
+							};
+						} else {
+							return false;
+						}
+					})
+				);
+			}
 		});
+
+		return function cleanup() {
+			abortController.abort();
+		};
 	}, [userSearchBar]);
 
 	const handleSubmit = (e) => {
+		console.log("Submitting ticket Form");
 		e.preventDefault();
 		props.clickHandle(ticket);
 	};
@@ -57,17 +66,13 @@ const TicketForm = (props) => {
 	};
 
 	const addComment = (comment) => {
-		addTicketComment(comment, 1, userData.token);
+		// userData.token
+		addTicketComment(comment, 1, "asdasdas");
 	};
 
 	const renderAdmin = () => {
 		return (
 			<div>
-				<Modal
-					component={<TicketCommentForm onSubmit={addComment} />}
-					title={"Comment"}
-					openText={"Add A Comment"}
-				></Modal>
 				<div className="form-group">
 					<label htmlFor="createdByInput">Assigned To</label>
 					<AutoComplete
@@ -121,6 +126,16 @@ const TicketForm = (props) => {
 					</select>
 				</div>
 			</div>
+		);
+	};
+
+	const renderAdminComments = () => {
+		return (
+			<Modal
+				component={<TicketCommentForm onSubmit={addComment} />}
+				title={"Comment"}
+				openText={"Add A Comment"}
+			></Modal>
 		);
 	};
 
@@ -184,6 +199,8 @@ const TicketForm = (props) => {
 						</div>
 					</div>
 				</form>
+
+				{userData.user.department !== "Client" && renderAdminComments()}
 			</div>
 		);
 	};

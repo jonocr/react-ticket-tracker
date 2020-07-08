@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useHistory, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import TopBar from "../../layout/TopBar";
 import SideMenu from "../../layout/SideMenu";
 import TicketList from "../../tickets/TicketList";
@@ -11,7 +11,6 @@ const TicketSearchPage = (props) => {
 	const [tickets, setTickets] = useState([]);
 	const [ticket, setTicket] = useState();
 	const { userData } = useContext(AuthContext);
-	const history = useHistory();
 
 	const clickToggle = (e) => {
 		closeCss === "" ? setCloseCss("close-menu") : setCloseCss("");

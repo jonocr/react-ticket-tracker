@@ -12,6 +12,11 @@
 -SideMenu
 -TopMenu
 
+Things Learned:
+How to cancel a subscription on unmount function so memory wont leak when Fetching
+
+---OTHER **********\*\***********
+
 ## Available Scripts
 
 In the project directory, you can run:

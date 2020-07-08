@@ -53,6 +53,10 @@ const TicketPage = (props) => {
 		!userData.token && history.push("/login");
 		props.location.state !== undefined &&
 			setTicket(props.location.state.ticket);
+
+		// return function cleanup() {
+		// 	setTicket(null);
+		// };
 	}, []);
 
 	return (
