@@ -4,21 +4,26 @@ export const getAllTicketsDynamicQuery = async (criteria, query, signal) => {
 			`http://localhost:8000/tickets/tickets-criteria/${criteria}/${query}`,
 			{ signal: signal }
 		);
-		console.log("tickets-criteria response: ", response.clone().json());
 		return response.json();
 	} catch (err) {
 		console.log("error at fetching: ", err);
 	}
 };
 
-export const addTicketComment = async (comment, id, token) => {
-	console.log("TicketAPI", comment, id, token);
-	// try {
-	// 	const response = await fetch(
-	// 		`http://localhost:8000/users/find-users-email/${email}`
-	// 	);
-	// 	return response.json();
-	// } catch (err) {
-	// 	console.log("error at fetching: ", err);
-	// }
+export const addTicketComment = async (ticketId, comment, email, token) => {
+	fetch("http://localhost:8000/tickets/add-comment", {
+		method: "PATCH",
+		headers: {
+			Authorization: `Bearer ${token}`,
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			ticketId: ticketId,
+			comment: comment,
+			email: email,
+		}),
+	})
+		.then((res) => res.json())
+		.then((data) => console.log(data))
+		.catch((err) => console.log(err));
 };

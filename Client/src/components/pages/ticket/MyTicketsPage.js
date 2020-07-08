@@ -23,7 +23,13 @@ const MyTicketsPage = (props) => {
 	}, []);
 
 	const findTicketsbyEmail = (email) => {
-		fetch(`http://localhost:8000/tickets/user-list/${email}`)
+		fetch(`http://localhost:8000/tickets/user-list/${email}`, {
+			method: "GET",
+			headers: {
+				Authorization: `Bearer ${userData.token}`,
+				"Content-Type": "application/json",
+			},
+		})
 			.then((response) => {
 				return response.json();
 			})

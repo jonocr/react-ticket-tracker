@@ -85,7 +85,7 @@ router.route("/update").patch(checkAuth, (req, res) => {
 router.route("/add-comment").patch(checkAuth, (req, res) => {
 	const errorEmailMessage = "There was an error finding this ticket";
 	const data = req.body;
-	const token = data.token;
+	const _id = data.ticketId;
 	const email = data.email;
 	const text = data.comment;
 	const lastModified = new Date();
@@ -95,14 +95,19 @@ router.route("/add-comment").patch(checkAuth, (req, res) => {
 		comment: text,
 		lastModified: lastModified,
 	};
-	// Ticket.updateOne(
-	// 	{
-	// 		_id: _id,
-	// 	},
-	// 	{
-	// 		$set: updatedTicket,
-	// 	}
-	// )
+	console.log("From ROUTE add comment: ", comment, _id);
+	Ticket.updateOne(
+		{
+			_id: _id,
+		},
+		{
+			$push: {
+				comments: { email: email, comment: text, lastModified: lastModified },
+			},
+		}
+	)
+		.then(() => res.json("Ticket updated!"))
+		.catch((err) => res.status(400).json(`Error: ${err}`));
 });
 
 router.route("/list-all").get(checkAuth, (req, res) => {

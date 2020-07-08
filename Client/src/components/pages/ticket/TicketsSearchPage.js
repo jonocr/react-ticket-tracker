@@ -7,6 +7,8 @@ import TicketSearchBar from "../../tickets/TicketSearchBar";
 import AuthContext from "../../utils/AuthContext";
 
 const TicketSearchPage = (props) => {
+	const abortController = new AbortController();
+	const signal = abortController.signal;
 	const [closeCss, setCloseCss] = useState("");
 	const [tickets, setTickets] = useState([]);
 	const [ticket, setTicket] = useState();
@@ -17,7 +19,11 @@ const TicketSearchPage = (props) => {
 	};
 
 	useEffect(() => {
-		getAllTickets();
+		getAllTickets(signal);
+
+		return function cleanup() {
+			abortController.abort();
+		};
 	}, []);
 
 	const goTicketDetail = (ticket) => {
@@ -48,8 +54,9 @@ const TicketSearchPage = (props) => {
 			});
 	};
 
-	const getAllTickets = async () => {
+	const getAllTickets = async (signal) => {
 		fetch(`http://localhost:8000/tickets/list-all`, {
+			signal: signal,
 			method: "GET",
 			contentType: "application/json",
 			headers: {

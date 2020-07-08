@@ -21,7 +21,6 @@ const TicketPage = (props) => {
 	};
 
 	const clickCreateHandle = async (ticket) => {
-		console.log("Create Ticket Page data: ", ticket);
 		fetch("http://localhost:8000/tickets/create", {
 			method: "POST",
 			headers: {
@@ -53,10 +52,6 @@ const TicketPage = (props) => {
 		!userData.token && history.push("/login");
 		props.location.state !== undefined &&
 			setTicket(props.location.state.ticket);
-
-		// return function cleanup() {
-		// 	setTicket(null);
-		// };
 	}, []);
 
 	return (
