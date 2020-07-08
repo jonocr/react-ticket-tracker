@@ -67,7 +67,7 @@ const TicketForm = (props) => {
 
 	const addComment = (comment) => {
 		// userData.token
-		addTicketComment(comment, 1, "asdasdas");
+		addTicketComment(comment, userData.user.email, userData.token);
 	};
 
 	const renderAdmin = () => {

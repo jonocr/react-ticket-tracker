@@ -24,7 +24,7 @@ const TicketCommentForm = (props) => {
 			<form onSubmit={clickHandle}>
 				<div className="form-group">
 					<textarea
-						class="form-control"
+						className="form-control"
 						id="commentTextArea"
 						rows="3"
 						onChange={(e) => setComment(e.target.value)}

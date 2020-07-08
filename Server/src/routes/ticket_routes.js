@@ -33,8 +33,7 @@ router.route("/create").post(checkAuth, (req, res) => {
 		.catch((err) => res.status(400).json(`Error: ${err}`));
 });
 
-router.route("/update").patch((req, res) => {
-	console.log("UPDATE TICKET ROUTE");
+router.route("/update").patch(checkAuth, (req, res) => {
 	const errorEmailMessage = "There was an error finding this ticket";
 	const data = req.body;
 	const createdBy = data.createdBy;
@@ -69,7 +68,6 @@ router.route("/update").patch((req, res) => {
 					error: errorEmailMessage,
 				});
 			} else {
-				console.log("update route ticket: ", updatedTicket);
 				Ticket.updateOne(
 					{
 						_id: _id,
@@ -84,7 +82,30 @@ router.route("/update").patch((req, res) => {
 		});
 });
 
-router.route("/list-all").get((req, res) => {
+router.route("/add-comment").patch(checkAuth, (req, res) => {
+	const errorEmailMessage = "There was an error finding this ticket";
+	const data = req.body;
+	const token = data.token;
+	const email = data.email;
+	const text = data.comment;
+	const lastModified = new Date();
+
+	const comment = {
+		email: email,
+		comment: text,
+		lastModified: lastModified,
+	};
+	// Ticket.updateOne(
+	// 	{
+	// 		_id: _id,
+	// 	},
+	// 	{
+	// 		$set: updatedTicket,
+	// 	}
+	// )
+});
+
+router.route("/list-all").get(checkAuth, (req, res) => {
 	Ticket.find()
 		.then((tickets) => res.json(tickets))
 		.catch((err) => res.status(400).json(`Error: ${err}`));
@@ -97,22 +118,24 @@ router.route("/find-id/:ticketId").get(checkAuth, (req, res) => {
 		.catch((err) => res.status(400).json(`Error: ${err}`));
 });
 
-router.route("/user-list/:email").get((req, res) => {
+router.route("/user-list/:email").get(checkAuth, (req, res) => {
 	const email = req.params.email;
 	Ticket.find({ createdBy: email })
 		.then((tickets) => res.json(tickets))
 		.catch((err) => res.status(400).json(`Error: ${err}`));
 });
 
-router.route("/tickets-criteria/:criteria/:query").get((req, res) => {
-	const criteria = req.params.criteria;
-	const query = req.params.query;
-	const queryOptionsObj = { $regex: query, $options: "i" };
-	const queryObj = {};
-	queryObj[criteria] = queryOptionsObj;
-	Ticket.find(queryObj)
-		.then((tickets) => res.json(tickets))
-		.catch((err) => res.status(400).json(`Error: ${err}`));
-});
+router
+	.route("/tickets-criteria/:criteria/:query")
+	.get(checkAuth, (req, res) => {
+		const criteria = req.params.criteria;
+		const query = req.params.query;
+		const queryOptionsObj = { $regex: query, $options: "i" };
+		const queryObj = {};
+		queryObj[criteria] = queryOptionsObj;
+		Ticket.find(queryObj)
+			.then((tickets) => res.json(tickets))
+			.catch((err) => res.status(400).json(`Error: ${err}`));
+	});
 
 module.exports = router;

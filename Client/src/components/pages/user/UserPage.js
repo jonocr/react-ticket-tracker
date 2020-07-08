@@ -16,8 +16,8 @@ const UserPage = (props) => {
 	const [teamUsers, setTeamUsers] = useState([]);
 	const [availableUsers, setAvailableUsers] = useState([]);
 	const [loading, setLoading] = useState(true);
-	const [openError, setOpenError] = React.useState(false);
-	const [errorMsg, setErrorMsg] = React.useState("");
+	// const [openError, setOpenError] = React.useState(false);
+	// const [errorMsg, setErrorMsg] = React.useState("");
 	const { email } = useParams();
 	const { userData } = useContext(AuthContext);
 
