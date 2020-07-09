@@ -66,7 +66,7 @@ const TicketPage = (props) => {
 							? props.location.state.ticket
 							: {}
 					}
-					buttonText={ticket ? "Save Ticket" : "Create Ticket"}
+					buttonText={ticket ? "Save Changes" : "Create Ticket"}
 				></TicketForm>
 				<div className={succesMsgCss} role="alert">
 					You have <strong>succesfully</strong> created a new ticket.

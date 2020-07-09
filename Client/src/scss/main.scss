@@ -1,23 +1,15 @@
 @charset 'UTF-8';
 
 // 1. Vendors
-@import
-  'vendors/bootstrap',
-  'vendors/normalize'; 
+@import "vendors/bootstrap", "vendors/normalize";
 
 // 2. Base stuff
-@import
-  'base/variables',
-  'base/base',
-  'base/fonts',
-  'base/typography',
-  'base/helpers';
+@import "base/variables", "base/base", "base/fonts", "base/typography",
+	"base/helpers";
 
 // 3. Layout-related sections
-@import
-  'layout/main'; 
+@import "layout/index";
 
 // 4. Components
-@import
-  'components/index';
+@import "components/index";
 //'components/button';
