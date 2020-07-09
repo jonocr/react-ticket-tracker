@@ -32,23 +32,25 @@ const TicketForm = (props) => {
 	}, []);
 
 	useEffect(() => {
-		findManyUsersByEmail(userSearchBar, signal).then((response) => {
-			if (response !== undefined) {
-				setUsersFound(
-					response.map((user, index) => {
-						if (user.department !== "Client") {
-							return {
-								value: user.email,
-								id: user.email,
-								index: index,
-							};
-						} else {
-							return false;
-						}
-					})
-				);
-			}
-		});
+		if (userSearchBar !== undefined) {
+			findManyUsersByEmail(userSearchBar, signal).then((response) => {
+				if (response !== undefined) {
+					setUsersFound(
+						response.map((user, index) => {
+							if (user.department !== "Client") {
+								return {
+									value: user.email,
+									id: user.email,
+									index: index,
+								};
+							} else {
+								return false;
+							}
+						})
+					);
+				}
+			});
+		}
 
 		return function cleanup() {
 			abortController.abort();

@@ -1,10 +1,11 @@
 import React from "react";
+import "bootstrap";
 var $ = require("jquery");
 
 const Modal = (props) => {
 	const clickClose = () => {
 		console.log("closing tag...");
-		window.$("#exampleModal").modal("toggle");
+		$("#exampleModal").modal("toggle");
 	};
 
 	return (

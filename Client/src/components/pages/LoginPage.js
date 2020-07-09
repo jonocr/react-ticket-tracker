@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const LoginPage = () => {
 	const [user, setUser] = useState({});
-	const { userData, setUserData } = useContext(AuthContext);
+	const { setUserData } = useContext(AuthContext);
 	let history = useHistory();
 
 	const loginHandle = (e) => {
