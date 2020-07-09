@@ -15,7 +15,9 @@
 Things Learned:
 How to cancel a subscription on unmount function so memory wont leak when Fetching
 
----OTHER **********\*\***********
+Use of cmd-env. for enviroment variables
+
+---OTHER ****\*\*****\*\*****\*\*****
 
 ## Available Scripts
 

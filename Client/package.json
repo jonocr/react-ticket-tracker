@@ -9,6 +9,7 @@
 		"browser-sync": "^2.26.7",
 		"gulp": "^4.0.2",
 		"gulp-sass": "^4.0.2",
+		"jquery": "^3.5.1",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
 		"react-router": "^5.1.2",
@@ -16,7 +17,7 @@
 		"react-scripts": "3.4.1"
 	},
 	"scripts": {
-		"start": "env-cmd .env.development react-scripts start",
+		"start": "env-cmd -f .env.development react-scripts start",
 		"build": "env-cmd .env.production react-scripts build",
 		"test": "env-cmd .env.development react-scripts test",
 		"eject": "react-scripts eject"
