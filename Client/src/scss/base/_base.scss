@@ -28,11 +28,6 @@ html {
 a {
 	color: $text-color;
 	text-decoration: none;
-
-	// @include on-event {
-	//   color: $text-color;
-	//   text-decoration: underline;
-	// }
 }
 
 label {
