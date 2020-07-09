@@ -3,6 +3,7 @@ import AuthContext from "../utils/AuthContext";
 import AutoComplete from "../utils/AutoComplete";
 import Modal from "../layout/Modal";
 import TicketCommentForm from "../tickets/TicketCommentForm";
+import TicketComments from "../tickets/TicketComments";
 import { findManyUsersByEmail } from "../users/UserApi";
 import { addTicketComment } from "../tickets/TicketApi";
 
@@ -74,57 +75,61 @@ const TicketForm = (props) => {
 	const renderAdmin = () => {
 		return (
 			<div>
-				<div className="form-group">
-					<label htmlFor="createdByInput">Assigned To</label>
-					<AutoComplete
-						items={usersFound}
-						search={searchAgent}
-						defaultValue={ticket.assignedTo}
-						onChange={(email) =>
-							SetTicket({
-								...ticket,
-								assignedTo: email,
-								assignedBy: userData.user.email,
-							})
-						}
-					></AutoComplete>
-				</div>
-				<div className="form-group">
-					<label htmlFor="createdByInput">Created By</label>
-					<input
-						type="text"
-						className="form-control"
-						id="createdByInput"
-						placeholder="Title of the Issue"
-						value={ticket.createdBy}
-						readOnly
-					/>
-				</div>
-				<div className="form-group">
-					<label htmlFor="prioritySelect">Priority</label>
-					<select
-						className="form-control"
-						id="prioritySelect"
-						value={ticket.priority}
-						onChange={(e) => SetTicket({ ...ticket, priority: e.target.value })}
-					>
-						<option value="1">Low</option>
-						<option value="2">Medium</option>
-						<option value="3">High</option>
-					</select>
-				</div>
+				<div className="row">
+					<div className="form-group col col-md-3">
+						<label htmlFor="createdByInput">Assigned To</label>
+						<AutoComplete
+							items={usersFound}
+							search={searchAgent}
+							defaultValue={ticket.assignedTo}
+							onChange={(email) =>
+								SetTicket({
+									...ticket,
+									assignedTo: email,
+									assignedBy: userData.user.email,
+								})
+							}
+						></AutoComplete>
+					</div>
+					<div className="form-group col col-md-3">
+						<label htmlFor="createdByInput">Created By</label>
+						<input
+							type="text"
+							className="form-control"
+							id="createdByInput"
+							placeholder="Title of the Issue"
+							value={ticket.createdBy}
+							readOnly
+						/>
+					</div>
+					<div className="form-group col col-md-3">
+						<label htmlFor="prioritySelect">Priority</label>
+						<select
+							className="form-control"
+							id="prioritySelect"
+							value={ticket.priority}
+							onChange={(e) =>
+								SetTicket({ ...ticket, priority: e.target.value })
+							}
+						>
+							<option value="1">Low</option>
+							<option value="2">Medium</option>
+							<option value="3">High</option>
+						</select>
+					</div>
 
-				<div className="form-group">
-					<label htmlFor="statusSelect">Status</label>
-					<select
-						className="form-control"
-						id="statusSelect"
-						value={ticket.status}
-						onChange={(e) => SetTicket({ ...ticket, status: e.target.value })}
-					>
-						<option value="open">Open</option>
-						<option value="close">Close</option>
-					</select>
+					<div className="form-group col col-md-3">
+						<label htmlFor="statusSelect">Status</label>
+						<select
+							className="form-control"
+							id="statusSelect"
+							value={ticket.status}
+							onChange={(e) => SetTicket({ ...ticket, status: e.target.value })}
+						>
+							<option value="open">Open</option>
+							<option value="close">Close</option>
+						</select>
+					</div>
 				</div>
 			</div>
 		);
@@ -174,6 +179,8 @@ const TicketForm = (props) => {
 						</select>
 					</div>
 
+					{userData.user.department !== "Client" && renderAdmin()}
+
 					<div className="form-group">
 						<label htmlFor="descriptionTextArea">
 							Description of the Issue
@@ -190,8 +197,6 @@ const TicketForm = (props) => {
 						></textarea>
 					</div>
 
-					{userData.user.department !== "Client" && renderAdmin()}
-
 					<div className="form-group row">
 						<div className="col-sm-10">
 							<button type="submit" className="btn btn-primary">
@@ -200,8 +205,22 @@ const TicketForm = (props) => {
 						</div>
 					</div>
 				</form>
-
-				{userData.user.department !== "Client" && renderAdminComments()}
+				<div className="container">
+					<div className="row">
+						<button
+							className="btn btn-primary"
+							type="button"
+							data-toggle="collapse"
+							data-target="#collapseExample"
+							aria-expanded="false"
+							aria-controls="collapseExample"
+						>
+							Show Comments
+						</button>
+						{userData.user.department !== "Client" && renderAdminComments()}
+					</div>
+				</div>
+				<TicketComments data={ticket.comments}></TicketComments>
 			</div>
 		);
 	};
