@@ -15,6 +15,32 @@
 		border-bottom: solid 0.1em $light-grey;
 		padding-bottom: 15px;
 	}
+
+	.comment-head {
+		font-size: medium;
+		strong {
+			margin-right: 10px;
+		}
+	}
+
+	.comment-head {
+		padding-bottom: 20px;
+		padding-left: 20px;
+		border-bottom: 1px solid $light-grey;
+	}
+
+	.comment-date {
+		margin-left: auto;
+		padding-right: 20px;
+	}
+
+	.comment-text {
+		font-size: large;
+		margin-top: 20px;
+	}
+	.card {
+		margin-bottom: 2px;
+	}
 }
 
 .ticket-comment-form {
@@ -26,4 +52,6 @@
 .comments-list {
 	margin-top: 20px;
 	margin-bottom: 20px;
+	// color: $text-color;
+	// font: normal 125% / 1.4 $text-font-stack;
 }
