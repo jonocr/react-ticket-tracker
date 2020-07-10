@@ -37,10 +37,12 @@ const TicketPage = (props) => {
 	};
 
 	const clickUpdateHandle = async (ticket) => {
-		console.log("Updating ticket: ", ticket);
 		fetch("http://localhost:8000/tickets/update", {
 			method: "PATCH",
-			headers: { "Content-Type": "application/json" },
+			headers: {
+				Authorization: `Bearer ${userData.token}`,
+				"Content-Type": "application/json",
+			},
 			body: JSON.stringify(ticket),
 		})
 			.then((res) => res.json())

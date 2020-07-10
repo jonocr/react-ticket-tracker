@@ -59,7 +59,6 @@ const TicketForm = (props) => {
 	}, [userSearchBar]);
 
 	const handleSubmit = (e) => {
-		console.log("Submitting ticket Form");
 		e.preventDefault();
 		props.clickHandle(ticket);
 	};
