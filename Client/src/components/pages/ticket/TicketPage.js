@@ -60,7 +60,7 @@ const TicketPage = (props) => {
 		<div className={closeCss}>
 			<SideMenu css={closeCss}></SideMenu>
 			<TopBar onClick={clickToggle} css={closeCss}></TopBar>
-			<div className="dashboard-main dashboard">
+			<div className="dashboard-main dashboard ticket-page">
 				<TicketForm
 					clickHandle={ticket ? clickUpdateHandle : clickCreateHandle}
 					data={

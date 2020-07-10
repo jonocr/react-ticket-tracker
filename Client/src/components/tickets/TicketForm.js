@@ -25,8 +25,6 @@ const TicketForm = (props) => {
 	});
 
 	useEffect(() => {
-		//REACT_APP_API_SERVER_URL:http://localhost:8000
-		console.log("Ticket FORM env: ", process.env);
 		if (props.data && JSON.stringify(props.data) !== JSON.stringify({})) {
 			SetTicket(props.data);
 			setEditTicket(true);
@@ -148,7 +146,7 @@ const TicketForm = (props) => {
 
 	const loadPage = () => {
 		return (
-			<div>
+			<div className="ticket-form">
 				<form onSubmit={handleSubmit}>
 					<div className="form-group">
 						<label htmlFor="subjectInput">Subject</label>
@@ -206,7 +204,8 @@ const TicketForm = (props) => {
 						</div>
 					</div>
 				</form>
-				<div className="container">
+				<label className="comments-section-title">Comments</label>
+				<div className="container comments">
 					<div className="row">
 						<button
 							className="btn btn-primary"

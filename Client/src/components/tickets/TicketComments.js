@@ -2,7 +2,7 @@ import React from "react";
 
 const TicketComments = (props) => {
 	return (
-		<div>
+		<div className="comments-list">
 			<div className="collapse" id="collapseExample">
 				{props.data.map((comment, index) => (
 					<div className="card card-body">

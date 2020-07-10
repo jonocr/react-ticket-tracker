@@ -1,5 +1,29 @@
+.ticket-page {
+	.container {
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+	.btn {
+		margin-right: 20px;
+	}
+
+	.comments-section-title {
+		border-top: solid 0.1em $light-grey;
+		width: 100%;
+		margin-bottom: 15px;
+		padding-top: 10px;
+		border-bottom: solid 0.1em $light-grey;
+		padding-bottom: 15px;
+	}
+}
+
 .ticket-comment-form {
 	.submit-button {
 		margin-bottom: 0;
 	}
+}
+
+.comments-list {
+	margin-top: 20px;
+	margin-bottom: 20px;
 }
