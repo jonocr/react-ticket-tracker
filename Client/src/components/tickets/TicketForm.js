@@ -25,6 +25,8 @@ const TicketForm = (props) => {
 	});
 
 	useEffect(() => {
+		//REACT_APP_API_SERVER_URL:http://localhost:8000
+		console.log("Ticket FORM env: ", process.env);
 		if (props.data && JSON.stringify(props.data) !== JSON.stringify({})) {
 			SetTicket(props.data);
 			setEditTicket(true);
