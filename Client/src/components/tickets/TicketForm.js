@@ -5,13 +5,14 @@ import Modal from "../layout/Modal";
 import TicketCommentForm from "../tickets/TicketCommentForm";
 import TicketComments from "../tickets/TicketComments";
 import { findManyUsersByEmail } from "../users/UserApi";
-import { addTicketComment } from "../tickets/TicketApi";
+import { addTicketComment, getTicketById } from "../tickets/TicketApi";
 
 const TicketForm = (props) => {
 	const abortController = new AbortController();
 	const signal = abortController.signal;
 	const { userData } = useContext(AuthContext);
-	const [loading, seLoading] = useState(true);
+	const [loading, setLoading] = useState(true);
+	const [newComment, setNewComment] = useState(null);
 	const [editTicket, setEditTicket] = useState(false);
 	const [userSearchBar, SetUserSearchBar] = useState();
 	const [usersFound, setUsersFound] = useState([]);
@@ -25,12 +26,29 @@ const TicketForm = (props) => {
 	});
 
 	useEffect(() => {
+		console.log("useEffect ticket: ", ticket._id);
 		if (props.data && JSON.stringify(props.data) !== JSON.stringify({})) {
 			SetTicket(props.data);
 			setEditTicket(true);
 		}
-		seLoading(false);
+		setLoading(false);
+		return function cleanup() {
+			abortController.abort();
+		};
 	}, []);
+
+	useEffect(() => {
+		console.log("useEffect Comment: ", ticket);
+		if (ticket._id !== undefined) {
+			getTicketById(ticket._id, userData.token, signal).then((response) => {
+				SetTicket(response);
+			});
+		}
+
+		return function cleanup() {
+			abortController.abort();
+		};
+	}, [newComment]);
 
 	useEffect(() => {
 		if (userSearchBar !== undefined) {
@@ -70,6 +88,8 @@ const TicketForm = (props) => {
 	const addComment = (comment) => {
 		addTicketComment(ticket._id, comment, userData.user.email, userData.token);
 	};
+
+	// const findTicketById = (id) => {};
 
 	const renderAdmin = () => {
 		return (

@@ -6,7 +6,6 @@ const TicketComments = (props) => {
 			<div className="collapse" id="collapseExample">
 				{props.data.map((comment, index) => (
 					<div className="card card-body">
-						{console.log("Comment: ", comment.lastModified.split("T")[1])}
 						<div className="row comment-head">
 							<div className="comment-author">
 								<strong>Author:</strong>

@@ -95,7 +95,6 @@ router.route("/add-comment").patch(checkAuth, (req, res) => {
 		comment: text,
 		lastModified: lastModified,
 	};
-	console.log("From ROUTE add comment: ", comment, _id);
 	Ticket.updateOne(
 		{
 			_id: _id,
@@ -118,7 +117,7 @@ router.route("/list-all").get(checkAuth, (req, res) => {
 
 router.route("/find-id/:ticketId").get(checkAuth, (req, res) => {
 	const ticketId = req.params.ticketId;
-	Ticket.find({ _id: ticketId })
+	Ticket.findOne({ _id: ticketId })
 		.then((tickets) => res.json(tickets))
 		.catch((err) => res.status(400).json(`Error: ${err}`));
 });
