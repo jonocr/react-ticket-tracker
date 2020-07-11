@@ -38,8 +38,8 @@ const TicketForm = (props) => {
 	}, []);
 
 	useEffect(() => {
-		console.log("useEffect Comment: ", ticket);
 		if (ticket._id !== undefined) {
+			console.log("ticket._id !== undefined: ");
 			getTicketById(ticket._id, userData.token, signal).then((response) => {
 				SetTicket(response);
 			});
@@ -87,6 +87,7 @@ const TicketForm = (props) => {
 
 	const addComment = (comment) => {
 		addTicketComment(ticket._id, comment, userData.user.email, userData.token);
+		setNewComment(comment);
 	};
 
 	// const findTicketById = (id) => {};
