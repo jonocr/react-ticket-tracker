@@ -267,21 +267,24 @@ const SideMenu = (props) => {
 								aria-haspopup="true"
 								aria-expanded="false"
 							>
-								Dropdown link
+								Tickets
 							</a>
 							<div
 								className="dropdown-menu"
 								aria-labelledby="navbarDropdownMenuLink"
 							>
-								<a className="dropdown-item" href="/#">
-									Action
-								</a>
-								<a className="dropdown-item" href="/#">
-									Another action
-								</a>
-								<a className="dropdown-item" href="/#">
-									Something else here
-								</a>
+								<Link className="dropdown-item" to="/create-ticket">
+									Create Ticket
+								</Link>
+								<Link className="dropdown-item" to="/my-tickets">
+									My Tickets
+								</Link>
+								<Link className="dropdown-item" to="/ticket-search">
+									All Tickets
+								</Link>
+								<Link className="dropdown-item" to="/my-cases">
+									My Cases
+								</Link>
 							</div>
 						</li>
 					</ul>
