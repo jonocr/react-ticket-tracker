@@ -1,18 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 const TicketCommentForm = (props) => {
 	const [comment, setComment] = useState("");
 	const clickHandle = (e) => {
 		e.preventDefault();
-		// const comment = e.target.commentTextArea.value;
-		// e.target.commentTextArea.value = "";
 		props.onSubmit(comment);
 		setComment("");
 		props.closeModal();
 	};
-
-	// useEffect(() => {
-	// }, [comment]);
 	return (
 		<div className="ticket-comment-form">
 			<form onSubmit={clickHandle}>
