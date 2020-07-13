@@ -21,6 +21,7 @@ const AutoComplete = (props) => {
 
 	useEffect(() => {
 		setSelectedItem(props.defaultValue);
+		// eslint-disable-next-line
 	}, []);
 
 	return (

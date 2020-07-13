@@ -24,6 +24,7 @@ const TicketSearchPage = (props) => {
 		return function cleanup() {
 			abortController.abort();
 		};
+		// eslint-disable-next-line
 	}, []);
 
 	const goTicketDetail = (ticket) => {
