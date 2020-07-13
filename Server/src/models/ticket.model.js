@@ -10,11 +10,12 @@ const ticketSchema = new Schema(
 		title: {
 			type: String,
 			required: true,
-			minlength: 10,
+			minlength: 5,
 		},
 		description: {
 			type: String,
 			required: true,
+			minlength: 5,
 		},
 		status: {
 			type: String,

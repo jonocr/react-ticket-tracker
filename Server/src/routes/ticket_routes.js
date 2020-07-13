@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const Ticket = require("../models/ticket.model");
 const checkAuth = require("../utils/check-auth");
+const mongoose = require("mongoose");
 
 router.route("/create").post(checkAuth, (req, res) => {
 	let today = new Date();
@@ -17,6 +18,7 @@ router.route("/create").post(checkAuth, (req, res) => {
 	const lastModified = today;
 
 	const newTicket = new Ticket({
+		_id: new mongoose.Types.ObjectId(),
 		title,
 		description,
 		status,
@@ -30,7 +32,10 @@ router.route("/create").post(checkAuth, (req, res) => {
 	newTicket
 		.save()
 		.then(() => res.json("Ticket created!"))
-		.catch((err) => res.status(400).json(`Error: ${err}`));
+		.catch((err) => {
+			console.log("ERROR: ", err);
+			res.status(400).json(`Error: ${err}`);
+		});
 });
 
 router.route("/update").patch(checkAuth, (req, res) => {

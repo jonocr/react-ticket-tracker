@@ -1,8 +1,9 @@
 import React from "react";
 
 const TicketComments = (props) => {
-	return (
-		<div className="comments-list">
+	const renderComment = () => {
+		console.log("Comments List: ", props.data[0]);
+		return (
 			<div className="collapse" id="collapseExample">
 				{props.data.map((comment, index) => (
 					<div className="card card-body" key={index}>
@@ -22,8 +23,9 @@ const TicketComments = (props) => {
 					</div>
 				))}
 			</div>
-		</div>
-	);
+		);
+	};
+	return <div className="comments-list">{renderComment()}</div>;
 };
 
 export default TicketComments;

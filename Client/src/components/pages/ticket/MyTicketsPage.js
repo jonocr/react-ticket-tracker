@@ -21,7 +21,6 @@ const MyTicketsPage = (props) => {
 	useEffect(() => {
 		findTicketsbyEmail(userData.user.email, userData.token, signal).then(
 			(response) => {
-				console.log("findTicketsbyEmail: ", response);
 				setTicketList(response);
 			}
 		);

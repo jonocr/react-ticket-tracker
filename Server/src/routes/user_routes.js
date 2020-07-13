@@ -154,6 +154,8 @@ router.route("/signup").post((req, res, next) => {
 							team,
 						});
 
+						console.log("newUser: ", newUser);
+
 						newUser
 							.save()
 							.then(() => res.json("User registered!"))

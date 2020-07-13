@@ -18,6 +18,7 @@ const TicketForm = (props) => {
 	const [usersFound, setUsersFound] = useState([]);
 	const [ticket, SetTicket] = useState({
 		status: "open",
+		category: "IT",
 		priority: 3,
 		createdBy: userData.user.email,
 		assignedTo: "",
@@ -26,7 +27,6 @@ const TicketForm = (props) => {
 	});
 
 	useEffect(() => {
-		console.log("useEffect ticket: ", ticket._id);
 		if (props.data && JSON.stringify(props.data) !== JSON.stringify({})) {
 			SetTicket(props.data);
 			setEditTicket(true);
@@ -39,7 +39,6 @@ const TicketForm = (props) => {
 
 	useEffect(() => {
 		if (ticket._id !== undefined) {
-			console.log("ticket._id !== undefined: ");
 			getTicketById(ticket._id, userData.token, signal).then((response) => {
 				SetTicket(response);
 			});
@@ -90,6 +89,107 @@ const TicketForm = (props) => {
 		setNewComment(comment);
 	};
 
+	const renderSubmitBtn = () => {
+		if (
+			userData.user.department !== "Client" ||
+			(userData.user.department === "Client" && !editTicket)
+		) {
+			return (
+				<div className="form-group row">
+					<div className="col-sm-10">
+						<button type="submit" className="btn btn-primary">
+							{props.buttonText}
+						</button>
+					</div>
+				</div>
+			);
+		}
+	};
+
+	const loadPage = () => {
+		return (
+			<div className="ticket-form">
+				<form onSubmit={handleSubmit}>
+					<div className="form-group">
+						<label htmlFor="subjectInput">Subject</label>
+						<input
+							type="text"
+							className="form-control"
+							id="subjectInput"
+							placeholder="Title of the Issue"
+							readOnly={!!editTicket}
+							value={ticket.title}
+							onChange={(e) => SetTicket({ ...ticket, title: e.target.value })}
+						/>
+					</div>
+
+					<div className="form-group">
+						<label htmlFor="categorySelect">Category</label>
+						<select
+							className="form-control"
+							id="categorySelect"
+							value={ticket.category}
+							disabled={!!editTicket && userData.user.department === "Client"}
+							onChange={(e) =>
+								SetTicket({ ...ticket, category: e.target.value })
+							}
+						>
+							<option>IT</option>
+							<option>Billing</option>
+							<option>Development</option>
+							<option>Sales</option>
+							<option>Other</option>
+						</select>
+					</div>
+
+					{userData.user.department !== "Client" && renderAdmin()}
+
+					<div className="form-group">
+						<label htmlFor="descriptionTextArea">
+							Description of the Issue
+						</label>
+						<textarea
+							className="form-control"
+							id="descriptionTextArea"
+							rows="3"
+							value={ticket.description}
+							readOnly={!!editTicket}
+							onChange={(e) =>
+								SetTicket({ ...ticket, description: e.target.value })
+							}
+						></textarea>
+					</div>
+					{renderSubmitBtn()}
+				</form>
+				{editTicket && (
+					<div>
+						<label className="comments-section-title">Comments</label>
+						<div className="container comments">
+							<div className="row">
+								<button
+									className="btn btn-primary"
+									type="button"
+									data-toggle="collapse"
+									data-target="#collapseExample"
+									aria-expanded="false"
+									aria-controls="collapseExample"
+								>
+									Show Comments
+								</button>
+
+								<Modal
+									component={<TicketCommentForm onSubmit={addComment} />}
+									title={"Comment"}
+									openText={"Add A Comment"}
+								></Modal>
+							</div>
+						</div>
+						<TicketComments data={ticket.comments}></TicketComments>
+					</div>
+				)}
+			</div>
+		);
+	};
 	const renderAdmin = () => {
 		return (
 			<div>
@@ -149,97 +249,6 @@ const TicketForm = (props) => {
 						</select>
 					</div>
 				</div>
-			</div>
-		);
-	};
-
-	const renderAdminComments = () => {
-		return (
-			<Modal
-				component={<TicketCommentForm onSubmit={addComment} />}
-				title={"Comment"}
-				openText={"Add A Comment"}
-			></Modal>
-		);
-	};
-
-	const loadPage = () => {
-		return (
-			<div className="ticket-form">
-				<form onSubmit={handleSubmit}>
-					<div className="form-group">
-						<label htmlFor="subjectInput">Subject</label>
-						<input
-							type="text"
-							className="form-control"
-							id="subjectInput"
-							placeholder="Title of the Issue"
-							value={ticket.title}
-							onChange={(e) => SetTicket({ ...ticket, title: e.target.value })}
-						/>
-					</div>
-
-					<div className="form-group">
-						<label htmlFor="categorySelect">Category</label>
-						<select
-							className="form-control"
-							id="categorySelect"
-							value={ticket.category}
-							onChange={(e) =>
-								SetTicket({ ...ticket, category: e.target.value })
-							}
-						>
-							<option>IT</option>
-							<option>Billing</option>
-							<option>Development</option>
-							<option>Sales</option>
-							<option>Other</option>
-						</select>
-					</div>
-
-					{userData.user.department !== "Client" && renderAdmin()}
-
-					<div className="form-group">
-						<label htmlFor="descriptionTextArea">
-							Description of the Issue
-						</label>
-						<textarea
-							className="form-control"
-							id="descriptionTextArea"
-							rows="3"
-							value={ticket.description}
-							readOnly={!!editTicket}
-							onChange={(e) =>
-								SetTicket({ ...ticket, description: e.target.value })
-							}
-						></textarea>
-					</div>
-
-					<div className="form-group row">
-						<div className="col-sm-10">
-							<button type="submit" className="btn btn-primary">
-								{props.buttonText}
-							</button>
-						</div>
-					</div>
-				</form>
-				<label className="comments-section-title">Comments</label>
-				<div className="container comments">
-					<div className="row">
-						<button
-							className="btn btn-primary"
-							type="button"
-							data-toggle="collapse"
-							data-target="#collapseExample"
-							aria-expanded="false"
-							aria-controls="collapseExample"
-						>
-							Show Comments
-						</button>
-						{userData.user.department !== "Client" && renderAdminComments()}
-					</div>
-				</div>
-				<TicketComments data={ticket.comments}></TicketComments>
 			</div>
 		);
 	};
