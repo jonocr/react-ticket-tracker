@@ -1,23 +1,26 @@
 {
-  "name": "ticket-tracker-server",
-  "version": "1.0.0",
-  "description": "server side API for react ticket tracker",
-  "main": "server.js",
-  "scripts": {
-    "dev": "nodemon server.js"
-  },
-  "author": "Jono",
-  "license": "ISC",
-  "dependencies": {
-    "bcrypt": "^4.0.1",
-    "body-parser": "^1.19.0",
-    "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.9.10"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.3"
-  }
+	"name": "ticket-tracker-server",
+	"version": "1.0.0",
+	"engines": {
+		"node": "12.16.3"
+	},
+	"description": "server side API for react ticket tracker",
+	"main": "server.js",
+	"scripts": {
+		"dev": "nodemon server.js"
+	},
+	"author": "Jono",
+	"license": "ISC",
+	"dependencies": {
+		"bcrypt": "^4.0.1",
+		"body-parser": "^1.19.0",
+		"cors": "^2.8.5",
+		"dotenv": "^8.2.0",
+		"express": "^4.17.1",
+		"jsonwebtoken": "^8.5.1",
+		"mongoose": "^5.9.10"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.3"
+	}
 }

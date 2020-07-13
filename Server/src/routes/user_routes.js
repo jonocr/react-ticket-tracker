@@ -33,7 +33,6 @@ router.route("/find-users-email/:email").get((req, res) => {
 	const queryOptionsObj = { $regex: query, $options: "i" };
 	const queryObj = {};
 	queryObj[criteria] = queryOptionsObj;
-	console.log("/find-users-email/:email: ", query);
 	User.find(queryObj)
 		.then((users) => {
 			res.json(users);

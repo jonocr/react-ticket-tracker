@@ -5,7 +5,7 @@ const TicketComments = (props) => {
 		<div className="comments-list">
 			<div className="collapse" id="collapseExample">
 				{props.data.map((comment, index) => (
-					<div className="card card-body">
+					<div className="card card-body" key={index}>
 						<div className="row comment-head">
 							<div className="comment-author">
 								<strong>Author:</strong>

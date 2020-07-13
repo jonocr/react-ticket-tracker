@@ -45,8 +45,27 @@ export const getTicketById = async (id, token, signal) => {
 	}
 };
 
+export const findTicketsbyEmail = async (email, token, signal) => {
+	try {
+		const response = await fetch(
+			`${API_SERVER_URL}/tickets/user-list/${email}`,
+			{
+				signal: signal,
+				method: "GET",
+				headers: {
+					Authorization: `Bearer ${token}`,
+					"Content-Type": "application/json",
+				},
+			}
+		);
+		return response.json();
+	} catch (err) {
+		console.log("error at fetching: ", err);
+	}
+};
+
 const getAllTickets = async (signal, token) => {
-	fetch(`http://localhost:8000/tickets/list-all`, {
+	fetch(`${API_SERVER_URL}/tickets/list-all`, {
 		signal: signal,
 		method: "GET",
 		contentType: "application/json",

@@ -4,7 +4,6 @@ var $ = require("jquery");
 
 const Modal = (props) => {
 	const clickClose = () => {
-		console.log("closing tag...");
 		$("#exampleModal").modal("toggle");
 	};
 

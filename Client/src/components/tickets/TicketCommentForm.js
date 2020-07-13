@@ -4,21 +4,15 @@ const TicketCommentForm = (props) => {
 	const [comment, setComment] = useState("");
 	const clickHandle = (e) => {
 		e.preventDefault();
-		console.log("clickHandle comment: ", comment);
 		// const comment = e.target.commentTextArea.value;
 		// e.target.commentTextArea.value = "";
 		props.onSubmit(comment);
-		props.closeModal();
 		setComment("");
+		props.closeModal();
 	};
 
-	useEffect(() => {
-		console.log("comment refreshed");
-		// setComment("");
-		// return function cleanup() {
-		// 	setComment("");
-		// };
-	}, [comment]);
+	// useEffect(() => {
+	// }, [comment]);
 	return (
 		<div className="ticket-comment-form">
 			<form onSubmit={clickHandle}>
@@ -27,6 +21,7 @@ const TicketCommentForm = (props) => {
 						className="form-control"
 						id="commentTextArea"
 						rows="3"
+						value={comment}
 						onChange={(e) => setComment(e.target.value)}
 					></textarea>
 				</div>

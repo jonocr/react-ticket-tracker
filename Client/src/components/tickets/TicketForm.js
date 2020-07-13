@@ -22,7 +22,7 @@ const TicketForm = (props) => {
 		createdBy: userData.user.email,
 		assignedTo: "",
 		assignedBy: "",
-		comment: [],
+		comments: [],
 	});
 
 	useEffect(() => {
@@ -89,8 +89,6 @@ const TicketForm = (props) => {
 		addTicketComment(ticket._id, comment, userData.user.email, userData.token);
 		setNewComment(comment);
 	};
-
-	// const findTicketById = (id) => {};
 
 	const renderAdmin = () => {
 		return (
