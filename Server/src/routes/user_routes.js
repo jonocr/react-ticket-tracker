@@ -159,7 +159,10 @@ router.route("/signup").post((req, res, next) => {
 						newUser
 							.save()
 							.then(() => res.json("User registered!"))
-							.catch((err) => res.status(400).json(`Error: ${err}`));
+							.catch((err) => {
+								console.log("ERROR: ", err);
+								res.status(400).json(`Error: ${err}`);
+							});
 					}
 				});
 			}
