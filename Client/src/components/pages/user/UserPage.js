@@ -1,15 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams, Redirect } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import TopBar from "../../layout/TopBar";
 import SideMenu from "../../layout/SideMenu";
 import UserList from "../../users/UserList";
 import UserForm from "../../users/UserForm";
+import { useHistory } from "react-router";
 import AuthContext from "../../utils/AuthContext";
 
-// import mockData from "../../data/users.json";
-// import mockTeam from "../../data/team.json";
-
 const UserPage = (props) => {
+	const history = useHistory();
 	const [closeCss, setCloseCss] = useState("");
 	const [user, setUser] = useState({});
 	const [allUsers, setAllUsers] = useState([]);
@@ -41,17 +40,19 @@ const UserPage = (props) => {
 	};
 
 	const getAllUsers = async () => {
-		fetch(`http://localhost:8000/tickets/list-all`, {
+		console.log("Context Token: ", userData);
+		fetch(`http://localhost:8000/users/`, {
 			method: "GET",
-			contentType: "application/json",
 			headers: {
 				Authorization: `Bearer ${userData.token}`,
+				"Content-Type": "application/json",
 			},
 		})
 			.then((response) => {
 				return response.json();
 			})
 			.then((responseData) => {
+				console.log("getAllUsers: ", responseData);
 				setAllUsers(responseData);
 			})
 			.catch((err) => {
@@ -59,12 +60,15 @@ const UserPage = (props) => {
 			});
 	};
 
-	const clickUpdateHandle = async (userData) => {
-		const updatedUser = { ...userData, team: teamUsers };
+	const clickUpdateHandle = async (userInfo) => {
+		const updatedUser = { ...userInfo, team: teamUsers };
 
 		fetch("http://localhost:8000/users/update", {
 			method: "PATCH",
-			headers: { "Content-Type": "application/json" },
+			contentType: "application/json",
+			headers: {
+				Authorization: `Bearer ${userData.token}`,
+			},
 			body: JSON.stringify(updatedUser),
 		})
 			.then((res) => res.json())
@@ -76,8 +80,8 @@ const UserPage = (props) => {
 		// return false;
 	};
 
-	const clickCreateHandle = async (userData) => {
-		const newUser = { ...userData, team: teamUsers };
+	const clickCreateHandle = async (userInfo) => {
+		const newUser = { ...userInfo, team: teamUsers };
 
 		fetch("http://localhost:8000/users/signup", {
 			method: "POST",
@@ -104,6 +108,7 @@ const UserPage = (props) => {
 	};
 
 	useEffect(() => {
+		!userData.token && history.push("/login");
 		getAllUsers();
 		if (email) {
 			findUserByEmail(email);
@@ -136,7 +141,7 @@ const UserPage = (props) => {
 						<div>
 							<UserForm
 								onClickSave={email ? clickUpdateHandle : clickCreateHandle}
-								userData={user}
+								userInfo={user}
 							></UserForm>
 
 							<div className="row">

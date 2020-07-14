@@ -9,7 +9,7 @@ const UserList = (props) => {
 						<th scope="col">#</th>
 						<th scope="col">User Name</th>
 						<th scope="col">Email</th>
-						<th scope="col">Created</th>
+						<th scope="col">Dep</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -23,7 +23,7 @@ const UserList = (props) => {
 							<th scope="row">{index}</th>
 							<td>{user.userName}</td>
 							<td>{user.email}</td>
-							<td>{user.createdAt}</td>
+							<td>{user.department}</td>
 						</tr>
 					))}
 				</tbody>

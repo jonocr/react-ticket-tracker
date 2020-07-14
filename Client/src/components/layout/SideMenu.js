@@ -130,26 +130,6 @@ const SideMenu = (props) => {
 										My Cases
 									</Link>
 								</li>
-								<li>
-									<a href="/#">
-										<svg
-											className="bi bi-folder"
-											width="1em"
-											height="1em"
-											viewBox="0 0 16 16"
-											fill="currentColor"
-											xmlns="http://www.w3.org/2000/svg"
-										>
-											<path d="M9.828 4a3 3 0 01-2.12-.879l-.83-.828A1 1 0 006.173 2H2.5a1 1 0 00-1 .981L1.546 4h-1L.5 3a2 2 0 012-2h3.672a2 2 0 011.414.586l.828.828A2 2 0 009.828 3v1z" />
-											<path
-												fillRule="evenodd"
-												d="M13.81 4H2.19a1 1 0 00-.996 1.09l.637 7a1 1 0 00.995.91h10.348a1 1 0 00.995-.91l.637-7A1 1 0 0013.81 4zM2.19 3A2 2 0 00.198 5.181l.637 7A2 2 0 002.826 14h10.348a2 2 0 001.991-1.819l.637-7A2 2 0 0013.81 3H2.19z"
-												clipRule="evenodd"
-											/>
-										</svg>
-										Due Date
-									</a>
-								</li>
 							</div>
 						)}
 					</ul>
@@ -177,7 +157,7 @@ const SideMenu = (props) => {
 									</Link>
 								</li>
 								<li>
-									<a href="/user">
+									<Link to="/user">
 										<svg
 											className="bi bi-person-plus"
 											width="1em"
@@ -198,27 +178,7 @@ const SideMenu = (props) => {
 											/>
 										</svg>
 										Create User
-									</a>
-								</li>
-								<li>
-									<a href="/#">
-										<svg
-											className="bi bi-folder"
-											width="1em"
-											height="1em"
-											viewBox="0 0 16 16"
-											fill="currentColor"
-											xmlns="http://www.w3.org/2000/svg"
-										>
-											<path d="M9.828 4a3 3 0 01-2.12-.879l-.83-.828A1 1 0 006.173 2H2.5a1 1 0 00-1 .981L1.546 4h-1L.5 3a2 2 0 012-2h3.672a2 2 0 011.414.586l.828.828A2 2 0 009.828 3v1z" />
-											<path
-												fillRule="evenodd"
-												d="M13.81 4H2.19a1 1 0 00-.996 1.09l.637 7a1 1 0 00.995.91h10.348a1 1 0 00.995-.91l.637-7A1 1 0 0013.81 4zM2.19 3A2 2 0 00.198 5.181l.637 7A2 2 0 002.826 14h10.348a2 2 0 001.991-1.819l.637-7A2 2 0 0013.81 3H2.19z"
-												clipRule="evenodd"
-											/>
-										</svg>
-										Roles
-									</a>
+									</Link>
 								</li>
 							</ul>
 						</div>
@@ -244,9 +204,9 @@ const SideMenu = (props) => {
 				<div className="collapse navbar-collapse" id="navbarNavDropdown">
 					<ul className="navbar-nav">
 						<li className="nav-item active">
-							<LINK className="nav-link" to="/dashboard">
+							<Link className="nav-link" to="/dashboard">
 								Dashboard <span className="sr-only">(current)</span>
-							</LINK>
+							</Link>
 						</li>
 						<li className="nav-item dropdown">
 							<a

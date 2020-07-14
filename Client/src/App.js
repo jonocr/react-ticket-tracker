@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./main.css";
 
@@ -34,8 +34,8 @@ function App() {
 
 	return (
 		<div>
-			<AuthContext.Provider value={{ userData, setUserData }}>
-				<Router>
+			<Router>
+				<AuthContext.Provider value={{ userData, setUserData }}>
 					<Route component={LoginPage} exact path="/login" />
 					<Route component={CreateUser} exact path="/new-account" />
 					<Route component={LoginPage} exact path="/" />
@@ -43,8 +43,8 @@ function App() {
 					<Route component={TicketPage} exact path="/ticket" />
 					<Route component={TicketPage} exact path="/create-ticket" />
 					<Route component={MyCasesPage} exact path="/my-cases" />
+					<Route component={UserPage} exact path="/user" />
 
-					{userData.token && <Route component={UserPage} exact path="/user" />}
 					{userData.token && (
 						<Route component={TicketSearchPage} exact path="/ticket-search" />
 					)}
@@ -57,8 +57,8 @@ function App() {
 					{userData.token && (
 						<Route component={UserSearchPage} exact path="/findUser" />
 					)}
-				</Router>
-			</AuthContext.Provider>
+				</AuthContext.Provider>
+			</Router>
 		</div>
 	);
 }

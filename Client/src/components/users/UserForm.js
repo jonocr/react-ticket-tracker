@@ -18,10 +18,10 @@ const UserForm = (props) => {
 
 	useEffect(() => {
 		if (
-			props.userData &&
-			JSON.stringify(props.userData) !== JSON.stringify({})
+			props.userInfo &&
+			JSON.stringify(props.userInfo) !== JSON.stringify({})
 		) {
-			setUser(props.userData);
+			setUser(props.userInfo);
 		}
 	}, []);
 
