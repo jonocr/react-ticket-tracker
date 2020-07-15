@@ -26,6 +26,7 @@ const TicketForm = (props) => {
 		comments: [],
 	});
 
+	//Loads Ticket info for update or empty for new Ticket
 	useEffect(() => {
 		if (props.data && JSON.stringify(props.data) !== JSON.stringify({})) {
 			SetTicket(props.data);
@@ -38,6 +39,7 @@ const TicketForm = (props) => {
 		// eslint-disable-next-line
 	}, []);
 
+	//Reloads the ticket with new comments
 	useEffect(() => {
 		if (ticket._id !== undefined) {
 			getTicketById(ticket._id, userData.token, signal).then((response) => {
@@ -85,8 +87,15 @@ const TicketForm = (props) => {
 		SetUserSearchBar(email);
 	};
 
+	//Add new comment, increments by 1 messages for Client or Agent
 	const addComment = (comment) => {
-		addTicketComment(ticket._id, comment, userData.user.email, userData.token);
+		addTicketComment(
+			ticket._id,
+			comment,
+			userData.user.email,
+			userData.token,
+			ticket.createdBy
+		);
 		setNewComment(comment);
 	};
 

@@ -11,7 +11,13 @@ export const getAllTicketsDynamicQuery = async (criteria, query, signal) => {
 	}
 };
 
-export const addTicketComment = async (ticketId, comment, email, token) => {
+export const addTicketComment = async (
+	ticketId,
+	comment,
+	email,
+	token,
+	ticketCreator
+) => {
 	fetch(`${API_SERVER_URL}/tickets/add-comment`, {
 		method: "PATCH",
 		headers: {
@@ -22,6 +28,7 @@ export const addTicketComment = async (ticketId, comment, email, token) => {
 			ticketId: ticketId,
 			comment: comment,
 			email: email,
+			ticketCreator: ticketCreator,
 		}),
 	})
 		.then((res) => res.json())

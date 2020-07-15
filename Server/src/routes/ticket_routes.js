@@ -93,13 +93,18 @@ router.route("/add-comment").patch(checkAuth, (req, res) => {
 	const _id = data.ticketId;
 	const email = data.email;
 	const text = data.comment;
+	const dbAction = { $inc: {} };
+	const dbField = email === data.ticketCreator ? "AgentMsg" : "ClientMsg";
+	dbAction.$inc[dbField] = 1;
 	const lastModified = new Date();
+	console.log("dbAction: ", dbAction);
 
 	const comment = {
 		email: email,
 		comment: text,
 		lastModified: lastModified,
 	};
+
 	Ticket.updateOne(
 		{
 			_id: _id,
@@ -110,7 +115,14 @@ router.route("/add-comment").patch(checkAuth, (req, res) => {
 			},
 		}
 	)
-		.then(() => res.json("Ticket updated!"))
+		.then(() => {
+			Ticket.updateOne(
+				{
+					_id: _id,
+				},
+				dbAction
+			).then(() => res.json("New Comment Added!"));
+		})
 		.catch((err) => res.status(400).json(`Error: ${err}`));
 });
 
