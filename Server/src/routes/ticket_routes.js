@@ -100,7 +100,7 @@ router.route("/add-comment").patch(checkAuth, (req, res) => {
 	const email = data.email;
 	const text = data.comment;
 	const dbAction = { $inc: {} };
-	const dbField = email !== data.ticketCreator ? "AgentMsg" : "ClientMsg";
+	const dbField = email === data.ticketCreator ? "AgentMsg" : "ClientMsg";
 	dbAction.$inc[dbField] = 1;
 	const lastModified = new Date();
 
@@ -137,18 +137,16 @@ router.route("/check-messages-viewed").patch(checkAuth, (req, res) => {
 	const _id = data.ticketId;
 	const email = data.email;
 	const dbAction = { $set: {} };
-	const dbField = email === data.ticketCreator ? "AgentMsg" : "ClientMsg";
-	dbAction.$set[dbField] = 1;
+	const dbField = email !== data.ticketCreator ? "AgentMsg" : "ClientMsg";
+	dbAction.$set[dbField] = 0;
 
 	Ticket.updateOne(
 		{
 			_id: _id,
 		},
-		{
-			dbAction,
-		}
+		dbAction
 	)
-		.then(() => () => res.json("viewed message checked"))
+		.then(() => () => res.json("Message checked"))
 		.catch((err) => res.status(400).json(`Error: ${err}`));
 });
 
