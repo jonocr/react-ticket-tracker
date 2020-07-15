@@ -18,6 +18,7 @@ const GUEST_USER = {
 	userName: "Guest",
 	isManager: false,
 	department: null,
+	mgs: 0,
 };
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
 		token: undefined,
 		user: GUEST_USER,
 		loading: true,
+		mgs: 0,
 	});
 	// const [userData, setUserData] = useState({
 	// 	token: window.localStorage.getItem("token"),

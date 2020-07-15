@@ -52,6 +52,9 @@ router.route("/update").patch(checkAuth, (req, res) => {
 	const dueDate = data.dueDate;
 	const assignedTo = data.assignedTo;
 	const assignedBy = data.assignedBy;
+	const agentMsg = data.AgentMsg;
+	const clientMsg = data.ClientMsg;
+	const comments = data.comments;
 
 	let updatedTicket = new Ticket({
 		title,
@@ -64,6 +67,9 @@ router.route("/update").patch(checkAuth, (req, res) => {
 		dueDate,
 		assignedTo,
 		assignedBy,
+		agentMsg,
+		clientMsg,
+		comments,
 	});
 	Ticket.findOne({ _id: _id })
 		.exec()
@@ -94,10 +100,9 @@ router.route("/add-comment").patch(checkAuth, (req, res) => {
 	const email = data.email;
 	const text = data.comment;
 	const dbAction = { $inc: {} };
-	const dbField = email === data.ticketCreator ? "AgentMsg" : "ClientMsg";
+	const dbField = email !== data.ticketCreator ? "AgentMsg" : "ClientMsg";
 	dbAction.$inc[dbField] = 1;
 	const lastModified = new Date();
-	console.log("dbAction: ", dbAction);
 
 	const comment = {
 		email: email,
@@ -123,6 +128,27 @@ router.route("/add-comment").patch(checkAuth, (req, res) => {
 				dbAction
 			).then(() => res.json("New Comment Added!"));
 		})
+		.catch((err) => res.status(400).json(`Error: ${err}`));
+});
+
+router.route("/check-messages-viewed").patch(checkAuth, (req, res) => {
+	const errorEmailMessage = "There was an error finding this ticket";
+	const data = req.body;
+	const _id = data.ticketId;
+	const email = data.email;
+	const dbAction = { $set: {} };
+	const dbField = email === data.ticketCreator ? "AgentMsg" : "ClientMsg";
+	dbAction.$set[dbField] = 1;
+
+	Ticket.updateOne(
+		{
+			_id: _id,
+		},
+		{
+			dbAction,
+		}
+	)
+		.then(() => () => res.json("viewed message checked"))
 		.catch((err) => res.status(400).json(`Error: ${err}`));
 });
 

@@ -5,7 +5,11 @@ import Modal from "../layout/Modal";
 import TicketCommentForm from "../tickets/TicketCommentForm";
 import TicketComments from "../tickets/TicketComments";
 import { findManyUsersByEmail } from "../users/UserApi";
-import { addTicketComment, getTicketById } from "../tickets/TicketApi";
+import {
+	addTicketComment,
+	getTicketById,
+	checkViewedMsg,
+} from "../tickets/TicketApi";
 
 const TicketForm = (props) => {
 	const abortController = new AbortController();
@@ -52,6 +56,7 @@ const TicketForm = (props) => {
 		};
 	}, [newComment]);
 
+	//For AutoComplete User Bar
 	useEffect(() => {
 		if (userSearchBar !== undefined) {
 			findManyUsersByEmail(userSearchBar, signal).then((response) => {
@@ -80,6 +85,7 @@ const TicketForm = (props) => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		console.log("Submit Form Ticket: ", ticket);
 		props.clickHandle(ticket);
 	};
 
@@ -97,6 +103,20 @@ const TicketForm = (props) => {
 			ticket.createdBy
 		);
 		setNewComment(comment);
+	};
+
+	const checkUserMgsCount = () => {
+		if (
+			(ticket.AgentMsg > 0 && ticket.assignedTo === userData.user.email) ||
+			(ticket.ClientMsg > 0 && ticket.createdBy === userData.user.email)
+		) {
+			checkViewedMsg(
+				ticket._id,
+				userData.user.email,
+				userData.token,
+				ticket.createdBy
+			);
+		}
 	};
 
 	const renderSubmitBtn = () => {
@@ -183,6 +203,7 @@ const TicketForm = (props) => {
 									data-target="#collapseExample"
 									aria-expanded="false"
 									aria-controls="collapseExample"
+									onClick={checkUserMgsCount}
 								>
 									Show Comments
 								</button>

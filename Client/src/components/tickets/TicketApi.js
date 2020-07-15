@@ -36,6 +36,24 @@ export const addTicketComment = async (
 		.catch((err) => console.log(err));
 };
 
+export const checkViewedMsg = async (ticketId, email, token, ticketCreator) => {
+	fetch(`${API_SERVER_URL}/tickets/check-messages-viewed`, {
+		method: "PATCH",
+		headers: {
+			Authorization: `Bearer ${token}`,
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			ticketId: ticketId,
+			email: email,
+			ticketCreator: ticketCreator,
+		}),
+	})
+		.then((res) => res.json())
+		.then((data) => console.log(data))
+		.catch((err) => console.log(err));
+};
+
 export const getTicketById = async (id, token, signal) => {
 	try {
 		const response = await fetch(`${API_SERVER_URL}/tickets/find-id/${id}`, {
