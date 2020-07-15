@@ -55,6 +55,7 @@ const TicketPage = (props) => {
 		!userData.token && history.push("/login");
 		props.location.state !== undefined &&
 			setTicket(props.location.state.ticket);
+		// eslint-disable-next-line
 	}, []);
 
 	return (

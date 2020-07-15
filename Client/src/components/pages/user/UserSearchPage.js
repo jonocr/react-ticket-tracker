@@ -41,6 +41,7 @@ const UserSearchPage = (props) => {
 
 	useEffect(() => {
 		loadUsers();
+		// eslint-disable-next-line
 	}, []);
 
 	return (

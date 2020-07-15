@@ -35,6 +35,7 @@ const TicketForm = (props) => {
 		return function cleanup() {
 			abortController.abort();
 		};
+		// eslint-disable-next-line
 	}, []);
 
 	useEffect(() => {

@@ -31,6 +31,7 @@ const MyCasesPage = (props) => {
 		return function cleanup() {
 			abortController.abort();
 		};
+		// eslint-disable-next-line
 	}, []);
 
 	const ticketDetails = (ticket) => {
