@@ -3,43 +3,58 @@
 // -----------------------------------------------------------------------------
 
 header {
-  background-color: $head-menu-bar;
-  height: 70px;
-  line-height: 70px;
-  @include media-breakpoint-up(md) {
-    padding-left: 280px;
-  }
+	background-color: $head-menu-bar;
+	height: 70px;
+	line-height: 70px;
+	@include media-breakpoint-up(md) {
+		padding-left: 280px;
+	}
 }
 
-.top-bar {  
-  display: inline;
-  @include media-breakpoint-up(md) {
-    margin-left: 40px;  
-    transition: margin 0.3s ease;
-  }
-  .bi {
-    margin-left: 25px;
-  }
-  .profile-icons {
-    float: right;
-    .bi {
-      margin-left: 0;
-    }
-  }
-  .flag {
-    height: 20px;
-    margin-right: 25px;
-  }
-  .profile-pic-icon {
-    margin-right: 25px;
-  }
+.top-bar {
+	display: inline;
+	@include media-breakpoint-up(md) {
+		margin-left: 40px;
+		transition: margin 0.3s ease;
+	}
+	.bi {
+		// margin-left: 25px;  //When more options exist
+		margin-left: 0;
+	}
+	.profile-icons {
+		float: right;
+		.bi {
+			margin-left: 0;
+		}
+	}
+	.flag {
+		height: 20px;
+		margin-right: 25px;
+		margin-left: 10px;
+	}
+	.profile-pic-icon {
+		margin-right: 25px;
+	}
+
+	.badge {
+		font-size: 55%;
+	}
+
+	.badge-pill {
+		padding-right: 0.45em;
+		padding-left: 0.45em;
+		border-radius: 10rem;
+		margin-left: -5px;
+		position: fixed;
+		margin-top: 25px;
+	}
 }
 
 .close-menu {
-  .top-bar {
-    @include media-breakpoint-up(md) {
-      margin-left: -170px;
-      transition: margin 0.3s ease;
-    }
-  }
+	.top-bar {
+		@include media-breakpoint-up(md) {
+			margin-left: -170px;
+			transition: margin 0.3s ease;
+		}
+	}
 }

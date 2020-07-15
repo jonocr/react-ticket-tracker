@@ -8,6 +8,8 @@ import { useHistory } from "react-router";
 import AuthContext from "../../utils/AuthContext";
 
 const UserPage = (props) => {
+	const abortController = new AbortController();
+	const signal = abortController.signal;
 	const history = useHistory();
 	const [closeCss, setCloseCss] = useState("");
 	const [user, setUser] = useState({});
@@ -24,8 +26,15 @@ const UserPage = (props) => {
 		closeCss === "" ? setCloseCss("close-menu") : setCloseCss("");
 	};
 
-	const findUserByEmail = (email) => {
-		fetch(`http://localhost:8000/users/${email}`)
+	const findUserByEmail = (email, signal) => {
+		fetch(`http://localhost:8000/users/${email}`, {
+			signal: signal,
+			method: "GET",
+			contentType: "application/json",
+			headers: {
+				Authorization: `Bearer ${userData.token}`,
+			},
+		})
 			.then((response) => {
 				return response.json();
 			})
@@ -39,9 +48,10 @@ const UserPage = (props) => {
 			});
 	};
 
-	const getAllUsers = async () => {
+	const getAllUsers = async (signal) => {
 		console.log("Context Token: ", userData);
 		fetch(`http://localhost:8000/users/`, {
+			signal: signal,
 			method: "GET",
 			headers: {
 				Authorization: `Bearer ${userData.token}`,
@@ -109,12 +119,15 @@ const UserPage = (props) => {
 
 	useEffect(() => {
 		!userData.token && history.push("/login");
-		getAllUsers();
+		getAllUsers(signal);
 		if (email) {
-			findUserByEmail(email);
+			findUserByEmail(email, signal);
 		} else {
 			setLoading(false);
 		}
+		return function cleanup() {
+			abortController.abort();
+		};
 	}, []);
 
 	useEffect(() => {
