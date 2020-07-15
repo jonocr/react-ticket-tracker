@@ -64,22 +64,22 @@ export const findTicketsbyEmail = async (email, token, signal) => {
 	}
 };
 
-const getAllTickets = async (signal, token) => {
-	fetch(`${API_SERVER_URL}/tickets/list-all`, {
-		signal: signal,
-		method: "GET",
-		contentType: "application/json",
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
-	})
-		.then((response) => {
-			return response.json();
-		})
-		.then((responseData) => {
-			// setTickets(responseData);
-		})
-		.catch((err) => {
-			console.log("error at fetching: ", err);
-		});
-};
+// const getAllTickets = async (signal, token) => {
+// 	fetch(`${API_SERVER_URL}/tickets/list-all`, {
+// 		signal: signal,
+// 		method: "GET",
+// 		contentType: "application/json",
+// 		headers: {
+// 			Authorization: `Bearer ${token}`,
+// 		},
+// 	})
+// 		.then((response) => {
+// 			return response.json();
+// 		})
+// 		.then((responseData) => {
+// 			// setTickets(responseData);
+// 		})
+// 		.catch((err) => {
+// 			console.log("error at fetching: ", err);
+// 		});
+// };
