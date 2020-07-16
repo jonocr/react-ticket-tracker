@@ -14,6 +14,7 @@ const DashboardPage = (props) => {
 	};
 
 	useEffect(() => {
+		console.log("Dashboard - session: ", userData);
 		!userData.token && history.push("/login");
 		// eslint-disable-next-line
 	}, []);
@@ -23,7 +24,7 @@ const DashboardPage = (props) => {
 			<SideMenu css={closeCss}></SideMenu>
 			<TopBar onClick={clickToggle} css={closeCss}></TopBar>
 			<div className="container">
-				<div className="dashboard-bar dashboard">Dashboar Title</div>
+				<div className="dashboard-bar dashboard">Dashboard</div>
 				<div className="dashboard-main dashboard">
 					<div className="row">
 						<div className="col-12 col-md-6 col-lg-3">

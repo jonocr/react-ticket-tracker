@@ -183,4 +183,22 @@ router
 			.catch((err) => res.status(400).json(`Error: ${err}`));
 	});
 
+router.route("/get-total-new-messages/").post((req, res) => {
+	const data = req.body;
+	const email = data.email;
+	const department = data.department;
+	const queryMsg = department === "Client" ? "$ClientMsg" : "$AgentMsg";
+	const queryGroup = department === "Client" ? "$createdBy" : "$assignedTo";
+	const queryMatch =
+		department === "Client" ? { createdBy: email } : { assignedTo: email };
+	console.log("ROUTE /get-total-new-messages/", data.email);
+
+	Ticket.aggregate([
+		{ $match: queryMatch },
+		{ $group: { _id: queryGroup, total: { $sum: queryMsg } } },
+	])
+		.then((tickets) => res.json(tickets))
+		.catch((err) => res.status(400).json(`Error: ${err}`));
+});
+
 module.exports = router;

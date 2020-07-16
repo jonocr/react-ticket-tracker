@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import AuthContext from "../utils/AuthContext";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
+import { getMessagesTotal } from "../tickets/TicketApi";
 
 const LoginPage = () => {
 	const [user, setUser] = useState({});
@@ -18,15 +19,27 @@ const LoginPage = () => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				setUserData({
-					token: data.token,
-					user: data.user,
-					loading: false,
-				});
+				// setUserData({
+				// 	token: data.token,
+				// 	user: data.user,
+				// 	loading: false,
+				// });
+
+				getMessagesTotal(data.user.email, data.user.department, data.token)
+					.then((res) => {
+						console.log("LoginPage - data: ", data);
+						const msgTotal = res.length > 0 ? res[0].total : 0;
+						console.log("LoginPage - msgTotal: ", msgTotal);
+						setUserData({
+							token: data.token,
+							user: { ...data.user, msg: msgTotal },
+							loading: false,
+						});
+					})
+					.then(() => history.push("/dashboard"));
 				//*********JUST FOR DEV ENVIROMENT******** */
 				// window.localStorage.setItem('token', data.token);
 				// window.localStorage.setItem('user', data.user);
-				history.push("/dashboard");
 			})
 			.catch((err) => console.log(err));
 	};

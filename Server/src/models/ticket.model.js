@@ -46,9 +46,11 @@ const ticketSchema = new Schema(
 		},
 		assignedTo: {
 			type: String,
+			default: "",
 		},
 		assignedBy: {
 			type: String,
+			default: "",
 		},
 		ClientMsg: {
 			type: Number,

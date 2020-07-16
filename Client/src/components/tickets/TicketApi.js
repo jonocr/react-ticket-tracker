@@ -89,22 +89,25 @@ export const findTicketsbyEmail = async (email, token, signal) => {
 	}
 };
 
-// const getAllTickets = async (signal, token) => {
-// 	fetch(`${API_SERVER_URL}/tickets/list-all`, {
-// 		signal: signal,
-// 		method: "GET",
-// 		contentType: "application/json",
-// 		headers: {
-// 			Authorization: `Bearer ${token}`,
-// 		},
-// 	})
-// 		.then((response) => {
-// 			return response.json();
-// 		})
-// 		.then((responseData) => {
-// 			// setTickets(responseData);
-// 		})
-// 		.catch((err) => {
-// 			console.log("error at fetching: ", err);
-// 		});
-// };
+export const getMessagesTotal = async (email, department, token) => {
+	try {
+		const response = await fetch(
+			`${API_SERVER_URL}/tickets/get-total-new-messages/`,
+			{
+				method: "POST",
+				headers: {
+					Authorization: `Bearer ${token}`,
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					email: email,
+					department: department,
+					token: token,
+				}),
+			}
+		);
+		return response.json();
+	} catch (err) {
+		console.log("error at fetching: ", err);
+	}
+};
