@@ -53,7 +53,11 @@ const MyTicketsPage = (props) => {
 			<div className="container">
 				<div className="dashboard-bar dashboard">My Tickets</div>
 				<div className="dashboard-main dashboard">
-					<TicketList data={ticketList} onClick={goTicketDetail}></TicketList>
+					<TicketList
+						data={ticketList}
+						onClick={goTicketDetail}
+						user={userData.user.email}
+					></TicketList>
 				</div>
 			</div>
 		</div>
