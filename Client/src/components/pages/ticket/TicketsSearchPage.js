@@ -84,7 +84,11 @@ const TicketSearchPage = (props) => {
 				<div className="dashboard-bar dashboard">Ticket Search</div>
 				<div className="dashboard-main dashboard">
 					<TicketSearchBar onClick={findTicketsQuery}></TicketSearchBar>
-					<TicketList data={tickets} onClick={goTicketDetail}></TicketList>
+					<TicketList
+						data={tickets}
+						onClick={goTicketDetail}
+						user={userData.user.email}
+					></TicketList>
 				</div>
 			</div>
 		</div>

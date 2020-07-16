@@ -182,6 +182,7 @@ router
 		const queryOptionsObj = { $regex: query, $options: "i" };
 		const queryObj = {};
 		queryObj[criteria] = queryOptionsObj;
+		console.log("\x1b[33m%s\x1b[0m", queryObj);
 		Ticket.find(queryObj)
 			.then((tickets) => res.json(tickets))
 			.catch((err) => res.status(400).json(`Error: ${err}`));

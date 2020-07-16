@@ -54,6 +54,7 @@ const TicketForm = (props) => {
 		return function cleanup() {
 			abortController.abort();
 		};
+		// eslint-disable-next-line
 	}, [newComment]);
 
 	//For AutoComplete User Bar
@@ -81,6 +82,7 @@ const TicketForm = (props) => {
 		return function cleanup() {
 			abortController.abort();
 		};
+		// eslint-disable-next-line
 	}, [userSearchBar]);
 
 	const handleSubmit = (e) => {

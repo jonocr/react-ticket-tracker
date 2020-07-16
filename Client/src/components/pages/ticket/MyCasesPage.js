@@ -26,13 +26,16 @@ const MyCasesPage = (props) => {
 			"background: #222; color: #bada55",
 			userData.user.email
 		);
-		getAllTicketsDynamicQuery("assignedTo", userData.user.email, signal).then(
-			(response) => {
-				if (response !== undefined) {
-					setTicketList(response);
-				}
+		getAllTicketsDynamicQuery(
+			"assignedTo",
+			userData.user.email,
+			userData.token,
+			signal
+		).then((response) => {
+			if (response !== undefined) {
+				setTicketList(response);
 			}
-		);
+		});
 
 		return function cleanup() {
 			abortController.abort();

@@ -21,9 +21,7 @@ const LoginPage = () => {
 			.then((data) => {
 				getMessagesTotal(data.user.email, data.user.department, data.token)
 					.then((res) => {
-						console.log("LoginPage - data: ", data);
 						const msgTotal = res.length > 0 ? res[0].total : 0;
-						console.log("LoginPage - msgTotal: ", msgTotal);
 						setUserData({
 							token: data.token,
 							user: { ...data.user, msg: msgTotal },

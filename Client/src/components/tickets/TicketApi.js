@@ -1,9 +1,20 @@
 const API_SERVER_URL = process.env.REACT_APP_API_SERVER_URL;
-export const getAllTicketsDynamicQuery = async (criteria, query, signal) => {
+export const getAllTicketsDynamicQuery = async (
+	criteria,
+	query,
+	token,
+	signal
+) => {
 	try {
 		const response = await fetch(
 			`${API_SERVER_URL}/tickets/tickets-criteria/${criteria}/${query}`,
-			{ signal: signal }
+			{
+				signal: signal,
+				headers: {
+					Authorization: `Bearer ${token}`,
+					"Content-Type": "application/json",
+				},
+			}
 		);
 		return response.json();
 	} catch (err) {
