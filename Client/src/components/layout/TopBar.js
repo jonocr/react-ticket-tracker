@@ -1,9 +1,12 @@
 import React, { useContext } from "react";
 import USFlag from "../../images/flags/svg/us.svg";
 import AuthContext from "../utils/AuthContext";
+import { Link } from "react-router-dom";
 
 const TopBar = (props) => {
 	const { userData } = useContext(AuthContext);
+	const newMsgUrl =
+		userData.user.department === "Client" ? "my-tickets" : "my-cases";
 
 	return (
 		<header className={props.css}>
@@ -70,7 +73,7 @@ const TopBar = (props) => {
 						/>
 					</svg>
 				</a> */}
-				<a href="/#">
+				<Link to={newMsgUrl}>
 					<svg
 						className="bi bi-envelope"
 						width="1em"
@@ -96,7 +99,7 @@ const TopBar = (props) => {
 							{userData.user.msg}
 						</span>
 					)}
-				</a>
+				</Link>
 				<div className="profile-icons">
 					Hi {userData.user.userName}
 					<img src={USFlag} className="flag"></img>
