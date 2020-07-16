@@ -195,7 +195,6 @@ router.route("/get-total-new-messages/").post((req, res) => {
 	const queryGroup = department === "Client" ? "$createdBy" : "$assignedTo";
 	const queryMatch =
 		department === "Client" ? { createdBy: email } : { assignedTo: email };
-	console.log("ROUTE /get-total-new-messages/", data.email);
 
 	Ticket.aggregate([
 		{ $match: queryMatch },

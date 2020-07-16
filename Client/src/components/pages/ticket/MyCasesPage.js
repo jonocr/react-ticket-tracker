@@ -20,6 +20,12 @@ const MyCasesPage = (props) => {
 
 	useEffect(() => {
 		!userData.token && history.push("/login");
+
+		console.log(
+			"%c My Cases Page ticket: ",
+			"background: #222; color: #bada55",
+			userData.user.email
+		);
 		getAllTicketsDynamicQuery("assignedTo", userData.user.email, signal).then(
 			(response) => {
 				if (response !== undefined) {
