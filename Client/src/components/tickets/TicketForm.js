@@ -11,10 +11,12 @@ import {
 	checkViewedMsg,
 } from "../tickets/TicketApi";
 
+import { getMessagesTotal } from "../tickets/TicketApi";
+
 const TicketForm = (props) => {
 	const abortController = new AbortController();
 	const signal = abortController.signal;
-	const { userData } = useContext(AuthContext);
+	const { userData, setUserData } = useContext(AuthContext);
 	const [loading, setLoading] = useState(true);
 	const [newComment, setNewComment] = useState(null);
 	const [editTicket, setEditTicket] = useState(false);
@@ -118,6 +120,18 @@ const TicketForm = (props) => {
 				userData.token,
 				ticket.createdBy
 			);
+			//TODO Refresh Context
+			getMessagesTotal(
+				userData.user.email,
+				userData.user.department,
+				userData.token
+			).then((res) => {
+				const msgTotal = res.length > 0 ? res[0].total : 0;
+				setUserData({
+					...userData,
+					user: { ...userData.user, msg: msgTotal },
+				});
+			});
 		}
 	};
 

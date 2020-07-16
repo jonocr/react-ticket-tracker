@@ -26,6 +26,7 @@ const MyCasesPage = (props) => {
 			"background: #222; color: #bada55",
 			userData.user.email
 		);
+
 		getAllTicketsDynamicQuery(
 			"assignedTo",
 			userData.user.email,

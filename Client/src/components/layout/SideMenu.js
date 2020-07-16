@@ -4,6 +4,11 @@ import AuthContext from "../utils/AuthContext";
 
 const SideMenu = (props) => {
 	const { userData } = useContext(AuthContext);
+	console.log(
+		"%c SIDE MENU context: ",
+		"background: #222; color: #bada55",
+		userData
+	);
 
 	return (
 		<section className={props.css}>
