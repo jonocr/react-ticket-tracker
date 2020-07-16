@@ -13,6 +13,8 @@ router.route("/create").post(checkAuth, (req, res) => {
 	const title = data.title;
 	const description = data.description;
 	const status = data.status;
+	const assignedTo = data.assignedTo;
+	const assignedBy = data.assignedBy;
 	const priority = Number(data.priority);
 	const category = data.category;
 	const lastModified = today;
@@ -26,6 +28,8 @@ router.route("/create").post(checkAuth, (req, res) => {
 		priority,
 		category,
 		createdBy,
+		assignedTo,
+		assignedBy,
 		dueDate,
 	});
 

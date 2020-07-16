@@ -52,6 +52,11 @@
 .comments-list {
 	margin-top: 20px;
 	margin-bottom: 20px;
-	// color: $text-color;
-	// font: normal 125% / 1.4 $text-font-stack;
+}
+
+.ticket-list {
+	svg {
+		margin-right: 10px;
+		color: darkgoldenrod;
+	}
 }

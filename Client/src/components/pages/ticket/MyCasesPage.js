@@ -46,7 +46,11 @@ const MyCasesPage = (props) => {
 			<div className="container">
 				<div className="dashboard-bar dashboard">My Tickets</div>
 				<div className="dashboard-main dashboard">
-					<TicketList data={ticketList} onClick={ticketDetails}></TicketList>
+					<TicketList
+						data={ticketList}
+						onClick={ticketDetails}
+						user={userData.user.email}
+					></TicketList>
 				</div>
 			</div>
 		</div>

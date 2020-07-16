@@ -2,7 +2,7 @@ import React from "react";
 
 const TicketList = (props) => {
 	return (
-		<div>
+		<div className="ticket-list">
 			<table className="table table-hover">
 				<thead>
 					<tr>
@@ -21,7 +21,26 @@ const TicketList = (props) => {
 							}}
 						>
 							<th scope="row">{index}</th>
-							<td>{ticket.title}</td>
+							<td>
+								{(props.user === ticket.createdBy && ticket.ClientMsg > 0) ||
+									(props.user !== ticket.createdBy && ticket.AgentMsg > 0 && (
+										<svg
+											width="1em"
+											height="1em"
+											viewBox="0 0 18 18"
+											class="bi bi-chat-right-dots"
+											fill="currentColor"
+											xmlns="http://www.w3.org/2000/svg"
+										>
+											<path
+												fill-rule="evenodd"
+												d="M2 1h12a1 1 0 0 1 1 1v11.586l-2-2A2 2 0 0 0 11.586 11H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12z"
+											/>
+											<path d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+										</svg>
+									))}
+								{ticket.title}
+							</td>
 							<td>{ticket.status}</td>
 							<td>{ticket.category}</td>
 						</tr>
