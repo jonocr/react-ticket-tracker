@@ -19,12 +19,6 @@ const LoginPage = () => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				// setUserData({
-				// 	token: data.token,
-				// 	user: data.user,
-				// 	loading: false,
-				// });
-
 				getMessagesTotal(data.user.email, data.user.department, data.token)
 					.then((res) => {
 						console.log("LoginPage - data: ", data);
