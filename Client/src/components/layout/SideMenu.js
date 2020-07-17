@@ -53,52 +53,56 @@ const SideMenu = (props) => {
 					</ul>
 					<div className="menu-subtitle">Tickets</div>
 					<ul>
-						<li>
-							<Link to="/create-ticket">
-								<svg
-									width="1em"
-									height="1em"
-									viewBox="0 0 16 16"
-									className="bi bi-folder-plus"
-									fill="currentColor"
-									xmlns="http://www.w3.org/2000/svg"
-								>
-									<path
-										fillRule="evenodd"
-										d="M9.828 4H2.19a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91H9v1H2.826a2 2 0 0 1-1.991-1.819l-.637-7a1.99 1.99 0 0 1 .342-1.31L.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181L15.546 8H14.54l.265-2.91A1 1 0 0 0 13.81 4H9.828zm-2.95-1.707L7.587 3H2.19c-.24 0-.47.042-.684.12L1.5 2.98a1 1 0 0 1 1-.98h3.672a1 1 0 0 1 .707.293z"
-									/>
-									<path
-										fillRule="evenodd"
-										d="M13.5 10a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1H13v-1.5a.5.5 0 0 1 .5-.5z"
-									/>
-									<path
-										fillRule="evenodd"
-										d="M13 12.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0v-2z"
-									/>
-								</svg>
-								Create Ticket
-							</Link>
-						</li>
-						<li>
-							<Link to="/my-tickets">
-								<svg
-									className="bi bi-folder"
-									width="1em"
-									height="1em"
-									viewBox="0 0 16 16"
-									fill="currentColor"
-									xmlns="http://www.w3.org/2000/svg"
-								>
-									<path d="M9.828 4a3 3 0 01-2.12-.879l-.83-.828A1 1 0 006.173 2H2.5a1 1 0 00-1 .981L1.546 4h-1L.5 3a2 2 0 012-2h3.672a2 2 0 011.414.586l.828.828A2 2 0 009.828 3v1z" />
-									<path
-										fillRule="evenodd"
-										d="M13.81 4H2.19a1 1 0 00-.996 1.09l.637 7a1 1 0 00.995.91h10.348a1 1 0 00.995-.91l.637-7A1 1 0 0013.81 4zM2.19 3A2 2 0 00.198 5.181l.637 7A2 2 0 002.826 14h10.348a2 2 0 001.991-1.819l.637-7A2 2 0 0013.81 3H2.19z"
-										clipRule="evenodd"
-									/>
-								</svg>
-								My Tickets
-							</Link>
-						</li>
+						{userData.user.department === "Client" && (
+							<>
+								<li>
+									<Link to="/create-ticket">
+										<svg
+											width="1em"
+											height="1em"
+											viewBox="0 0 16 16"
+											className="bi bi-folder-plus"
+											fill="currentColor"
+											xmlns="http://www.w3.org/2000/svg"
+										>
+											<path
+												fillRule="evenodd"
+												d="M9.828 4H2.19a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91H9v1H2.826a2 2 0 0 1-1.991-1.819l-.637-7a1.99 1.99 0 0 1 .342-1.31L.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181L15.546 8H14.54l.265-2.91A1 1 0 0 0 13.81 4H9.828zm-2.95-1.707L7.587 3H2.19c-.24 0-.47.042-.684.12L1.5 2.98a1 1 0 0 1 1-.98h3.672a1 1 0 0 1 .707.293z"
+											/>
+											<path
+												fillRule="evenodd"
+												d="M13.5 10a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1H13v-1.5a.5.5 0 0 1 .5-.5z"
+											/>
+											<path
+												fillRule="evenodd"
+												d="M13 12.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0v-2z"
+											/>
+										</svg>
+										Create Ticket
+									</Link>
+								</li>
+								<li>
+									<Link to="/my-tickets">
+										<svg
+											className="bi bi-folder"
+											width="1em"
+											height="1em"
+											viewBox="0 0 16 16"
+											fill="currentColor"
+											xmlns="http://www.w3.org/2000/svg"
+										>
+											<path d="M9.828 4a3 3 0 01-2.12-.879l-.83-.828A1 1 0 006.173 2H2.5a1 1 0 00-1 .981L1.546 4h-1L.5 3a2 2 0 012-2h3.672a2 2 0 011.414.586l.828.828A2 2 0 009.828 3v1z" />
+											<path
+												fillRule="evenodd"
+												d="M13.81 4H2.19a1 1 0 00-.996 1.09l.637 7a1 1 0 00.995.91h10.348a1 1 0 00.995-.91l.637-7A1 1 0 0013.81 4zM2.19 3A2 2 0 00.198 5.181l.637 7A2 2 0 002.826 14h10.348a2 2 0 001.991-1.819l.637-7A2 2 0 0013.81 3H2.19z"
+												clipRule="evenodd"
+											/>
+										</svg>
+										My Tickets
+									</Link>
+								</li>
+							</>
+						)}
 						{userData.user.department !== "Client" && (
 							<div>
 								<li>
@@ -250,12 +254,16 @@ const SideMenu = (props) => {
 								className="dropdown-menu"
 								aria-labelledby="navbarDropdownMenuLink"
 							>
-								<Link className="dropdown-item" to="/create-ticket">
-									Create Ticket
-								</Link>
-								<Link className="dropdown-item" to="/my-tickets">
-									My Tickets
-								</Link>
+								{userData.user.department === "Client" && (
+									<>
+										<Link className="dropdown-item" to="/create-ticket">
+											Create Ticket
+										</Link>
+										<Link className="dropdown-item" to="/my-tickets">
+											My Tickets
+										</Link>
+									</>
+								)}
 								{userData.user.department !== "Client" && (
 									<React.Fragment>
 										<Link className="dropdown-item" to="/ticket-search">

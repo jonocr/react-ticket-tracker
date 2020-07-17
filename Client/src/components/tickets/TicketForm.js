@@ -120,7 +120,7 @@ const TicketForm = (props) => {
 				userData.token,
 				ticket.createdBy
 			);
-			//TODO Refresh Context
+			//Refresh Context Session of number of new messages
 			getMessagesTotal(
 				userData.user.email,
 				userData.user.department,

@@ -14,7 +14,6 @@ const DashboardPage = (props) => {
 	};
 
 	useEffect(() => {
-		console.log("Dashboard - session: ", userData);
 		!userData.token && history.push("/login");
 		// eslint-disable-next-line
 	}, []);
