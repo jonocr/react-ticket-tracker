@@ -34,4 +34,13 @@
 	.rounded-circle {
 		border-radius: 50% !important;
 	}
+	.card-body {
+		border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+		li {
+			width: 32%;
+			text-align: center;
+			border-right: 1px solid #e6e6e6;
+			display: inline-block;
+		}
+	}
 }

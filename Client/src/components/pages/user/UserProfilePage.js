@@ -4,11 +4,15 @@ import { useHistory } from "react-router";
 import SideMenu from "../../layout/SideMenu";
 import TopBar from "../../layout/TopBar";
 import ProfilePicture from "../../../images/generic-profile1.png";
+import { findManyUsersByEmail } from "../../users/UserApi";
 
 const UserProfilePage = (props) => {
 	const [closeCss, setCloseCss] = useState("");
+	const [user, setUser] = useState("");
 	const { userData } = useContext(AuthContext);
 	const history = useHistory();
+	const abortController = new AbortController();
+	const signal = abortController.signal;
 
 	const clickToggle = (e) => {
 		closeCss === "" ? setCloseCss("close-menu") : setCloseCss("");
@@ -16,6 +20,14 @@ const UserProfilePage = (props) => {
 
 	useEffect(() => {
 		!userData.token && history.push("/login");
+		findManyUsersByEmail(userData.user.email, signal).then((res) => {
+			if (res !== undefined) {
+				setUser(res[0]);
+			}
+		});
+		return function cleanup() {
+			abortController.abort();
+		};
 		// eslint-disable-next-line
 	}, []);
 	return (
@@ -36,15 +48,34 @@ const UserProfilePage = (props) => {
 									></img>
 								</div>
 								<div className="profile-name-card">
-									<div className="username">Featured</div>
-									<div className="role"> ROLE</div>
+									<div className="username">{user.userName}</div>
+									<div className="role"> {user.department}</div>
 								</div>
+							</div>
+							<div className="card-body">
+								<ul>
+									<li>
+										<h5>2</h5>
+										Total {user.department === "Client" ? "Tickets" : "Cases"}
+									</li>
+									<li>
+										<h5>1</h5>
+										Open
+									</li>
+									<li>
+										<h5>1</h5>
+										Close
+									</li>
+								</ul>
 							</div>
 							<div>
 								<ul className="list-group list-group-flush">
-									<li className="list-group-item">Cras justo odio</li>
-									<li className="list-group-item">Dapibus ac facilisis in</li>
-									<li className="list-group-item">Vestibulum at eros</li>
+									<li className="list-group-item">Username: {user.userName}</li>
+									<li className="list-group-item">Role: {user.department}</li>
+									<li className="list-group-item">Email: {user.email}</li>
+									<li className="list-group-item">
+										User since: {(user.createdAt + "").split("T")[0]}
+									</li>
 								</ul>
 							</div>
 						</div>

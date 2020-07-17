@@ -75,9 +75,9 @@ const UserPage = (props) => {
 
 		fetch("http://localhost:8000/users/update", {
 			method: "PATCH",
-			contentType: "application/json",
 			headers: {
 				Authorization: `Bearer ${userData.token}`,
+				"Content-Type": "application/json",
 			},
 			body: JSON.stringify(updatedUser),
 		})

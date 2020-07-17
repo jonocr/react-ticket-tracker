@@ -103,7 +103,7 @@ const TopBar = (props) => {
 				<div className="profile-icons">
 					Hi {userData.user.userName}
 					<img src={USFlag} className="flag" alt="Profile Flag"></img>
-					<a href="/#" className="profile-pic-icon">
+					<Link to="my-profile" className="profile-pic-icon">
 						<svg
 							className="bi bi-people-circle"
 							width="1em"
@@ -124,7 +124,7 @@ const TopBar = (props) => {
 								clipRule="evenodd"
 							/>
 						</svg>
-					</a>
+					</Link>
 				</div>
 			</div>
 		</header>

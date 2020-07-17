@@ -4,11 +4,6 @@ import AuthContext from "../utils/AuthContext";
 
 const SideMenu = (props) => {
 	const { userData } = useContext(AuthContext);
-	console.log(
-		"%c SIDE MENU context: ",
-		"background: #222; color: #bada55",
-		userData
-	);
 
 	return (
 		<section className={props.css}>
@@ -146,74 +141,76 @@ const SideMenu = (props) => {
 							</div>
 						)}
 					</ul>
-					{userData.user.department !== "Client" && (
-						<div>
-							<div className="menu-subtitle">Users</div>
-							<ul>
-								<li>
-									<Link to="/my-profile">
-										<svg
-											className="bi bi-person"
-											width="1em"
-											height="1em"
-											viewBox="0 0 16 16"
-											fill="currentColor"
-											xmlns="http://www.w3.org/2000/svg"
-										>
-											<path
-												fillRule="evenodd"
-												d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 00.014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 00.022.004zm9.974.056v-.002.002zM8 7a2 2 0 100-4 2 2 0 000 4zm3-2a3 3 0 11-6 0 3 3 0 016 0z"
-												clipRule="evenodd"
-											/>
-										</svg>
-										Profile
-									</Link>
-								</li>
-								<li>
-									<Link to="/findUser">
-										<svg
-											width="1em"
-											height="1em"
-											viewBox="0 0 16 16"
-											className="bi bi-people"
-											fill="currentColor"
-											xmlns="http://www.w3.org/2000/svg"
-										>
-											<path
-												fillRule="evenodd"
-												d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.995-.944v-.002.002zM7.022 13h7.956a.274.274 0 0 0 .014-.002l.008-.002c-.002-.264-.167-1.03-.76-1.72C13.688 10.629 12.718 10 11 10c-1.717 0-2.687.63-3.24 1.276-.593.69-.759 1.457-.76 1.72a1.05 1.05 0 0 0 .022.004zm7.973.056v-.002.002zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10c-1.668.02-2.615.64-3.16 1.276C1.163 11.97 1 12.739 1 13h3c0-1.045.323-2.086.92-3zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"
-											/>
-										</svg>
-										List Users
-									</Link>
-								</li>
-								<li>
-									<Link to="/user">
-										<svg
-											className="bi bi-person-plus"
-											width="1em"
-											height="1em"
-											viewBox="0 0 16 16"
-											fill="currentColor"
-											xmlns="http://www.w3.org/2000/svg"
-										>
-											<path
-												fillRule="evenodd"
-												d="M11 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM1.022 13h9.956a.274.274 0 00.014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 00.022.004zm9.974.056v-.002.002zM6 7a2 2 0 100-4 2 2 0 000 4zm3-2a3 3 0 11-6 0 3 3 0 016 0zm4.5 0a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 010-1H13V5.5a.5.5 0 01.5-.5z"
-												clipRule="evenodd"
-											/>
-											<path
-												fillRule="evenodd"
-												d="M13 7.5a.5.5 0 01.5-.5h2a.5.5 0 010 1H14v1.5a.5.5 0 01-1 0v-2z"
-												clipRule="evenodd"
-											/>
-										</svg>
-										Create User
-									</Link>
-								</li>
-							</ul>
-						</div>
-					)}
+					<div>
+						<div className="menu-subtitle">Users</div>
+						<ul>
+							<li>
+								<Link to="/my-profile">
+									<svg
+										className="bi bi-person"
+										width="1em"
+										height="1em"
+										viewBox="0 0 16 16"
+										fill="currentColor"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<path
+											fillRule="evenodd"
+											d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 00.014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 00.022.004zm9.974.056v-.002.002zM8 7a2 2 0 100-4 2 2 0 000 4zm3-2a3 3 0 11-6 0 3 3 0 016 0z"
+											clipRule="evenodd"
+										/>
+									</svg>
+									Profile
+								</Link>
+							</li>
+							{userData.user.department !== "Client" && (
+								<>
+									<li>
+										<Link to="/findUser">
+											<svg
+												width="1em"
+												height="1em"
+												viewBox="0 0 16 16"
+												className="bi bi-people"
+												fill="currentColor"
+												xmlns="http://www.w3.org/2000/svg"
+											>
+												<path
+													fillRule="evenodd"
+													d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.995-.944v-.002.002zM7.022 13h7.956a.274.274 0 0 0 .014-.002l.008-.002c-.002-.264-.167-1.03-.76-1.72C13.688 10.629 12.718 10 11 10c-1.717 0-2.687.63-3.24 1.276-.593.69-.759 1.457-.76 1.72a1.05 1.05 0 0 0 .022.004zm7.973.056v-.002.002zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10c-1.668.02-2.615.64-3.16 1.276C1.163 11.97 1 12.739 1 13h3c0-1.045.323-2.086.92-3zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"
+												/>
+											</svg>
+											List Users
+										</Link>
+									</li>
+									<li>
+										<Link to="/user">
+											<svg
+												className="bi bi-person-plus"
+												width="1em"
+												height="1em"
+												viewBox="0 0 16 16"
+												fill="currentColor"
+												xmlns="http://www.w3.org/2000/svg"
+											>
+												<path
+													fillRule="evenodd"
+													d="M11 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM1.022 13h9.956a.274.274 0 00.014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 00.022.004zm9.974.056v-.002.002zM6 7a2 2 0 100-4 2 2 0 000 4zm3-2a3 3 0 11-6 0 3 3 0 016 0zm4.5 0a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 010-1H13V5.5a.5.5 0 01.5-.5z"
+													clipRule="evenodd"
+												/>
+												<path
+													fillRule="evenodd"
+													d="M13 7.5a.5.5 0 01.5-.5h2a.5.5 0 010 1H14v1.5a.5.5 0 01-1 0v-2z"
+													clipRule="evenodd"
+												/>
+											</svg>
+											Create User
+										</Link>
+									</li>
+								</>
+							)}
+						</ul>
+					</div>
 				</div>
 			</nav>
 
@@ -276,37 +273,37 @@ const SideMenu = (props) => {
 								)}
 							</div>
 						</li>
-						{userData.user.department !== "Client" && (
-							<li className="nav-item dropdown">
-								<a
-									className="nav-link dropdown-toggle"
-									href="/#"
-									id="navbarDropdownMenuLink"
-									data-toggle="dropdown"
-									aria-haspopup="true"
-									aria-expanded="false"
-								>
-									Users
-								</a>
-								<div
-									className="dropdown-menu"
-									aria-labelledby="navbarDropdownMenuLink"
-								>
-									<Link className="dropdown-item" to="/create-ticket">
-										Create User
-									</Link>
-									<Link className="dropdown-item" to="/my-tickets">
-										My Tickets
-									</Link>
-									<Link className="dropdown-item" to="/ticket-search">
-										All Users
-									</Link>
-									<Link className="dropdown-item" to="/my-cases">
-										My Cases
-									</Link>
-								</div>
-							</li>
-						)}
+
+						<li className="nav-item dropdown">
+							<a
+								className="nav-link dropdown-toggle"
+								href="/#"
+								id="navbarDropdownMenuLink"
+								data-toggle="dropdown"
+								aria-haspopup="true"
+								aria-expanded="false"
+							>
+								Users
+							</a>
+							<div
+								className="dropdown-menu"
+								aria-labelledby="navbarDropdownMenuLink"
+							>
+								{userData.user.department !== "Client" && (
+									<>
+										<Link className="dropdown-item" to="/user">
+											Create User
+										</Link>
+										<Link className="dropdown-item" to="/find-user">
+											All Users
+										</Link>
+									</>
+								)}
+								<Link className="dropdown-item" to="/my-profile">
+									Profile
+								</Link>
+							</div>
+						</li>
 					</ul>
 				</div>
 			</nav>
