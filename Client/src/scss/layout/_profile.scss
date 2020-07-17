@@ -1,0 +1,37 @@
+.profile-page {
+	.card-header {
+		background-color: $super-dark-grey;
+		height: 175px;
+	}
+
+	.profile-picture-card {
+		display: inline-block;
+		margin-right: 25px;
+		position: relative;
+		top: 15px;
+		margin-left: 15px;
+	}
+
+	.profile-name-card {
+		display: inline-block;
+		position: absolute;
+		margin-top: 30px;
+		margin-left: 20px;
+	}
+
+	.username {
+		font-size: 2rem;
+		color: $super-light-gray;
+	}
+
+	.role {
+		color: $menu-gray-title-text;
+	}
+
+	.profile-picture {
+		height: 125px;
+	}
+	.rounded-circle {
+		border-radius: 50% !important;
+	}
+}

@@ -3,7 +3,7 @@ import TicketList from "../../tickets/TicketList";
 import TopBar from "../../layout/TopBar";
 import SideMenu from "../../layout/SideMenu";
 import AuthContext from "../../utils/AuthContext";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import { getAllTicketsDynamicQuery } from "../../tickets/TicketApi";
 
 const MyCasesPage = (props) => {
@@ -11,6 +11,7 @@ const MyCasesPage = (props) => {
 	const signal = abortController.signal;
 	const { userData } = useContext(AuthContext);
 	const [closeCss, setCloseCss] = useState("");
+	const [ticket, setTicket] = useState();
 	const [ticketList, setTicketList] = useState([]);
 	const history = useHistory();
 
@@ -45,11 +46,23 @@ const MyCasesPage = (props) => {
 	}, []);
 
 	const ticketDetails = (ticket) => {
-		console.log("details: ", ticket);
+		setTicket(ticket);
+	};
+
+	const redirectDetail = () => {
+		return (
+			<Redirect
+				to={{
+					pathname: "/ticket",
+					state: { ticket: ticket },
+				}}
+			/>
+		);
 	};
 
 	return (
 		<div className={closeCss}>
+			{ticket && redirectDetail()}
 			<SideMenu css={closeCss}></SideMenu>
 			<TopBar onClick={clickToggle} css={closeCss}></TopBar>
 

@@ -102,7 +102,7 @@ const TopBar = (props) => {
 				</Link>
 				<div className="profile-icons">
 					Hi {userData.user.userName}
-					<img src={USFlag} className="flag"></img>
+					<img src={USFlag} className="flag" alt="Profile Flag"></img>
 					<a href="/#" className="profile-pic-icon">
 						<svg
 							className="bi bi-people-circle"

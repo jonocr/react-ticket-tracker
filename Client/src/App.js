@@ -4,6 +4,7 @@ import "./main.css";
 
 import UserPage from "./components/pages/user/UserPage";
 import UserSearchPage from "./components/pages/user/UserSearchPage";
+import UserProfilePage from "./components/pages/user/UserProfilePage";
 import DashboardPage from "./components/pages/DashboardPage";
 import LoginPage from "./components/pages/LoginPage";
 import CreateUser from "./components/pages/user/CreateUser";
@@ -46,6 +47,7 @@ function App() {
 					<Route component={TicketPage} exact path="/create-ticket" />
 					<Route component={MyCasesPage} exact path="/my-cases" />
 					<Route component={UserPage} exact path="/user" />
+					<Route component={UserProfilePage} exact path="/my-profile" />
 
 					{userData.token && (
 						<Route component={TicketSearchPage} exact path="/ticket-search" />
