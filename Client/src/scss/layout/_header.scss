@@ -12,10 +12,12 @@ header {
 }
 
 .top-bar {
+	padding-left: 20px;
 	display: inline;
 	@include media-breakpoint-up(md) {
 		margin-left: 40px;
 		transition: margin 0.3s ease;
+		padding-left: 0;
 	}
 	.bi {
 		// margin-left: 25px;  //When more options exist
@@ -23,18 +25,25 @@ header {
 	}
 	.profile-icons {
 		float: right;
-		margin-right: 20px;
+		@include media-breakpoint-up(md) {
+			margin-right: 20px;
+		}
 		.bi {
 			margin-left: 0;
 		}
 	}
+
+	.logout {
+		float: right;
+		margin-right: 20px;
+	}
 	.flag {
 		height: 20px;
-		margin-right: 25px;
+		margin-right: 10px;
 		margin-left: 10px;
 	}
 	.profile-pic-icon {
-		margin-right: 25px;
+		margin-left: 20px;
 	}
 
 	.badge {
@@ -48,6 +57,12 @@ header {
 		margin-left: -5px;
 		position: absolute;
 		margin-top: 25px;
+	}
+
+	.btn {
+		@include media-breakpoint-up(md) {
+			line-height: 1.2;
+		}
 	}
 }
 

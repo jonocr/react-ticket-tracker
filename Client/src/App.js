@@ -27,8 +27,15 @@ function App() {
 		token: undefined,
 		user: GUEST_USER,
 		loading: true,
-		mgs: 0,
 	});
+
+	const logOut = () => {
+		setUserData({
+			token: undefined,
+			user: GUEST_USER,
+			loading: true,
+		});
+	};
 	// const [userData, setUserData] = useState({
 	// 	token: window.localStorage.getItem("token"),
 	// 	user: window.localStorage.getItem("user"),
@@ -38,7 +45,7 @@ function App() {
 	return (
 		<div>
 			<Router>
-				<AuthContext.Provider value={{ userData, setUserData }}>
+				<AuthContext.Provider value={{ userData, setUserData, logOut }}>
 					<Route component={LoginPage} exact path="/login" />
 					<Route component={CreateUser} exact path="/new-account" />
 					<Route component={LoginPage} exact path="/" />
