@@ -20,7 +20,7 @@ const UserSearchPage = (props) => {
 	};
 
 	const loadUsers = () => {
-		fetch("http://localhost:8000/users", {
+		fetch(`${process.env.REACT_APP_API_SERVER_URL}/users', {
 			method: "GET",
 			headers: {
 				Authorization: `Bearer ${userData.token}`,

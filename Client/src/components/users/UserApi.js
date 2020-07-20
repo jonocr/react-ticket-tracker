@@ -1,7 +1,7 @@
 export const findManyUsersByEmail = async (email, signal) => {
 	try {
 		const response = await fetch(
-			`http://localhost:8000/users/find-users-email/${email}`,
+			`${process.env.REACT_APP_API_SERVER_URL}/users/find-users-email/${email}`,
 			{ signal: signal }
 		);
 		return response.json();

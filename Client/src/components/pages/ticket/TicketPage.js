@@ -22,7 +22,7 @@ const TicketPage = (props) => {
 
 	const clickCreateHandle = async (ticket) => {
 		console.log("Creating New Ticket: ", ticket);
-		fetch("http://localhost:8000/tickets/create", {
+		fetch(`${process.env.REACT_APP_API_SERVER_URL}/tickets/create`, {
 			method: "POST",
 			headers: {
 				Authorization: `Bearer ${userData.token}`,
@@ -38,7 +38,7 @@ const TicketPage = (props) => {
 	};
 
 	const clickUpdateHandle = async (ticket) => {
-		fetch("http://localhost:8000/tickets/update", {
+		fetch(`${process.env.REACT_APP_API_SERVER_URL}/tickets/update`, {
 			method: "PATCH",
 			headers: {
 				Authorization: `Bearer ${userData.token}`,

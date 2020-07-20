@@ -27,7 +27,7 @@ const UserPage = (props) => {
 	};
 
 	const findUserByEmail = (email, signal) => {
-		fetch(`http://localhost:8000/users/${email}`, {
+		fetch(`${process.env.REACT_APP_API_SERVER_URL}/users/${email}`, {
 			signal: signal,
 			method: "GET",
 			contentType: "application/json",
@@ -50,7 +50,7 @@ const UserPage = (props) => {
 
 	const getAllUsers = async (signal) => {
 		console.log("Context Token: ", userData);
-		fetch(`http://localhost:8000/users/`, {
+		fetch(`${process.env.REACT_APP_API_SERVER_URL}/users/`, {
 			signal: signal,
 			method: "GET",
 			headers: {
@@ -73,7 +73,7 @@ const UserPage = (props) => {
 	const clickUpdateHandle = async (userInfo) => {
 		const updatedUser = { ...userInfo, team: teamUsers };
 
-		fetch("http://localhost:8000/users/update", {
+		fetch(`${process.env.REACT_APP_API_SERVER_URL}/users/update`, {
 			method: "PATCH",
 			headers: {
 				Authorization: `Bearer ${userData.token}`,
@@ -93,7 +93,7 @@ const UserPage = (props) => {
 	const clickCreateHandle = async (userInfo) => {
 		const newUser = { ...userInfo, team: teamUsers };
 
-		fetch("http://localhost:8000/users/signup", {
+		fetch(`${process.env.REACT_APP_API_SERVER_URL}/users/signup`, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify(newUser),

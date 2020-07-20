@@ -7,7 +7,7 @@ const CreateUser = (props) => {
 	const history = useHistory();
 	const [succesMsgCss, setSuccesMsgCss] = useState("close d-none");
 	const clickCreateHandle = async (userData) => {
-		fetch("http://localhost:8000/users/signup", {
+		fetch(`${process.env.REACT_APP_API_SERVER_URL}/users/signup`, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify(userData),

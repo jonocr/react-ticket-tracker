@@ -43,7 +43,9 @@ const TicketSearchPage = (props) => {
 	};
 
 	const findTicketsQuery = (criteria, query) => {
-		fetch(`http://localhost:8000/tickets/tickets-criteria/${criteria}/${query}`)
+		fetch(
+			`${process.env.REACT_APP_API_SERVER_URL}/tickets/tickets-criteria/${criteria}/${query}`
+		)
 			.then((response) => {
 				return response.json();
 			})
@@ -56,7 +58,7 @@ const TicketSearchPage = (props) => {
 	};
 
 	const getAllTickets = async (signal) => {
-		fetch(`http://localhost:8000/tickets/list-all`, {
+		fetch(`${process.env.REACT_APP_API_SERVER_URL}/tickets/list-all`, {
 			signal: signal,
 			method: "GET",
 			contentType: "application/json",
