@@ -56,7 +56,7 @@ const UserProfilePage = (props) => {
 								<ul>
 									<li>
 										<h5>2</h5>
-										Total {user.department === "Client" ? "Tickets" : "Cases"}
+										{user.department === "Client" ? "Tickets" : "Cases"}
 									</li>
 									<li>
 										<h5>1</h5>

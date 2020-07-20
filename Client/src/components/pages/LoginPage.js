@@ -12,7 +12,7 @@ const LoginPage = () => {
 	const loginHandle = (e) => {
 		e.preventDefault();
 
-		fetch("http://localhost:8000/users/login", {
+		fetch(`${process.env.REACT_APP_API_SERVER_URL}/users/login`, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify(user),
