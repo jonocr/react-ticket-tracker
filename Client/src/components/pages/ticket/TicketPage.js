@@ -5,19 +5,34 @@ import TopBar from "../../layout/TopBar";
 import AuthContext from "../../utils/AuthContext";
 import { useHistory } from "react-router";
 
+const ALERT_MSG_CREATE_TICKET_CONFIRMATION = "Ticket created.";
+const ALERT_MSG_UPDATE_TICKET_CONFIRMATION = "Ticket updated.";
+
 const TicketPage = (props) => {
 	const [closeCss, setCloseCss] = useState("");
 	const [ticket, setTicket] = useState(null);
 	const { userData } = useContext(AuthContext);
-	const [succesMsgCss, setSuccesMsgCss] = useState("close d-none");
+	const [msgCss, setMsgCss] = useState("close d-none");
 	const history = useHistory();
+	const [alertMsg, setAlertMsg] = useState("");
 
 	const clickToggle = (e) => {
 		closeCss === "" ? setCloseCss("close-menu") : setCloseCss("");
 	};
 
-	const showMsg = () => {
-		setSuccesMsgCss("alert alert-success alert-dismissible fade show");
+	const showMsg = (msg, style) => {
+		setMsgCss(`alert ${style} alert-dismissible fade show`);
+		setAlertMsg(msg);
+	};
+
+	const hideMsg = () => {
+		setMsgCss("close d-none");
+	};
+
+	const redirectMyTickets = () => {
+		if (alertMsg === ALERT_MSG_CREATE_TICKET_CONFIRMATION) {
+			history.push("/my-tickets");
+		}
 	};
 
 	const clickCreateHandle = async (ticket) => {
@@ -31,7 +46,7 @@ const TicketPage = (props) => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				showMsg();
+				showMsg(ALERT_MSG_CREATE_TICKET_CONFIRMATION, "alert-success");
 			})
 			.catch((err) => console.log(err));
 	};
@@ -46,7 +61,9 @@ const TicketPage = (props) => {
 			body: JSON.stringify(ticket),
 		})
 			.then((res) => res.json())
-			.then((data) => console.log(data))
+			.then((data) => {
+				showMsg(ALERT_MSG_UPDATE_TICKET_CONFIRMATION, "alert-success");
+			})
 			.catch((err) => console.log(err));
 	};
 
@@ -71,15 +88,10 @@ const TicketPage = (props) => {
 					}
 					buttonText={ticket ? "Save Changes" : "Create Ticket"}
 				></TicketForm>
-				<div className={succesMsgCss} role="alert">
-					You have <strong>succesfully</strong> created a new ticket.
-					<button
-						type="button"
-						className="close"
-						data-dismiss="alert"
-						aria-label="Close"
-					>
-						<span aria-hidden="true">&times;</span>
+				<div className={msgCss} role="alert">
+					{alertMsg}
+					<button type="button" className="close" onClick={redirectMyTickets}>
+						<span onClick={hideMsg}>&times;</span>
 					</button>
 				</div>
 			</div>
