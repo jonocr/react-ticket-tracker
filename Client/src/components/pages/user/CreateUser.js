@@ -6,6 +6,7 @@ import { useHistory } from "react-router";
 const CreateUser = (props) => {
 	const history = useHistory();
 	const [succesMsgCss, setSuccesMsgCss] = useState("close d-none");
+
 	const clickCreateHandle = async (userData) => {
 		fetch(`${process.env.REACT_APP_API_SERVER_URL}/users/signup`, {
 			method: "POST",
@@ -22,18 +23,13 @@ const CreateUser = (props) => {
 	const showMsg = () => {
 		setSuccesMsgCss("alert alert-success alert-dismissible fade show");
 	};
+
 	return (
 		<div>
 			<div className="new-user-body">
 				<div className="new-user-container">
-					<div className="container">
-						<UserClientForm onClickSave={clickCreateHandle}></UserClientForm>
-					</div>
-					<div className="no-account">
-						Already have an account ? <Link to="/login">Log In Here</Link>
-					</div>
 					<div className={succesMsgCss} role="alert">
-						You have <strong>succesfully</strong> registered a new account.
+						New account created.
 						<button
 							type="button"
 							className="close"
@@ -45,6 +41,12 @@ const CreateUser = (props) => {
 						>
 							<span aria-hidden="true">&times;</span>
 						</button>
+					</div>
+					<div className="container">
+						<UserClientForm onClickSave={clickCreateHandle}></UserClientForm>
+					</div>
+					<div className="no-account">
+						Already have an account ? <Link to="/login">Log In Here</Link>
 					</div>
 				</div>
 			</div>

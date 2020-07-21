@@ -11,7 +11,6 @@
 	top: 50px;
 	margin-right: auto;
 	margin-left: auto;
-	padding-top: 20px;
 	padding-bottom: 10px;
 	border-radius: 2px;
 	color: $login-text-color;
@@ -30,5 +29,14 @@
 	label {
 		display: inline-block;
 		margin-bottom: 0.5rem;
+	}
+	.alert {
+		margin-bottom: 0;
+		span {
+			float: right;
+		}
+	}
+	.container {
+		padding-top: 20px;
 	}
 }
