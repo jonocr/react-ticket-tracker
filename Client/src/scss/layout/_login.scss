@@ -11,7 +11,6 @@
 	top: 50px;
 	margin-right: auto;
 	margin-left: auto;
-	padding-top: 20px;
 	padding-bottom: 10px;
 	border-radius: 2px;
 	color: $login-text-color;
@@ -19,6 +18,10 @@
 
 	@include media-breakpoint-up(md) {
 		width: 400px;
+	}
+
+	form {
+		padding-top: 20px;
 	}
 
 	.form-group {

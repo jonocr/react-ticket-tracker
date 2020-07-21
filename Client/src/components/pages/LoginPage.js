@@ -3,14 +3,21 @@ import AuthContext from "../utils/AuthContext";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { getMessagesTotal } from "../tickets/TicketApi";
+var $ = require("jquery");
 
 const LoginPage = () => {
-	const [user, setUser] = useState({});
+	const [user, setUser] = useState({ email: "", password: "" });
 	const { setUserData } = useContext(AuthContext);
+	const [msgCss, setMsgCss] = useState("close d-none");
 	let history = useHistory();
 
 	const loginHandle = (e) => {
 		e.preventDefault();
+
+		if (user.email === "" || user.password === "") {
+			showMsg();
+			return null;
+		}
 
 		fetch(`${process.env.REACT_APP_API_SERVER_URL}/users/login`, {
 			method: "POST",
@@ -36,9 +43,23 @@ const LoginPage = () => {
 			.catch((err) => console.log(err));
 	};
 
+	const showMsg = () => {
+		setMsgCss("alert alert-danger alert-dismissible fade show");
+	};
+
+	const hideMsg = () => {
+		setMsgCss("close d-none");
+	};
+
 	return (
 		<div className="login-body">
 			<div className="login-container">
+				<div className={msgCss} role="alert">
+					Incorrect email or password.
+					<button type="button" className="close">
+						<span onClick={hideMsg}>&times;</span>
+					</button>
+				</div>
 				<form onSubmit={loginHandle}>
 					<div className="form-group">
 						<label htmlFor="emailInput">Email address</label>
