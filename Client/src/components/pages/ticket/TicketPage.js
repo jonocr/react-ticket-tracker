@@ -21,7 +21,6 @@ const TicketPage = (props) => {
 	};
 
 	const clickCreateHandle = async (ticket) => {
-		console.log("Creating New Ticket: ", ticket);
 		fetch(`${process.env.REACT_APP_API_SERVER_URL}/tickets/create`, {
 			method: "POST",
 			headers: {

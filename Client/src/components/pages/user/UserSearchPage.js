@@ -28,7 +28,6 @@ const UserSearchPage = (props) => {
 			},
 		})
 			.then((response) => {
-				console.log("All Users Data: ", response.clone().json());
 				return response.json();
 			})
 			.then((responseData) => {

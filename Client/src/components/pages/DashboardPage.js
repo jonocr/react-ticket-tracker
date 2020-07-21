@@ -15,7 +15,6 @@ const DashboardPage = (props) => {
 
 	useEffect(() => {
 		!userData.token && history.push("/login");
-		console.log("DASHBOAD ENV: ", process.env.REACT_APP_API_SERVER_URL);
 		// eslint-disable-next-line
 	}, []);
 

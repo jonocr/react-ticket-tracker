@@ -49,7 +49,6 @@ const UserPage = (props) => {
 	};
 
 	const getAllUsers = async (signal) => {
-		console.log("Context Token: ", userData);
 		fetch(`${process.env.REACT_APP_API_SERVER_URL}/users/`, {
 			signal: signal,
 			method: "GET",
@@ -62,7 +61,6 @@ const UserPage = (props) => {
 				return response.json();
 			})
 			.then((responseData) => {
-				console.log("getAllUsers: ", responseData);
 				setAllUsers(responseData);
 			})
 			.catch((err) => {
