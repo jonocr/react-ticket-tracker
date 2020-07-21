@@ -3,11 +3,23 @@ import UserClientForm from "../../users/UserClientForm";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
 
+const ALERT_MSG_CREATE_USER_VALIDATION = "Invalid email, username or password.";
+const ALERT_MSG_CREATE_USER_CONFIRMATION = "User created.";
+
 const CreateUser = (props) => {
 	const history = useHistory();
-	const [succesMsgCss, setSuccesMsgCss] = useState("close d-none");
+	const [msgCss, setMsgCss] = useState("close d-none");
+	const [alertMsg, setAlertMsg] = useState("");
 
 	const clickCreateHandle = async (userData) => {
+		if (
+			userData.userName === "" ||
+			userData.email === "" ||
+			userData.password === ""
+		) {
+			showMsg(ALERT_MSG_CREATE_USER_VALIDATION, "alert-danger");
+			return null;
+		}
 		fetch(`${process.env.REACT_APP_API_SERVER_URL}/users/signup`, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
@@ -15,31 +27,34 @@ const CreateUser = (props) => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				showMsg();
+				showMsg(ALERT_MSG_CREATE_USER_CONFIRMATION, "alert-success");
 			})
 			.catch((err) => console.log(err));
 	};
 
-	const showMsg = () => {
-		setSuccesMsgCss("alert alert-success alert-dismissible fade show");
+	const showMsg = (msg, style) => {
+		setMsgCss(`alert ${style} alert-dismissible fade show`);
+		setAlertMsg(msg);
+	};
+
+	const hideMsg = () => {
+		setMsgCss("close d-none");
+	};
+
+	const redirectLogin = () => {
+		if (alertMsg === ALERT_MSG_CREATE_USER_CONFIRMATION) {
+			history.push("/login");
+		}
 	};
 
 	return (
 		<div>
 			<div className="new-user-body">
 				<div className="new-user-container">
-					<div className={succesMsgCss} role="alert">
-						New account created.
-						<button
-							type="button"
-							className="close"
-							data-dismiss="alert"
-							aria-label="Close"
-							onClick={() => {
-								history.push("/login");
-							}}
-						>
-							<span aria-hidden="true">&times;</span>
+					<div className={msgCss} role="alert">
+						{alertMsg}
+						<button type="button" className="close" onClick={redirectLogin}>
+							<span onClick={hideMsg}>&times;</span>
 						</button>
 					</div>
 					<div className="container">

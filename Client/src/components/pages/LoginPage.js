@@ -3,7 +3,6 @@ import AuthContext from "../utils/AuthContext";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { getMessagesTotal } from "../tickets/TicketApi";
-var $ = require("jquery");
 
 const LoginPage = () => {
 	const [user, setUser] = useState({ email: "", password: "" });
