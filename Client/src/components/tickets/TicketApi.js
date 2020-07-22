@@ -122,3 +122,26 @@ export const getMessagesTotal = async (email, department, token) => {
 		console.log("error at fetching: ", err);
 	}
 };
+
+export const getMyTicketsTotal = async (email, department, token) => {
+	try {
+		const response = await fetch(
+			`${API_SERVER_URL}/tickets/get-total-new-messages/`,
+			{
+				method: "POST",
+				headers: {
+					Authorization: `Bearer ${token}`,
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					email: email,
+					department: department,
+					token: token,
+				}),
+			}
+		);
+		return response.json();
+	} catch (err) {
+		console.log("error at fetching: ", err);
+	}
+};

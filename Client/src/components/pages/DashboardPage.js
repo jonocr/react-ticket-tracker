@@ -3,7 +3,9 @@ import AuthContext from "../utils/AuthContext";
 import TopBar from "../layout/TopBar";
 import SideMenu from "../layout/SideMenu";
 import { useHistory } from "react-router";
-
+import { CircularProgressbar } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
+const percentage = 66;
 const DashboardPage = (props) => {
 	const [closeCss, setCloseCss] = useState("");
 	const history = useHistory();
@@ -27,6 +29,52 @@ const DashboardPage = (props) => {
 				<div className="dashboard-main dashboard">
 					<div className="row">
 						<div className="col-12 col-md-6 col-lg-3">
+							<div className="box">
+								<div>
+									<CircularProgressbar
+										value={percentage}
+										text={`${percentage}%`}
+									/>
+								</div>
+								<div className="text">Total Tickets</div>
+							</div>
+						</div>
+						<div className="col-12 col-md-6 col-lg-3">
+							<div className="box">
+								<div>
+									<CircularProgressbar
+										value={percentage}
+										text={`${percentage}%`}
+									/>
+								</div>
+								<div className="text">Open</div>
+							</div>
+						</div>
+						<div className="col-12 col-md-6 col-lg-3">
+							<div className="box">
+								<div>
+									<CircularProgressbar
+										value={percentage}
+										text={`${percentage}%`}
+									/>
+								</div>
+								<div className="text">Close</div>
+							</div>
+						</div>
+						<div className="ccol-12 col-md-6 col-lg-3">
+							<div className="box">
+								<div>
+									<CircularProgressbar
+										value={percentage}
+										text={`${percentage}%`}
+									/>
+								</div>
+								<div className="text">Total Messages</div>
+							</div>
+						</div>
+					</div>
+					{/* <div className="row">
+						<div className="col-12 col-md-6 col-lg-3">
 							<div className="box">1 of 4</div>
 						</div>
 						<div className="col-12 col-md-6 col-lg-3">
@@ -38,21 +86,7 @@ const DashboardPage = (props) => {
 						<div className="ccol-12 col-md-6 col-lg-3">
 							<div className="box">4 of 4</div>
 						</div>
-					</div>
-					<div className="row">
-						<div className="col-12 col-md-6 col-lg-3">
-							<div className="box">1 of 4</div>
-						</div>
-						<div className="col-12 col-md-6 col-lg-3">
-							<div className="box">2 of 4</div>
-						</div>
-						<div className="col-12 col-md-6 col-lg-3">
-							<div className="box">3 of 4</div>
-						</div>
-						<div className="ccol-12 col-md-6 col-lg-3">
-							<div className="box">4 of 4</div>
-						</div>
-					</div>
+					</div> */}
 				</div>
 
 				<div className="dashboard-main dashboard"></div>

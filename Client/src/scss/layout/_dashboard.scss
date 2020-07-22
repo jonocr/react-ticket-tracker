@@ -35,8 +35,21 @@
 .box {
 	padding: 5px;
 	margin-bottom: 25px;
-	background-color: skyblue;
-	min-height: 150px;
+	background-color: white;
+	height: 120px;
+	padding-left: 40px;
+	display: flex;
+	align-items: center;
+	@include media-breakpoint-up(md) {
+		padding-left: 20px;
+	}
+	.CircularProgressbar {
+		width: 70px;
+	}
+	.text {
+		text-align: center;
+		width: 100%;
+	}
 }
 
 .dashboard {
