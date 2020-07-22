@@ -205,4 +205,16 @@ router.route("/get-total-new-messages/").post((req, res) => {
 		.catch((err) => res.status(400).json(`Error: ${err}`));
 });
 
+router.route("/get-total-tickets/").post((req, res) => {
+	const data = req.body;
+	const email = data.email;
+	const department = data.department;
+	const queryMatch =
+		department === "Client" ? { createdBy: email } : { assignedTo: email };
+
+	Ticket.count(queryMatch)
+		.then((tickets) => res.json(tickets))
+		.catch((err) => res.status(400).json(`Error: ${err}`));
+});
+
 module.exports = router;

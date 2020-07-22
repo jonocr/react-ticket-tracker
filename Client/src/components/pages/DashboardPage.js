@@ -5,14 +5,20 @@ import SideMenu from "../layout/SideMenu";
 import { useHistory } from "react-router";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-const totalMessages = 100;
+import { getTicketsTotal } from "../tickets/TicketApi";
+
 const percentage = 66;
 const percentageOpen = 60;
 const percentageClose = 40;
+
 const DashboardPage = (props) => {
+	const abortController = new AbortController();
+	const signal = abortController.signal;
 	const [closeCss, setCloseCss] = useState("");
+	const [totalTickets, setTotalTickets] = useState();
 	const history = useHistory();
 	const { userData } = useContext(AuthContext);
+	const totalTicketProgress = 100;
 
 	const clickToggle = (e) => {
 		closeCss === "" ? setCloseCss("close-menu") : setCloseCss("");
@@ -20,6 +26,22 @@ const DashboardPage = (props) => {
 
 	useEffect(() => {
 		!userData.token && history.push("/login");
+
+		getTicketsTotal(
+			userData.user.email,
+			userData.user.department,
+			userData.token,
+			signal
+		)
+			.then((data) => {
+				setTotalTickets(data);
+			})
+			.catch((err) =>
+				console.log("An error happened when retrieving the total tickets")
+			);
+		return function cleanup() {
+			abortController.abort();
+		};
 		// eslint-disable-next-line
 	}, []);
 
@@ -34,7 +56,10 @@ const DashboardPage = (props) => {
 						<div className="col-12 col-md-6 col-lg-3">
 							<div className="box">
 								<div>
-									<CircularProgressbar value={totalMessages} text="5" />
+									<CircularProgressbar
+										value={totalTicketProgress}
+										text={totalTickets}
+									/>
 								</div>
 								<div className="text">Total Tickets</div>
 							</div>

@@ -123,11 +123,12 @@ export const getMessagesTotal = async (email, department, token) => {
 	}
 };
 
-export const getMyTicketsTotal = async (email, department, token) => {
+export const getTicketsTotal = async (email, department, token, signal) => {
 	try {
 		const response = await fetch(
-			`${API_SERVER_URL}/tickets/get-total-new-messages/`,
+			`${API_SERVER_URL}/tickets/get-total-tickets/`,
 			{
+				signal: signal,
 				method: "POST",
 				headers: {
 					Authorization: `Bearer ${token}`,
