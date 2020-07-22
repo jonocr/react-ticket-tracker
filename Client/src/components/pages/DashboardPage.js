@@ -5,7 +5,10 @@ import SideMenu from "../layout/SideMenu";
 import { useHistory } from "react-router";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+const totalMessages = 100;
 const percentage = 66;
+const percentageOpen = 60;
+const percentageClose = 40;
 const DashboardPage = (props) => {
 	const [closeCss, setCloseCss] = useState("");
 	const history = useHistory();
@@ -31,20 +34,17 @@ const DashboardPage = (props) => {
 						<div className="col-12 col-md-6 col-lg-3">
 							<div className="box">
 								<div>
-									<CircularProgressbar
-										value={percentage}
-										text={`${percentage}%`}
-									/>
+									<CircularProgressbar value={totalMessages} text="5" />
 								</div>
 								<div className="text">Total Tickets</div>
 							</div>
 						</div>
 						<div className="col-12 col-md-6 col-lg-3">
 							<div className="box">
-								<div>
+								<div className="open-msg">
 									<CircularProgressbar
-										value={percentage}
-										text={`${percentage}%`}
+										value={percentageOpen}
+										text={`${percentageOpen}%`}
 									/>
 								</div>
 								<div className="text">Open</div>
@@ -52,10 +52,10 @@ const DashboardPage = (props) => {
 						</div>
 						<div className="col-12 col-md-6 col-lg-3">
 							<div className="box">
-								<div>
+								<div className="close-msg">
 									<CircularProgressbar
-										value={percentage}
-										text={`${percentage}%`}
+										value={percentageClose}
+										text={`${percentageClose}%`}
 									/>
 								</div>
 								<div className="text">Close</div>
@@ -63,7 +63,7 @@ const DashboardPage = (props) => {
 						</div>
 						<div className="ccol-12 col-md-6 col-lg-3">
 							<div className="box">
-								<div>
+								<div className="comments">
 									<CircularProgressbar
 										value={percentage}
 										text={`${percentage}%`}

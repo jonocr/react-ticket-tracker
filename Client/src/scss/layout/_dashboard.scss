@@ -50,6 +50,21 @@
 		text-align: center;
 		width: 100%;
 	}
+	.open-msg {
+		.CircularProgressbar-path {
+			stroke: red;
+		}
+	}
+	.close-msg {
+		.CircularProgressbar-path {
+			stroke: #ffc107;
+		}
+	}
+	.comments {
+		.CircularProgressbar-path {
+			stroke: #28a745;
+		}
+	}
 }
 
 .dashboard {
