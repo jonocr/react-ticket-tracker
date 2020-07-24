@@ -63,7 +63,6 @@ router.route("/update").patch((req, res) => {
 		team,
 	});
 
-	console.log("ROUTE user update: ", updatedUser);
 	User.findOne({ _id: _id })
 		.exec()
 		.then((user) => {
