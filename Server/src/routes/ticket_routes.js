@@ -182,7 +182,7 @@ router
 		const queryOptionsObj = { $regex: query, $options: "i" };
 		const queryObj = {};
 		queryObj[criteria] = queryOptionsObj;
-		console.log("\x1b[33m%s\x1b[0m", queryObj);
+
 		Ticket.find(queryObj)
 			.then((tickets) => res.json(tickets))
 			.catch((err) => res.status(400).json(`Error: ${err}`));
@@ -211,6 +211,21 @@ router.route("/get-total-tickets/").post((req, res) => {
 	const department = data.department;
 	const queryMatch =
 		department === "Client" ? { createdBy: email } : { assignedTo: email };
+
+	Ticket.count(queryMatch)
+		.then((tickets) => res.json(tickets))
+		.catch((err) => res.status(400).json(`Error: ${err}`));
+});
+
+router.route("/get-total-open-close-tickets/").post((req, res) => {
+	const data = req.body;
+	const email = data.email;
+	const department = data.department;
+	const status = data.open ? "open" : "close";
+	const queryMatch =
+		department === "Client"
+			? { createdBy: email, status: status }
+			: { assignedTo: email, status: status };
 
 	Ticket.count(queryMatch)
 		.then((tickets) => res.json(tickets))

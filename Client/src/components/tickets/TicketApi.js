@@ -146,3 +146,34 @@ export const getTicketsTotal = async (email, department, token, signal) => {
 		console.log("error at fetching: ", err);
 	}
 };
+
+export const getOpenCloseTicketsTotal = async (
+	email,
+	department,
+	open,
+	token,
+	signal
+) => {
+	try {
+		const response = await fetch(
+			`${API_SERVER_URL}/tickets/get-total-open-close-tickets/`,
+			{
+				signal: signal,
+				method: "POST",
+				headers: {
+					Authorization: `Bearer ${token}`,
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					email: email,
+					department: department,
+					open: open,
+					token: token,
+				}),
+			}
+		);
+		return response.json();
+	} catch (err) {
+		console.log("error at fetching: ", err);
+	}
+};

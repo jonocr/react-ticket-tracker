@@ -5,17 +5,20 @@ import SideMenu from "../layout/SideMenu";
 import { useHistory } from "react-router";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import { getTicketsTotal } from "../tickets/TicketApi";
+import {
+	getTicketsTotal,
+	getOpenCloseTicketsTotal,
+} from "../tickets/TicketApi";
 
 const percentage = 66;
-const percentageOpen = 60;
-const percentageClose = 40;
 
 const DashboardPage = (props) => {
 	const abortController = new AbortController();
 	const signal = abortController.signal;
 	const [closeCss, setCloseCss] = useState("");
 	const [totalTickets, setTotalTickets] = useState();
+	const [totalOpenTickets, setTotalOpenTickets] = useState();
+	const [totalCloseTickets, setTotalCloseTickets] = useState();
 	const history = useHistory();
 	const { userData } = useContext(AuthContext);
 	const totalTicketProgress = 100;
@@ -37,13 +40,40 @@ const DashboardPage = (props) => {
 				setTotalTickets(data);
 			})
 			.catch((err) =>
-				console.log("An error happened when retrieving the total tickets")
+				console.log("An error happened when retrieving the tickets total")
 			);
+
+		getOpenCloseTicketsTotal(
+			userData.user.email,
+			userData.user.department,
+			true,
+			userData.token,
+			signal
+		)
+			.then((data) => setTotalOpenTickets(data))
+			.catch((err) =>
+				console.log("An error happened when retrieving the open tickets total")
+			);
+
+		getOpenCloseTicketsTotal(
+			userData.user.email,
+			userData.user.department,
+			false,
+			userData.token,
+			signal
+		)
+			.then((data) => setTotalCloseTickets(data))
+			.catch((err) =>
+				console.log("An error happened when retrieving the open tickets total")
+			);
+
 		return function cleanup() {
 			abortController.abort();
 		};
 		// eslint-disable-next-line
 	}, []);
+
+	const openTickets = () => {};
 
 	return (
 		<div className={closeCss}>
@@ -68,8 +98,8 @@ const DashboardPage = (props) => {
 							<div className="box">
 								<div className="open-msg">
 									<CircularProgressbar
-										value={percentageOpen}
-										text={`${percentageOpen}%`}
+										value={(100 * totalOpenTickets) / totalTickets}
+										text={`${(100 * totalOpenTickets) / totalTickets}%`}
 									/>
 								</div>
 								<div className="text">Open</div>
@@ -79,8 +109,8 @@ const DashboardPage = (props) => {
 							<div className="box">
 								<div className="close-msg">
 									<CircularProgressbar
-										value={percentageClose}
-										text={`${percentageClose}%`}
+										value={(100 * totalCloseTickets) / totalTickets}
+										text={`${(100 * totalCloseTickets) / totalTickets}%`}
 									/>
 								</div>
 								<div className="text">Close</div>
