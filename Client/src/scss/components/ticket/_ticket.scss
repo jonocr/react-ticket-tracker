@@ -29,9 +29,27 @@
 		border-bottom: 1px solid $light-grey;
 	}
 
+	.comment-author {
+		&.col-12 {
+			padding-left: 0;
+		}
+		&.col-md-6 {
+			padding-left: 0;
+		}
+	}
+
 	.comment-date {
 		margin-left: auto;
 		padding-right: 20px;
+		@include media-breakpoint-up(md) {
+			text-align: end;
+		}
+		&.col-12 {
+			padding-left: 0;
+		}
+		&.col-md-6 {
+			padding-left: 0;
+		}
 	}
 
 	.comment-text {
@@ -40,6 +58,13 @@
 	}
 	.card {
 		margin-bottom: 2px;
+	}
+	.comments {
+		.col-md-3 {
+			@include media-breakpoint-up(md) {
+				padding-left: 0;
+			}
+		}
 	}
 }
 

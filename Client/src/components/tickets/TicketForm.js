@@ -141,7 +141,7 @@ const TicketForm = (props) => {
 		) {
 			return (
 				<div className="form-group row">
-					<div className="col-sm-10">
+					<div className="col-10">
 						<button type="submit" className="btn btn-primary">
 							{props.buttonText}
 						</button>
@@ -211,23 +211,27 @@ const TicketForm = (props) => {
 						<label className="comments-section-title">Comments</label>
 						<div className="container comments">
 							<div className="row">
-								<button
-									className="btn btn-primary"
-									type="button"
-									data-toggle="collapse"
-									data-target="#collapseExample"
-									aria-expanded="false"
-									aria-controls="collapseExample"
-									onClick={checkUserMgsCount}
-								>
-									Show Comments
-								</button>
+								<div className="col-6 col-md-3">
+									<button
+										className="btn btn-primary"
+										type="button"
+										data-toggle="collapse"
+										data-target="#collapseExample"
+										aria-expanded="false"
+										aria-controls="collapseExample"
+										onClick={checkUserMgsCount}
+									>
+										Show Comments
+									</button>
+								</div>
 
-								<Modal
-									component={<TicketCommentForm onSubmit={addComment} />}
-									title={"Comment"}
-									openText={"Add A Comment"}
-								></Modal>
+								<div className="col-6 col-md-3">
+									<Modal
+										component={<TicketCommentForm onSubmit={addComment} />}
+										title={"Comment"}
+										openText={"Add A Comment"}
+									></Modal>
+								</div>
 							</div>
 						</div>
 						<TicketComments data={ticket.comments}></TicketComments>
@@ -240,7 +244,7 @@ const TicketForm = (props) => {
 		return (
 			<div>
 				<div className="row">
-					<div className="form-group col col-md-3">
+					<div className="form-group col-6 col-md-3">
 						<label htmlFor="createdByInput">Assigned To</label>
 						<AutoComplete
 							items={usersFound}
@@ -255,7 +259,7 @@ const TicketForm = (props) => {
 							}
 						></AutoComplete>
 					</div>
-					<div className="form-group col col-md-3">
+					<div className="form-group col-6 col-md-3">
 						<label htmlFor="createdByInput">Created By</label>
 						<input
 							type="text"
@@ -266,7 +270,7 @@ const TicketForm = (props) => {
 							readOnly
 						/>
 					</div>
-					<div className="form-group col col-md-3">
+					<div className="form-group col-6 col-md-3">
 						<label htmlFor="prioritySelect">Priority</label>
 						<select
 							className="form-control"
@@ -282,7 +286,7 @@ const TicketForm = (props) => {
 						</select>
 					</div>
 
-					<div className="form-group col col-md-3">
+					<div className="form-group col-6 col-md-3">
 						<label htmlFor="statusSelect">Status</label>
 						<select
 							className="form-control"

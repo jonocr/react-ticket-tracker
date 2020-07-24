@@ -7,11 +7,11 @@ const TicketComments = (props) => {
 				{props.data.map((comment, index) => (
 					<div className="card card-body" key={index}>
 						<div className="row comment-head">
-							<div className="comment-author">
+							<div className="comment-author col-12 col-md-6">
 								<strong>Author:</strong>
 								{comment.email}
 							</div>
-							<div className="comment-date">
+							<div className="comment-date col-12 col-md-6">
 								<strong>Date:</strong>
 								{comment.lastModified.split("T")[0]}
 								&nbsp;

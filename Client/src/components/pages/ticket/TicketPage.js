@@ -78,21 +78,25 @@ const TicketPage = (props) => {
 		<div className={closeCss}>
 			<SideMenu css={closeCss}></SideMenu>
 			<TopBar onClick={clickToggle} css={closeCss}></TopBar>
-			<div className="dashboard-main dashboard ticket-page">
-				<TicketForm
-					clickHandle={ticket ? clickUpdateHandle : clickCreateHandle}
-					data={
-						props.location.state !== undefined
-							? props.location.state.ticket
-							: {}
-					}
-					buttonText={ticket ? "Save Changes" : "Create Ticket"}
-				></TicketForm>
-				<div className={msgCss} role="alert">
-					{alertMsg}
-					<button type="button" className="close" onClick={redirectMyTickets}>
-						<span onClick={hideMsg}>&times;</span>
-					</button>
+
+			<div className="container">
+				<div className="dashboard-bar dashboard">Ticket Managment</div>
+				<div className="dashboard-main dashboard ticket-page">
+					<TicketForm
+						clickHandle={ticket ? clickUpdateHandle : clickCreateHandle}
+						data={
+							props.location.state !== undefined
+								? props.location.state.ticket
+								: {}
+						}
+						buttonText={ticket ? "Save Changes" : "Create Ticket"}
+					></TicketForm>
+					<div className={msgCss} role="alert">
+						{alertMsg}
+						<button type="button" className="close" onClick={redirectMyTickets}>
+							<span onClick={hideMsg}>&times;</span>
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>
