@@ -8,9 +8,8 @@ import "react-circular-progressbar/dist/styles.css";
 import {
 	getTicketsTotal,
 	getOpenCloseTicketsTotal,
+	getTicketCommentsTotal,
 } from "../tickets/TicketApi";
-
-const percentage = 66;
 
 const DashboardPage = (props) => {
 	const abortController = new AbortController();
@@ -19,6 +18,7 @@ const DashboardPage = (props) => {
 	const [totalTickets, setTotalTickets] = useState();
 	const [totalOpenTickets, setTotalOpenTickets] = useState();
 	const [totalCloseTickets, setTotalCloseTickets] = useState();
+	const [totalTicketComments, setTotalTicketComments] = useState(0);
 	const history = useHistory();
 	const { userData } = useContext(AuthContext);
 	const totalTicketProgress = 100;
@@ -67,13 +67,21 @@ const DashboardPage = (props) => {
 				console.log("An error happened when retrieving the open tickets total")
 			);
 
+		getTicketCommentsTotal(userData.user.email, userData.token, signal)
+			.then((data) => {
+				setTotalTicketComments(data[0].total);
+			})
+			.catch((err) =>
+				console.log(
+					"An error happened when retrieving the tickets comments total"
+				)
+			);
+
 		return function cleanup() {
 			abortController.abort();
 		};
 		// eslint-disable-next-line
 	}, []);
-
-	const openTickets = () => {};
 
 	return (
 		<div className={closeCss}>
@@ -120,8 +128,8 @@ const DashboardPage = (props) => {
 							<div className="box">
 								<div className="comments">
 									<CircularProgressbar
-										value={percentage}
-										text={`${percentage}%`}
+										value={totalTicketComments > 0 ? totalTicketProgress : 0}
+										text={totalTicketComments}
 									/>
 								</div>
 								<div className="text">Total Messages</div>

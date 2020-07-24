@@ -232,4 +232,37 @@ router.route("/get-total-open-close-tickets/").post((req, res) => {
 		.catch((err) => res.status(400).json(`Error: ${err}`));
 });
 
+router.route("/get-total-ticket-comments/").post((req, res) => {
+	const data = req.body;
+	const email = data.email;
+
+	Ticket.aggregate([
+		{
+			$project: {
+				numberOfEntries: {
+					$size: {
+						$filter: {
+							input: "$comments",
+							as: "items",
+							cond: {
+								$eq: ["$$items.email", email],
+							},
+						},
+					},
+				},
+			},
+		},
+		{
+			$group: {
+				_id: null,
+				total: {
+					$sum: "$numberOfEntries",
+				},
+			},
+		},
+	])
+		.then((tickets) => res.json(tickets))
+		.catch((err) => res.status(400).json(`Error: ${err}`));
+});
+
 module.exports = router;

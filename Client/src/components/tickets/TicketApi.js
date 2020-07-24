@@ -177,3 +177,26 @@ export const getOpenCloseTicketsTotal = async (
 		console.log("error at fetching: ", err);
 	}
 };
+
+export const getTicketCommentsTotal = async (email, token, signal) => {
+	try {
+		const response = await fetch(
+			`${API_SERVER_URL}/tickets/get-total-ticket-comments/`,
+			{
+				signal: signal,
+				method: "POST",
+				headers: {
+					Authorization: `Bearer ${token}`,
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					email: email,
+					token: token,
+				}),
+			}
+		);
+		return response.json();
+	} catch (err) {
+		console.log("error at fetching: ", err);
+	}
+};
