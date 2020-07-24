@@ -294,7 +294,7 @@ const SideMenu = (props) => {
 										<Link className="dropdown-item" to="/user">
 											Create User
 										</Link>
-										<Link className="dropdown-item" to="/find-user">
+										<Link className="dropdown-item" to="/findUser">
 											All Users
 										</Link>
 									</>
