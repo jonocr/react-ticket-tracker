@@ -107,7 +107,9 @@ const DashboardPage = (props) => {
 								<div className="open-msg">
 									<CircularProgressbar
 										value={(100 * totalOpenTickets) / totalTickets}
-										text={`${(100 * totalOpenTickets) / totalTickets}%`}
+										text={`${Number.parseFloat(
+											(100 * totalOpenTickets) / totalTickets
+										).toFixed(0)}%`}
 									/>
 								</div>
 								<div className="text">Open</div>
@@ -118,7 +120,9 @@ const DashboardPage = (props) => {
 								<div className="close-msg">
 									<CircularProgressbar
 										value={(100 * totalCloseTickets) / totalTickets}
-										text={`${(100 * totalCloseTickets) / totalTickets}%`}
+										text={`${Number.parseFloat(
+											(100 * totalCloseTickets) / totalTickets
+										).toFixed(0)}%`}
 									/>
 								</div>
 								<div className="text">Close</div>
