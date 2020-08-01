@@ -22,26 +22,6 @@ const UserSearchPage = (props) => {
 		history.push(`/user/${user.email}`);
 	};
 
-	// const loadUsers = () => {
-	// 	fetch(`${process.env.REACT_APP_API_SERVER_URL}/users`, {
-	// 		signal: signal,
-	// 		method: "GET",
-	// 		headers: {
-	// 			Authorization: `Bearer ${userData.token}`,
-	// 			"Content-Type": "application/json",
-	// 		},
-	// 	})
-	// 		.then((response) => {
-	// 			return response.json();
-	// 		})
-	// 		.then((responseData) => {
-	// 			setUsers(responseData);
-	// 		})
-	// 		.catch((err) => {
-	// 			console.log("error at fetching: ", err);
-	// 		});
-	// };
-
 	useEffect(() => {
 		loadUsers(userData.token, signal).then((data) => {
 			setUsers(data);
