@@ -44,3 +44,19 @@ export const loadUsers = async (token, signal) => {
 		console.log("error at fetching: ", err);
 	}
 };
+
+export const signup = async (user) => {
+	try {
+		const response = await fetch(
+			`${process.env.REACT_APP_API_SERVER_URL}/users/signup`,
+			{
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(user),
+			}
+		);
+		return response.json();
+	} catch (err) {
+		console.log("error at fetching: ", err);
+	}
+};

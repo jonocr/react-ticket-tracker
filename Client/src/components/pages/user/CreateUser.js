@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import UserClientForm from "../../users/UserClientForm";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
+import { signup } from "../../users/UserApi";
 
 const ALERT_MSG_CREATE_USER_VALIDATION = "Invalid email, username or password.";
 const ALERT_MSG_CREATE_USER_CONFIRMATION = "User created.";
@@ -20,12 +21,7 @@ const CreateUser = (props) => {
 			showMsg(ALERT_MSG_CREATE_USER_VALIDATION, "alert-danger");
 			return null;
 		}
-		fetch(`${process.env.REACT_APP_API_SERVER_URL}/users/signup`, {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(userData),
-		})
-			.then((res) => res.json())
+		signup(userData)
 			.then((data) => {
 				showMsg(ALERT_MSG_CREATE_USER_CONFIRMATION, "alert-success");
 			})
