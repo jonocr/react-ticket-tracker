@@ -6,6 +6,12 @@ import UserList from "../../users/UserList";
 import UserForm from "../../users/UserForm";
 import { useHistory } from "react-router";
 import AuthContext from "../../utils/AuthContext";
+import {
+	findUserByEmail,
+	updateUser,
+	signup,
+	getAllUsers as getUsers,
+} from "../../users/UserApi";
 
 const UserPage = (props) => {
 	const abortController = new AbortController();
@@ -26,18 +32,8 @@ const UserPage = (props) => {
 		closeCss === "" ? setCloseCss("close-menu") : setCloseCss("");
 	};
 
-	const findUserByEmail = (email, signal) => {
-		fetch(`${process.env.REACT_APP_API_SERVER_URL}/users/${email}`, {
-			signal: signal,
-			method: "GET",
-			contentType: "application/json",
-			headers: {
-				Authorization: `Bearer ${userData.token}`,
-			},
-		})
-			.then((response) => {
-				return response.json();
-			})
+	const findUser = (email, signal) => {
+		findUserByEmail(email, userData.token, signal)
 			.then((responseData) => {
 				setUser(responseData[0]);
 				setTeamUsers(responseData[0].team);
@@ -49,17 +45,7 @@ const UserPage = (props) => {
 	};
 
 	const getAllUsers = async (signal) => {
-		fetch(`${process.env.REACT_APP_API_SERVER_URL}/users/`, {
-			signal: signal,
-			method: "GET",
-			headers: {
-				Authorization: `Bearer ${userData.token}`,
-				"Content-Type": "application/json",
-			},
-		})
-			.then((response) => {
-				return response.json();
-			})
+		getUsers(userData.token, signal)
 			.then((responseData) => {
 				setAllUsers(responseData);
 			})
@@ -71,32 +57,15 @@ const UserPage = (props) => {
 	const clickUpdateHandle = async (userInfo) => {
 		const updatedUser = { ...userInfo, team: teamUsers };
 
-		fetch(`${process.env.REACT_APP_API_SERVER_URL}/users/update`, {
-			method: "PATCH",
-			headers: {
-				Authorization: `Bearer ${userData.token}`,
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(updatedUser),
-		})
-			.then((res) => res.json())
+		updateUser(updatedUser, userData.token, signal)
 			.then((data) => console.log(data))
 			.catch((err) => console.log(err));
-
-		// setOpenError(true);
-		// setErrorMsg(error.message);
-		// return false;
 	};
 
 	const clickCreateHandle = async (userInfo) => {
 		const newUser = { ...userInfo, team: teamUsers };
 
-		fetch(`${process.env.REACT_APP_API_SERVER_URL}/users/signup`, {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(newUser),
-		})
-			.then((res) => res.json())
+		signup(newUser, signal)
 			.then((data) => console.log(data))
 			.catch((err) => console.log(err));
 	};
@@ -119,7 +88,7 @@ const UserPage = (props) => {
 		!userData.token && history.push("/login");
 		getAllUsers(signal);
 		if (email) {
-			findUserByEmail(email, signal);
+			findUser(email, signal);
 		} else {
 			setLoading(false);
 		}
