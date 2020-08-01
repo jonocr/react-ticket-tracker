@@ -9,3 +9,19 @@ export const findManyUsersByEmail = async (email, signal) => {
 		console.log("error at fetching: ", err);
 	}
 };
+
+export const login = async (user) => {
+	try {
+		const response = await fetch(
+			`${process.env.REACT_APP_API_SERVER_URL}/users/login`,
+			{
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(user),
+			}
+		);
+		return response.json();
+	} catch (err) {
+		console.log("error at fetching: ", err);
+	}
+};

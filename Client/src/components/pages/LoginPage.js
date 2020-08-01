@@ -3,6 +3,7 @@ import AuthContext from "../utils/AuthContext";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { getMessagesTotal } from "../tickets/TicketApi";
+import { login } from "../users/UserApi";
 
 const LoginPage = () => {
 	const [user, setUser] = useState({ email: "", password: "" });
@@ -18,12 +19,7 @@ const LoginPage = () => {
 			return null;
 		}
 
-		fetch(`${process.env.REACT_APP_API_SERVER_URL}/users/login`, {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(user),
-		})
-			.then((res) => res.json())
+		login(user)
 			.then((data) => {
 				getMessagesTotal(data.user.email, data.user.department, data.token)
 					.then((res) => {
