@@ -15,9 +15,10 @@ const DashboardPage = (props) => {
 	const abortController = new AbortController();
 	const signal = abortController.signal;
 	const [closeCss, setCloseCss] = useState("");
-	const [totalTickets, setTotalTickets] = useState();
-	const [totalOpenTickets, setTotalOpenTickets] = useState();
-	const [totalCloseTickets, setTotalCloseTickets] = useState();
+	const [loading, setLoading] = useState(true);
+	const [totalTickets, setTotalTickets] = useState(0);
+	const [totalOpenTickets, setTotalOpenTickets] = useState(0);
+	const [totalCloseTickets, setTotalCloseTickets] = useState(0);
 	const [totalTicketComments, setTotalTicketComments] = useState(0);
 	const history = useHistory();
 	const { userData } = useContext(AuthContext);
@@ -50,7 +51,9 @@ const DashboardPage = (props) => {
 			userData.token,
 			signal
 		)
-			.then((data) => setTotalOpenTickets(data))
+			.then((data) => {
+				setTotalOpenTickets(data);
+			})
 			.catch((err) =>
 				console.log("An error happened when retrieving the open tickets total")
 			);
@@ -62,7 +65,9 @@ const DashboardPage = (props) => {
 			userData.token,
 			signal
 		)
-			.then((data) => setTotalCloseTickets(data))
+			.then((data) => {
+				setTotalCloseTickets(data);
+			})
 			.catch((err) =>
 				console.log("An error happened when retrieving the open tickets total")
 			);
@@ -83,6 +88,10 @@ const DashboardPage = (props) => {
 		// eslint-disable-next-line
 	}, []);
 
+	useEffect(() => {
+		setLoading(false);
+	}, [totalTicketComments]);
+
 	return (
 		<div className={closeCss}>
 			<SideMenu css={closeCss}></SideMenu>
@@ -90,70 +99,80 @@ const DashboardPage = (props) => {
 			<div className="container">
 				<div className="dashboard-bar dashboard">Dashboard</div>
 				<div className="dashboard-main dashboard">
-					<div className="row">
-						<div className="col-12 col-md-6 col-lg-3">
-							<div className="box">
-								<div>
-									<CircularProgressbar
-										value={totalTicketProgress}
-										text={totalTickets}
-									/>
+					{!loading && (
+						<div>
+							<div className="row">
+								<div className="col-12 col-md-6 col-lg-3">
+									<div className="box">
+										<div>
+											<CircularProgressbar
+												value={totalTickets < 1 ? "0" : totalTicketProgress}
+												text={totalTickets < 1 ? "0" : totalTickets}
+											/>
+										</div>
+										<div className="text">Total Tickets</div>
+									</div>
 								</div>
-								<div className="text">Total Tickets</div>
+								<div className="col-12 col-md-6 col-lg-3">
+									<div className="box">
+										<div className="open-msg">
+											<CircularProgressbar
+												value={
+													totalOpenTickets > 0
+														? (100 * totalOpenTickets) / totalTickets
+														: "0"
+												}
+												text={
+													totalOpenTickets > 0
+														? `${Number.parseFloat(
+																(100 * totalOpenTickets) / totalTickets
+														  ).toFixed(0)}%`
+														: "0"
+												}
+											/>
+										</div>
+										<div className="text">Open</div>
+									</div>
+								</div>
+								<div className="col-12 col-md-6 col-lg-3">
+									<div className="box">
+										<div className="close-msg">
+											<CircularProgressbar
+												value={
+													totalCloseTickets > 0
+														? (100 * totalCloseTickets) / totalTickets
+														: "0"
+												}
+												text={
+													totalCloseTickets > 0
+														? `${Number.parseFloat(
+																(100 * totalCloseTickets) / totalTickets
+														  ).toFixed(0)}%`
+														: "0"
+												}
+											/>
+										</div>
+										<div className="text">Close</div>
+									</div>
+								</div>
+								<div className="ccol-12 col-md-6 col-lg-3">
+									<div className="box">
+										<div className="comments">
+											<CircularProgressbar
+												value={
+													totalTicketComments > 0 ? totalTicketProgress : "0"
+												}
+												text={
+													totalTicketComments > 0 ? totalTicketComments : "0"
+												}
+											/>
+										</div>
+										<div className="text">Total Messages</div>
+									</div>
+								</div>
 							</div>
 						</div>
-						<div className="col-12 col-md-6 col-lg-3">
-							<div className="box">
-								<div className="open-msg">
-									<CircularProgressbar
-										value={(100 * totalOpenTickets) / totalTickets}
-										text={`${Number.parseFloat(
-											(100 * totalOpenTickets) / totalTickets
-										).toFixed(0)}%`}
-									/>
-								</div>
-								<div className="text">Open</div>
-							</div>
-						</div>
-						<div className="col-12 col-md-6 col-lg-3">
-							<div className="box">
-								<div className="close-msg">
-									<CircularProgressbar
-										value={(100 * totalCloseTickets) / totalTickets}
-										text={`${Number.parseFloat(
-											(100 * totalCloseTickets) / totalTickets
-										).toFixed(0)}%`}
-									/>
-								</div>
-								<div className="text">Close</div>
-							</div>
-						</div>
-						<div className="ccol-12 col-md-6 col-lg-3">
-							<div className="box">
-								<div className="comments">
-									<CircularProgressbar
-										value={totalTicketComments > 0 ? totalTicketProgress : 0}
-										text={totalTicketComments}
-									/>
-								</div>
-								<div className="text">Total Messages</div>
-							</div>
-						</div>
-					</div>
-					{/* <div className="row">
-						<div className="col-12 col-md-6 col-lg-3">
-							<div className="box">1 of 4</div>
-						</div>
-						<div className="col-12 col-md-6 col-lg-3">
-							<div className="box">2 of 4</div>
-						</div>
-						<div className="col-12 col-md-6 col-lg-3">
-							<div className="box">3 of 4</div>
-						</div>
-						<div className="ccol-12 col-md-6 col-lg-3">
-							<div className="box">4 of 4</div>
-						</div>
-					</div> */}
+					)}
 				</div>
 
 				<div className="dashboard-main dashboard"></div>
