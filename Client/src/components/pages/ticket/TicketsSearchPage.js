@@ -5,6 +5,10 @@ import SideMenu from "../../layout/SideMenu";
 import TicketList from "../../tickets/TicketList";
 import TicketSearchBar from "../../tickets/TicketSearchBar";
 import AuthContext from "../../utils/AuthContext";
+import {
+	findTicketsQuery as getTicketsQuery,
+	getAllTickets as getAllTicketsApi,
+} from "../../tickets/TicketApi";
 
 const TicketSearchPage = (props) => {
 	const abortController = new AbortController();
@@ -19,7 +23,7 @@ const TicketSearchPage = (props) => {
 	};
 
 	useEffect(() => {
-		getAllTickets(signal);
+		getAllTickets();
 
 		return function cleanup() {
 			abortController.abort();
@@ -43,12 +47,7 @@ const TicketSearchPage = (props) => {
 	};
 
 	const findTicketsQuery = (criteria, query) => {
-		fetch(
-			`${process.env.REACT_APP_API_SERVER_URL}/tickets/tickets-criteria/${criteria}/${query}`
-		)
-			.then((response) => {
-				return response.json();
-			})
+		getTicketsQuery(criteria, query, userData.token, signal)
 			.then((responseData) => {
 				setTickets(responseData);
 			})
@@ -57,18 +56,8 @@ const TicketSearchPage = (props) => {
 			});
 	};
 
-	const getAllTickets = async (signal) => {
-		fetch(`${process.env.REACT_APP_API_SERVER_URL}/tickets/list-all`, {
-			signal: signal,
-			method: "GET",
-			contentType: "application/json",
-			headers: {
-				Authorization: `Bearer ${userData.token}`,
-			},
-		})
-			.then((response) => {
-				return response.json();
-			})
+	const getAllTickets = async () => {
+		getAllTicketsApi(userData.token, signal)
 			.then((responseData) => {
 				setTickets(responseData);
 			})

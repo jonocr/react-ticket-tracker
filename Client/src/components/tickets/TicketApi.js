@@ -200,3 +200,41 @@ export const getTicketCommentsTotal = async (email, token, signal) => {
 		console.log("error at fetching: ", err);
 	}
 };
+
+export const findTicketsQuery = async (criteria, query, token, signal) => {
+	try {
+		const response = await fetch(
+			`${process.env.REACT_APP_API_SERVER_URL}/tickets/tickets-criteria/${criteria}/${query}`,
+			{
+				signal: signal,
+				method: "GET",
+				headers: {
+					Authorization: `Bearer ${token}`,
+					"Content-Type": "application/json",
+				},
+			}
+		);
+		return response.json();
+	} catch (err) {
+		console.log("error at fetching: ", err);
+	}
+};
+
+export const getAllTickets = async (token, signal) => {
+	try {
+		const response = await fetch(
+			`${process.env.REACT_APP_API_SERVER_URL}/tickets/list-all`,
+			{
+				signal: signal,
+				method: "GET",
+				headers: {
+					Authorization: `Bearer ${token}`,
+					"Content-Type": "application/json",
+				},
+			}
+		);
+		return response.json();
+	} catch (err) {
+		console.log("error at fetching: ", err);
+	}
+};
