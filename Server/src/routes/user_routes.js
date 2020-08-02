@@ -12,14 +12,7 @@ router.route("/").get(checkAuth, (req, res) => {
 });
 
 router.route("/:email").get((req, res) => {
-	// const criteria = req.params.criteria;
-	// const query = req.params.query;
-	// const queryOptionsObj = { $regex: query, $options: "i" };
-	// const queryObj = {};
-	// queryObj[criteria] = queryOptionsObj;
-
 	const email = req.params.email;
-	// console.log("User Email: ", email);
 	User.find({ email: email })
 		.then((users) => {
 			res.json(users);
@@ -155,8 +148,6 @@ router.route("/signup").post((req, res, next) => {
 							team,
 						});
 
-						console.log("newUser: ", newUser);
-
 						newUser
 							.save()
 							.then(() => res.json("User registered!"))
@@ -216,20 +207,3 @@ router.route("/login").post((req, res) => {
 });
 
 module.exports = router;
-
-// {
-// 	"username" : "jono" ,
-// 	"password" : "12345",
-// 	"roles" : ["developer"],
-// 	"email" : "d@gmail.com",
-// 	"manager" : ""
-// }
-
-// bcrypt.compare(data.password, hash).then(function (result) {
-//     // result == true
-//     console.log("compare correct: ", result);
-// });
-// bcrypt.compare("someOtherPlaintextPassword", hash).then(function (result) {
-//     console.log("compare : ", result);
-//     // result == false
-// });
