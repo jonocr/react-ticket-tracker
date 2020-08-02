@@ -4,6 +4,7 @@ import SideMenu from "../../layout/SideMenu";
 import TopBar from "../../layout/TopBar";
 import AuthContext from "../../utils/AuthContext";
 import { useHistory } from "react-router";
+import { createTicket, updateTicket } from "../../tickets/TicketApi";
 
 const ALERT_MSG_CREATE_TICKET_CONFIRMATION = "Ticket created.";
 const ALERT_MSG_UPDATE_TICKET_CONFIRMATION = "Ticket updated.";
@@ -36,15 +37,7 @@ const TicketPage = (props) => {
 	};
 
 	const clickCreateHandle = async (ticket) => {
-		fetch(`${process.env.REACT_APP_API_SERVER_URL}/tickets/create`, {
-			method: "POST",
-			headers: {
-				Authorization: `Bearer ${userData.token}`,
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(ticket),
-		})
-			.then((res) => res.json())
+		createTicket(ticket, userData.token)
 			.then((data) => {
 				showMsg(ALERT_MSG_CREATE_TICKET_CONFIRMATION, "alert-success");
 			})
@@ -52,15 +45,7 @@ const TicketPage = (props) => {
 	};
 
 	const clickUpdateHandle = async (ticket) => {
-		fetch(`${process.env.REACT_APP_API_SERVER_URL}/tickets/update`, {
-			method: "PATCH",
-			headers: {
-				Authorization: `Bearer ${userData.token}`,
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(ticket),
-		})
-			.then((res) => res.json())
+		updateTicket(ticket, userData.token)
 			.then((data) => {
 				showMsg(ALERT_MSG_UPDATE_TICKET_CONFIRMATION, "alert-success");
 			})

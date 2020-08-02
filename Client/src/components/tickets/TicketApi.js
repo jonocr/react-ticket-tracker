@@ -238,3 +238,41 @@ export const getAllTickets = async (token, signal) => {
 		console.log("error at fetching: ", err);
 	}
 };
+
+export const createTicket = async (ticket, token) => {
+	try {
+		const response = await fetch(
+			`${process.env.REACT_APP_API_SERVER_URL}/tickets/create`,
+			{
+				method: "POST",
+				headers: {
+					Authorization: `Bearer ${token}`,
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(ticket),
+			}
+		);
+		return response.json();
+	} catch (err) {
+		console.log("error at fetching: ", err);
+	}
+};
+
+export const updateTicket = async (ticket, token) => {
+	try {
+		const response = await fetch(
+			`${process.env.REACT_APP_API_SERVER_URL}/tickets/update`,
+			{
+				method: "PATCH",
+				headers: {
+					Authorization: `Bearer ${token}`,
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(ticket),
+			}
+		);
+		return response.json();
+	} catch (err) {
+		console.log("error at fetching: ", err);
+	}
+};
