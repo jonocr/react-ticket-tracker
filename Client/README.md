@@ -1,25 +1,14 @@
--Components
--UserForm
--UserList
--NewTicket
+## WebSite Live:
 
--Pages
--Dashboad
--UserPage
--UserSearch
+https://react-ticket-tracker.herokuapp.com/login
 
--Layout
--SideMenu
--TopMenu
+## Things Learned:
 
-Things Learned:
 How to cancel a subscription on unmount function so memory wont leak when Fetching
 
 Use enviroment variables
 
 Modal Wrapper for content.
-
----OTHER \***\*\*\*\*\***\*\*\***\*\*\*\*\***
 
 ## Available Scripts
 
