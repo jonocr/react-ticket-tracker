@@ -12,6 +12,12 @@ router.route("/").get(checkAuth, (req, res) => {
 });
 
 router.route("/:email").get((req, res) => {
+	// const criteria = req.params.criteria;
+	// const query = req.params.query;
+	// const queryOptionsObj = { $regex: query, $options: "i" };
+	// const queryObj = {};
+	// queryObj[criteria] = queryOptionsObj;
+
 	const email = req.params.email;
 	User.find({ email: email })
 		.then((users) => {
@@ -64,14 +70,28 @@ router.route("/update").patch((req, res) => {
 					error: errorEmailMessage,
 				});
 			} else {
-				if (password != user.password) {
-					if (err) {
-						res.status(500).json({
-							error: err,
-						});
-					} else {
-						updatedUser.password = hash;
+				bcrypt.hash(data.password, 10, (err, hash) => {
+					if (hash != user.password) {
+						if (err) {
+							res.status(500).json({
+								error: err,
+							});
+						} else {
+							updatedUser.password = hash;
 
+							User.updateOne(
+								{
+									_id: _id,
+								},
+								{
+									$set: updatedUser,
+									$currentDate: { lastModified: true },
+								}
+							)
+								.then(() => res.json("User updated!"))
+								.catch((err) => res.status(400).json(`Error: ${err}`));
+						}
+					} else {
 						User.updateOne(
 							{
 								_id: _id,
@@ -84,19 +104,7 @@ router.route("/update").patch((req, res) => {
 							.then(() => res.json("User updated!"))
 							.catch((err) => res.status(400).json(`Error: ${err}`));
 					}
-				} else {
-					User.updateOne(
-						{
-							_id: _id,
-						},
-						{
-							$set: updatedUser,
-							$currentDate: { lastModified: true },
-						}
-					)
-						.then(() => res.json("User updated!"))
-						.catch((err) => res.status(400).json(`Error: ${err}`));
-				}
+				});
 			}
 		});
 });
@@ -207,3 +215,20 @@ router.route("/login").post((req, res) => {
 });
 
 module.exports = router;
+
+// {
+// 	"username" : "jono" ,
+// 	"password" : "12345",
+// 	"roles" : ["developer"],
+// 	"email" : "d@gmail.com",
+// 	"manager" : ""
+// }
+
+// bcrypt.compare(data.password, hash).then(function (result) {
+//     // result == true
+//     console.log("compare correct: ", result);
+// });
+// bcrypt.compare("someOtherPlaintextPassword", hash).then(function (result) {
+//     console.log("compare : ", result);
+//     // result == false
+// });
